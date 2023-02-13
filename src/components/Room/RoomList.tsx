@@ -5,7 +5,7 @@ import { getDepartments } from '../../api/DepartmentApi';
 import { Department } from '../../api/models/Department';
 import { Room } from '../../api/models/Room';
 import { getRooms } from '../../api/RoomApi';
-import Dropdown, { DropdownKeyPair } from '../common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
 
 
 const RoomList = () =>{

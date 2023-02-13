@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
 import { getBeds } from '../../api/BedApi';
 import { Bed } from '../../api/models/Bed';
-import Dropdown, { DropdownKeyPair } from '../common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
 
 
 const BedList = () =>{

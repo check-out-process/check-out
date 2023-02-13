@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
 import { getDepartments } from '../../api/DepartmentApi';
 import { Department } from '../../api/models/Department';
-import Dropdown, { DropdownKeyPair } from '../common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
 
 
 const DepartmentList = () =>{

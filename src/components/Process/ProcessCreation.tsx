@@ -4,6 +4,7 @@ import React from 'react';
 import BedList from '../Bed/BedList';
 import DepartmentList from '../Department/DepartmentList';
 import RoomList from '../Room/RoomList';
+import ProcessBasicDetailsForm from './ProcessBasicDetailsForm';
 
 
 const ProcessCreation = () =>{
@@ -15,10 +16,8 @@ const ProcessCreation = () =>{
              <RoomList/>
 
              <BedList/>
-
-             <Typography variant="h6" component="h2">בחירת מיטה</Typography>;
-
-             <Typography variant="h6" component="h2">הוספת פרטים נוספים על התהליך</Typography>;
+        
+             <ProcessBasicDetailsForm/>
       </Box>
     );
    
