@@ -2,7 +2,7 @@ import { InputAdornment, TextareaAutosize, TextField, Typography } from '@mui/ma
 import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
 import { ProcssPropertiesSchema } from '../../api/models/Process';
-import { getProcessPropertiesSchema } from '../../api/Process';
+import { getProcessPropertiesSchema } from '../../api/ProcessApi';
 
 
 const ProcessBasicDetailsForm = () =>{
