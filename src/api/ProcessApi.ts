@@ -6,7 +6,17 @@ export function getProcessPropertiesSchema(): Promise<ProcssPropertiesSchema[]> 
         id: 1,
     uuid: 'sddsds',
     propertyKind: 'string',
-    propertyName: 'האם בבידוד',
+    propertyDisplayName: 'האם בבידוד',
+    propertyName: 'ljlj',
+    processKind: 1,
+    required: true
+    },
+    {
+        id: 1,
+    uuid: 'sddsds',
+    propertyKind: 'string',
+    propertyDisplayName: 'האם מלוכלך',
+    propertyName: 'dirty',
     processKind: 1,
     required: true
     }
