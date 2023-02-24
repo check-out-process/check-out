@@ -7,7 +7,6 @@ export type ProcessBasicDetailsType = {
     properties: {[id: string]: any}
 }
 
-
 export type ProcessCreationContextType = {
     processDetails?: ProcessBasicDetailsType,
     setProcessDetails?: (processDetails: ProcessBasicDetailsType) => void
