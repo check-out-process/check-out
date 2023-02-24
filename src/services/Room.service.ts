@@ -1,7 +1,8 @@
 import { Room } from "./models/Room";
 
 
-export function getRooms(): Promise<Room[]>{
+export function getRooms(departmentUuid: string): Promise<Room[]>{
+    console.log(departmentUuid)
     return Promise.resolve([{
         id: 1,
         uuid: "dfdsfdsfsdds",

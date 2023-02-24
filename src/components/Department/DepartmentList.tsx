@@ -1,15 +1,15 @@
 import { SelectChangeEvent } from '@mui/material';
 import Box from '@mui/material/Box';
-import React, { useEffect, useState } from 'react';
-import { getDepartments } from '../../api/DepartmentApi';
-import { Department } from '../../api/models/Department';
-import Dropdown, { DropdownKeyPair } from '../common/Select/Dropdown';
+import React, { useContext,useEffect, useState } from 'react';
+import { getDepartments } from '../../services/Department.service';
+import { Department } from '../../services/models/Department';
+import {ProcessCreationDetailsContext} from '../../context/ProcessCreationContext';
+import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
 
 
 const DepartmentList = () =>{
+    const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
     const [departmentsDropdownData,setDepartmentsDropdownData] = useState<DropdownKeyPair[]>([])
-    const [departments,setDepartments] = useState<Department[]>([])
-    const [department,setDepartment] = useState<Department>({} as any)
 
     useEffect(() => {
         fetchDepartments()
@@ -17,7 +17,6 @@ const DepartmentList = () =>{
 
     const fetchDepartments = () =>{
         getDepartments().then((departments: Department[]) => {
-            setDepartments(departments)
             const data: DropdownKeyPair[] = departments.map((department: Department) => (
                 {id: department.uuid, value: department.name }
                 ))
@@ -26,9 +25,8 @@ const DepartmentList = () =>{
     }
 
     function onChange(event: SelectChangeEvent): void {
-        const departmentUuid: string = event.target.value as string
-        const department: Department = departments.find(department => department.uuid === departmentUuid)
-        setDepartment(department)
+        processDetails.deparmentUuid = event.target.value as string
+        setProcessDetails({...processDetails})
     }
     
 
