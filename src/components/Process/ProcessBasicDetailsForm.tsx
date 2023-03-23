@@ -21,19 +21,16 @@ const ProcessBasicDetailsForm = () => {
 
     return (
         <div>
-            <Typography style={{marginRight:'1%'}} align="right" variant="h6" component="h2">הוספת פרטים נוספים על התהליך :</Typography>
+            <Typography style={{marginRight:'2%'}} align="right" variant="h6" component="h2">הוספת פרטים נוספים על התהליך:</Typography>
 
             <div style={{marginTop:"2%"}}>
-                <Typography style={{marginTop:'1%'}} align="right" variant="h6" component="h2">תיאור חופשי:</Typography>
+                <Typography style={{marginTop:'1%',marginRight:'2%'}} align="right" variant="h6" component="h2">תיאור חופשי:</Typography>
                 <TextareaAutosize minRows={6} placeholder="תיאור" style={{ direction: "rtl", width: '79%', marginRight: '1%', display: 'flex', justifyContent: 'flex-start' }} />
 
                 <div style={{ marginTop: '1%' }}>
                     {processProperties.map(processProperty => {
                         return (
-                            <DynamicPropertiesFactory
-                                name={processProperty.propertyDisplayName}
-                                displayName={processProperty.propertyDisplayName}
-                                type={processProperty.propertyKind} />
+                            <DynamicPropertiesFactory {...processProperty} />
                         )
                     })}
                 </div>

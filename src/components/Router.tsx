@@ -1,6 +1,4 @@
 import React from 'react';
-import Toolbar from '@mui/material/Toolbar';
-import Box from '@mui/material/Box';
 import * as ReactDOM from "react-dom";
 import {
   createBrowserRouter,
@@ -22,9 +20,9 @@ const Router =  () =>{
     )
   
     return    (
-      <Box>
+      <div>
         <RouterProvider router={router} />      
-      </Box>
+      </div>
     );
    
 }

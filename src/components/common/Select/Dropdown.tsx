@@ -27,7 +27,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, onChange }) => {
 
   return (
     <div style={{ minWidth: 120 }}>
-      <Typography style={{ marginRight: '1%', width: '30%' }} align="right" variant="h6" component="h2">{title}</Typography>
+      <Typography style={{ marginRight: '2%', width: '30%' }} align="right" variant="h6" component="h2">{title}</Typography>
 
       <FormControl fullWidth variant="filled" style={{ margin: '1%' }}>
         <Select
