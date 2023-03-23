@@ -28,7 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({title, data, onChange}) => {
 
   return (
     <Box sx={{ minWidth: 120 }}>
-        <Typography variant="h6" component="h2">{title}</Typography>
+        <Typography align="right" variant="h6" component="h2">{title}</Typography>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">{title}</InputLabel>
         <Select
@@ -40,7 +40,7 @@ const Dropdown: React.FC<DropdownProps> = ({title, data, onChange}) => {
         >
             {data.map((rowData,index) => {
                 return (
-                    <MenuItem key={index} value={rowData.id}>{rowData.value}</MenuItem>          
+                    <MenuItem style={{justifyContent: 'flex-end'}} key={index} value={rowData.id}>{rowData.value}</MenuItem>          
                 )
             })}
         </Select>
