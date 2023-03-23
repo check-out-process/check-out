@@ -7,7 +7,7 @@ import {ProcessCreationDetailsContext} from '../../context/ProcessCreationContex
 import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
 
 
-const DepartmentList = () =>{
+const DepartmentList = () => {
     const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
     const [departmentsDropdownData,setDepartmentsDropdownData] = useState<DropdownKeyPair[]>([])
 

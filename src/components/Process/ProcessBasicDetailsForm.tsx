@@ -1,8 +1,8 @@
 import { InputAdornment, TextareaAutosize, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
-import { ProcssPropertiesSchema } from '../../api/models/Process';
-import { getProcessPropertiesSchema } from '../../api/ProcessApi';
+import { ProcssPropertiesSchema } from '../../services/models/Process';
+import { getProcessPropertiesSchema } from '../../services/Process.service';
 import DynamicPropertiesFactory from '../Common/DynamicProperties/PropertiesFactory';
 
 
