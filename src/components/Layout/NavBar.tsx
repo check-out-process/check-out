@@ -23,7 +23,9 @@ const NavBarLayout =() =>{
             </Tabs>
         </header>
         <main>
+          <div style={{backgroundColor:'#EBE6E6'}}>
             <Outlet/>
+            </div>
         </main>
         
       </Box>

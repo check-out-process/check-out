@@ -1,10 +1,8 @@
-import { SelectChangeEvent } from '@mui/material';
-import Box from '@mui/material/Box';
 import React, { useContext, useEffect, useState } from 'react';
 import { getBeds } from '../../services/Bed.service';
 import { Bed } from '../../services/models/Bed';
 import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
-import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown';
 
 
 const BedList = () =>{
@@ -24,15 +22,15 @@ const BedList = () =>{
         })
     }
 
-    function onChange(event: SelectChangeEvent): void {
+    function onChange(event: onChangeEvent): void {
         processDetails.bedUuid = event.target.value as string
         setProcessDetails({...processDetails})
     }
 
     return (
-      <Box>
+      <div>
         <Dropdown title='בחירת מיטה' data={bedsDropdownData} onChange={onChange}/>
-      </Box>
+      </div>
     );
    
 }

@@ -1,10 +1,8 @@
-import { SelectChangeEvent } from '@mui/material';
-import Box from '@mui/material/Box';
 import React, { useEffect, useState, useContext } from 'react';
 import { Room } from '../../services/models/Room';
 import { getRooms } from '../../services/Room.service';
 import {ProcessCreationDetailsContext} from '../../context/ProcessCreationContext';
-import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown';
 
 
 const RoomList = () =>{
@@ -24,16 +22,16 @@ const RoomList = () =>{
         })
     }
 
-    function onChange(event: SelectChangeEvent): void {
+    function onChange(event: onChangeEvent): void {
         processDetails.roomUuid = event.target.value as string
         setProcessDetails({...processDetails})
     }
     
 
     return (
-      <Box>
+      <div>
         <Dropdown title='בחירת חדר' data={roomsDropdownData} onChange={onChange}/>
-      </Box>
+      </div>
     );
    
 }

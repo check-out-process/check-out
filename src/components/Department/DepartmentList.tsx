@@ -1,10 +1,8 @@
-import { SelectChangeEvent } from '@mui/material';
-import Box from '@mui/material/Box';
 import React, { useContext,useEffect, useState } from 'react';
 import { getDepartments } from '../../services/Department.service';
 import { Department } from '../../services/models/Department';
 import {ProcessCreationDetailsContext} from '../../context/ProcessCreationContext';
-import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown';
 
 
 const DepartmentList = () => {
@@ -24,16 +22,16 @@ const DepartmentList = () => {
         })
     }
 
-    function onChange(event: SelectChangeEvent): void {
+    function onChange(event: onChangeEvent): void {
         processDetails.deparmentUuid = event.target.value as string
         setProcessDetails({...processDetails})
     }
     
 
     return (
-      <Box>
+      <div>
              <Dropdown title='בחירת מחלקה' data={departmentsDropdownData} onChange={onChange}/>
-      </Box>
+      </div>
     );
    
 }

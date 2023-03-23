@@ -1,17 +1,17 @@
-import { InputAdornment, TextareaAutosize, TextField, Typography } from '@mui/material';
-import Box from '@mui/material/Box';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize/TextareaAutosize';
+import Typography from '@material-ui/core/Typography';
 import React, { useEffect, useState } from 'react';
 import { ProcssPropertiesSchema } from '../../services/models/Process';
 import { getProcessPropertiesSchema } from '../../services/Process.service';
 import DynamicPropertiesFactory from '../Common/DynamicProperties/PropertiesFactory';
 
 
-const ProcessBasicDetailsForm = () =>{
-    const [processProperties,setProcessProperties] = useState<ProcssPropertiesSchema[]>([])
+const ProcessBasicDetailsForm = () => {
+    const [processProperties, setProcessProperties] = useState<ProcssPropertiesSchema[]>([])
 
     useEffect(() => {
         fetchProcessProperties()
-    },[])
+    }, [])
 
     const fetchProcessProperties = () => {
         getProcessPropertiesSchema().then((processProperties: ProcssPropertiesSchema[]) => {
@@ -19,24 +19,28 @@ const ProcessBasicDetailsForm = () =>{
         })
     }
 
-    return    (
-      <Box>
-          <Typography variant="h6" component="h2">הוספת פרטים נוספים על התהליך</Typography>
-          
-          <Typography variant="h6" component="h2">תיאור חופשי</Typography>
-          <TextareaAutosize minRows={6} placeholder="תיאור" style={{ width: '100%' }} />
+    return (
+        <div>
+            <Typography style={{marginRight:'1%'}} align="right" variant="h6" component="h2">הוספת פרטים נוספים על התהליך :</Typography>
 
-            {processProperties.map(processProperty => {
-                return (
-                    <DynamicPropertiesFactory 
-                        name={processProperty.propertyDisplayName}
-                        displayName={processProperty.propertyDisplayName}
-                        type={processProperty.propertyKind}/>
-                )
-            })}
-      </Box>
+            <div style={{marginTop:"2%"}}>
+                <Typography style={{marginTop:'1%'}} align="right" variant="h6" component="h2">תיאור חופשי:</Typography>
+                <TextareaAutosize minRows={6} placeholder="תיאור" style={{ direction: "rtl", width: '79%', marginRight: '1%', display: 'flex', justifyContent: 'flex-start' }} />
+
+                <div style={{ marginTop: '1%' }}>
+                    {processProperties.map(processProperty => {
+                        return (
+                            <DynamicPropertiesFactory
+                                name={processProperty.propertyDisplayName}
+                                displayName={processProperty.propertyDisplayName}
+                                type={processProperty.propertyKind} />
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
     )
-   
+
 }
 
 export default ProcessBasicDetailsForm

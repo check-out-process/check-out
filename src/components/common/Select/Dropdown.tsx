@@ -1,52 +1,52 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Typography } from '@mui/material';
+import React from 'react';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Typography from '@material-ui/core/Typography/Typography';
+import MenuItem from "@material-ui/core/MenuItem";
 
 
 export type DropdownKeyPair = {
-    id: any,
-    value: string
-} 
+  id: any,
+  value: string
+}
 
 export type DropdownProps = {
-    title: string,
-    data: DropdownKeyPair[],
-    onChange: (event: SelectChangeEvent) => void
-} 
+  title: string,
+  data: DropdownKeyPair[],
+  onChange: (event: onChangeEvent) => void
+}
 
-const Dropdown: React.FC<DropdownProps> = ({title, data, onChange}) => {
+export type onChangeEvent = React.ChangeEvent<{ name?: string; value: unknown }>
+
+const Dropdown: React.FC<DropdownProps> = ({ title, data, onChange }) => {
   const [element, setElement] = React.useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: onChangeEvent) => {
     setElement(event.target.value as string);
     onChange(event)
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-        <Typography align="right" variant="h6" component="h2">{title}</Typography>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">{title}</InputLabel>
+    <div style={{ minWidth: 120 }}>
+      <Typography style={{ marginRight: '1%', width: '30%' }} align="right" variant="h6" component="h2">{title}</Typography>
+
+      <FormControl fullWidth variant="filled" style={{ margin: '1%' }}>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
           value={element}
-          label={title}
+          style={{ direction: "rtl", width: '80%', marginRight: '1%', display: 'flex', justifyContent: 'flex-start' }}
           onChange={handleChange}
         >
-            {data.map((rowData,index) => {
-                return (
-                    <MenuItem style={{justifyContent: 'flex-end'}} key={index} value={rowData.id}>{rowData.value}</MenuItem>          
-                )
-            })}
+          {data.map((rowData, index) => {
+            return (
+              <MenuItem style={{ justifyContent: 'flex-end', textAlign: 'right' }} key={index} value={rowData.id}>
+                <Typography align="right" variant="h6" component="h1">{rowData.value}</Typography>
+              </MenuItem>
+            )
+          })}
         </Select>
       </FormControl>
-    </Box>
+    </div>
   );
 }
+
 
 export default Dropdown
