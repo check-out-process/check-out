@@ -18,7 +18,7 @@ const ProcessSectorForm = () => {
   }
 
   return (
-    <Box className="sectorsList" sx={{ display: 'flex', justifyContent: 'center' }}>
+    <Box className="processSectorForm" sx={{ display: 'flex', justifyContent: 'center' }}>
       <List sx={{
         width: '100%', maxWidth: 600, counterReset: 'gradient-counter',
       }}>
