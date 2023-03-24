@@ -9,7 +9,7 @@ interface ISectorCardProps {
 }
 const style = (refOffsetTop: number) => ({
     position: 'absolute' as 'absolute',
-    left: '20%',
+    left: '100px',
     transform: 'translate(-50%, -50%)',
     width: 136,
     height: '92px',
@@ -42,7 +42,7 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
             aria-describedby="modal-modal-description">
 
             <Box sx={style(refOffsetTop)}>
-                <Button onClick={handleEdit}>עריכה</Button>
+                <Button onClick={handleEdit} >עריכה</Button>
                 <Button onClick={handleRemove}>הסרה</Button>
             </Box>
         </Modal>
