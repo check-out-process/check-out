@@ -19,7 +19,9 @@ const ProcessSectorForm = () => {
 
   return (
     <Box className="sectorsList" sx={{ display: 'flex', justifyContent: 'center' }}>
-      <List sx={{ width: '100%', maxWidth: 600 }}>
+      <List sx={{
+        width: '100%', maxWidth: 600, counterReset: 'gradient-counter',
+      }}>
         {sectorsData.map((sector: Sector) => (
           <SectorCard {...sector} />
         ))}

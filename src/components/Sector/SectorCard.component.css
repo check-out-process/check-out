@@ -1,0 +1,29 @@
+.cardSector {
+    counter-increment: gradient-counter;
+    position: relative;
+     overflow: visible !important 
+}
+
+.cardSector::after {
+    background: linear-gradient(135deg, blue 0%, lightblue 100%);
+    border-radius: 1rem 1rem 1rem 0rem;
+    content: '';
+    height: 42px;
+    right: -1rem;
+    overflow: hidden;
+    position: absolute;
+    top: -11px;
+        width: 42px;
+}
+
+.cardSector::before {
+    align-items: flex-end;
+    content: counter(gradient-counter);
+    color: black;
+    display: flex;
+    font: 900 1.5em/1 'Montserrat';
+    justify-content: flex-end;
+    padding: 0.125em 0.25em;
+    z-index: 1;
+    height: 0px;
+}
