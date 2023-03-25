@@ -15,7 +15,7 @@ const SectorCard = (sector: Sector) => {
     const ownerTitle = `אחראי: ${sector.owner}`;
 
     const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setOffsetTop(ref.current.offsetTop)
+        setOffsetTop(window.pageYOffset + ref.current.getBoundingClientRect().top)
         setOpen(true);
     }
 
