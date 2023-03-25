@@ -37,8 +37,8 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, onChange }) => {
         >
           {data.map((rowData, index) => {
             return (
-              <MenuItem style={{ justifyContent: 'flex-end', textAlign: 'right' }} key={index} value={rowData.id}>
-                <Typography align="right" variant="h6" component="h1">{rowData.value}</Typography>
+              <MenuItem style={{ height:'10%',justifyContent: 'flex-end'}} key={index} value={rowData.id}>
+                <Typography style={{height:'4%'}} align="right" variant="h6" component="h6">{rowData.value}</Typography>
               </MenuItem>
             )
           })}

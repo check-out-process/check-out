@@ -5,5 +5,6 @@ export type ProcssPropertiesSchema = {
     propertyName: string;
     propertyKind: string; // string, checkbox, number
     processKind: number;
-    required: boolean
+    required: boolean;
+    value: any;
 }

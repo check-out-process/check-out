@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import BedList from '../Bed/BedList';
 import DepartmentList from '../Department/DepartmentList';
 import RoomList from '../Room/RoomList';
-import ProcessBasicDetailsForm from './ProcessBasicDetailsForm';
+import ProcessBasicDetailsForm from './ProcessDynamicProperties.component';
 import { ProcessCreationProvider } from '../../context/ProcessCreationContext'
 import { Button } from '@mui/material';
 import Typography from '@material-ui/core/Typography';
