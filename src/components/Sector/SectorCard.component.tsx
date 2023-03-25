@@ -22,11 +22,11 @@ const SectorCard = (sector: Sector) => {
     return (
         <Box>
             <Card ref={ref} className="cardSector" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 20px 15px 10px' }}>
-                <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '8px' }}>
-                    <Typography component="div" variant="h5" fontSize={'17px'}>
+                <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0px' }}>
+                    <Typography component="div" variant="h5" fontSize={'17px'} marginRight={'15px'}>
                         {sector.name}
                     </Typography>
-                    <Typography variant="subtitle1" color="text.secondary" component="div" fontSize={'12px'}>
+                    <Typography variant="subtitle1" color="text.secondary" component="div" fontSize={'12px'} marginRight={'15px'}>
                         {ownerTitle}
                     </Typography>
                 </CardContent>

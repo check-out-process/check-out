@@ -5,7 +5,7 @@ import ProcessSectorForm from './ProcessSectorForm.component';
 
 const ProcessCreation = () =>{
     return    (
-      <Box>
+      <Box className="appClass" sx={{height: '100%'}}>
         <ProcessSectorForm/>
       </Box>
     );
