@@ -1,5 +1,6 @@
 import { Button, Modal, } from "@material-ui/core";
 import React, { Dispatch, SetStateAction } from 'react';
+import './SectorOptionsModal.component.css';
 
 interface ISectorCardProps {
     open: boolean,
@@ -8,19 +9,19 @@ interface ISectorCardProps {
 }
 const style = (refOffsetTop: number) => ({
     position: 'absolute' as 'absolute',
-    left: '100px',
+    left: '87px',
     transform: 'translate(-50%, -50%)',
     width: 136,
-    height: '92px',
+    height: '88px',
     backgroundColor: '#c6cbd7',
-    border: '1.5px solid black',
-    borderRadius: '10px',
+    border: '1.5px solid #c6cbd7',
+    borderRadius: '8px',
     boxShadow: '24',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 0,
-    top: (135 + refOffsetTop)
+    top: (87 + refOffsetTop)
 });
 
 const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffsetTop }: ISectorCardProps) => {
@@ -41,7 +42,8 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description">
 
-                <div style={style(refOffsetTop) as React.CSSProperties} >
+                <div className="sectorOptionsModal"
+                    style={style(refOffsetTop) as React.CSSProperties} >
                     <Button onClick={handleEdit} >עריכה</Button>
                     <Button onClick={handleRemove}>הסרה</Button>
                 </div>
