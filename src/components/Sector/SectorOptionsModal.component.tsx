@@ -1,6 +1,5 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Button, Modal, } from "@material-ui/core";
 import React, { Dispatch, SetStateAction } from 'react';
-
 
 interface ISectorCardProps {
     open: boolean,
@@ -13,7 +12,7 @@ const style = (refOffsetTop: number) => ({
     transform: 'translate(-50%, -50%)',
     width: 136,
     height: '92px',
-    bgcolor: 'background.paper',
+    backgroundColor: '#c6cbd7',
     border: '1.5px solid black',
     borderRadius: '10px',
     boxShadow: '24',
@@ -35,17 +34,18 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
     };
 
     return (
-        open ? <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description">
+        open ?
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description">
 
-            <Box sx={style(refOffsetTop)}>
-                <Button onClick={handleEdit} >עריכה</Button>
-                <Button onClick={handleRemove}>הסרה</Button>
-            </Box>
-        </Modal>
+                <div style={style(refOffsetTop) as React.CSSProperties} >
+                    <Button onClick={handleEdit} >עריכה</Button>
+                    <Button onClick={handleRemove}>הסרה</Button>
+                </div>
+            </Modal>
             : null
     )
 }
