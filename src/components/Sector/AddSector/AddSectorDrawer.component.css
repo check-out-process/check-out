@@ -1,0 +1,10 @@
+.drawerHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center !important;
+}
+
+.addSectorDrawer>.MuiDrawer-paper {
+    width: 240px;
+    display: flex;
+}

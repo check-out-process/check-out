@@ -5,9 +5,11 @@ import { Sector } from "../../services/models/Sector";
 import './SectorCard.component.css';
 import SectorOptionsModal from "./SectorOptionsModal.component";
 
-
-
-const SectorCard = (sector: Sector) => {
+interface ISectorCardProps {
+    sector: Sector,
+    removeProcessSector: any
+}
+const SectorCard: React.FC<ISectorCardProps> = ({ sector, removeProcessSector }: ISectorCardProps) => {
     const [open, setOpen] = useState(false);
     const [offsetTop, setOffsetTop] = useState(0);
     const ref = useRef(null)
@@ -34,7 +36,7 @@ const SectorCard = (sector: Sector) => {
                     <MoreHorizIcon />
                 </IconButton>
             </Card>
-            <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} />
+            <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} sector={sector} removeProcessSector={removeProcessSector} />
         </div>
     )
 }

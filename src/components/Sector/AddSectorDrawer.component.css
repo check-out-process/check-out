@@ -1,7 +1,0 @@
-.addSectorDrawer {
-    width: 240px;
-    flex-shrink: 0;
-}
-.addSectorDrawer > .MuiDrawer-paper {
-    width: 240px;
-}
