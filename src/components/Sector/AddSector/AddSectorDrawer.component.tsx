@@ -27,7 +27,12 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
 
     const addChoosenSector = (sector: Sector) => {
         setChoosenSectors(current => [...current, sector]);
+    };
 
+    const removeChoosenSector = (sector: Sector) => {
+        setChoosenSectors((current) =>
+            current.filter((currentSector) => currentSector.id !== sector.id)
+        );
     };
 
     return (
@@ -53,7 +58,7 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
                         {sectorsData.map((sector: Sector) => (
-                            <AddSectorCard sector={sector} addChoosenSector={addChoosenSector} />
+                            <AddSectorCard sector={sector} addChoosenSector={addChoosenSector} removeChoosenSector={removeChoosenSector}/>
                         ))}
                     </List>
                     <Button variant="outlined" style={{ color: 'black', width: '80px', alignSelf: 'center', backgroundColor: 'rgb(189 212 232)', borderColor: 'rgb(189 212 232)' }} onClick={handleAddSectorsToProcessSectors}>הוספה</Button>
