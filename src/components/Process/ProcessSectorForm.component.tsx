@@ -32,12 +32,12 @@ const ProcessSectorForm = () => {
     })
   }
 
-  const addProcessSector = (sector: Sector) => {
-    setProcessSectors(current => [...current, sector]);
-    setDefaultSectorsData(current => [...current, sector]);
+  const addProcessSectors = (sectors: Sector[]) => {
+    setProcessSectors(current => [...current, ...sectors]);
+    setDefaultSectorsData(current => [...current, ...sectors]);
 
     setSectorData((current) =>
-      current.filter((currentSector) => currentSector.id !== sector.id)
+      current.filter((currentSector) => !sectors.map(({ id }) => id).includes(currentSector.id))
     );
   };
 
@@ -87,7 +87,7 @@ const ProcessSectorForm = () => {
           <Button variant="outlined" onClick={saveProcessSector} style={buttonsStyle()}>אישור</Button>
         </div>
       </div >
-      <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} sectorsData={sectorsData} addProcessSector={addProcessSector} />
+      <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} sectorsData={sectorsData} addProcessSectors={addProcessSectors} />
     </div>
 
   )

@@ -1,5 +1,5 @@
 export type Sector = {
-    id: number;
+    id: string;
     name: string;
     owner: string;
 }

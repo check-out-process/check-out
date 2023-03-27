@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Drawer, List, Divider, Typography, IconButton, Button, styled } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './AddSectorDrawer.component.css';
@@ -9,7 +9,7 @@ interface IAddSectorDrawerProps {
     open: boolean,
     handleDrawerClose: any,
     sectorsData: Sector[],
-    addProcessSector: any,
+    addProcessSectors: any,
 }
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -17,8 +17,18 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'flex-start',
 }));
 
-const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose, sectorsData, addProcessSector }: IAddSectorDrawerProps) => {
+const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose, sectorsData, addProcessSectors }: IAddSectorDrawerProps) => {
+    const [choosenSectors, setChoosenSectors] = useState<Sector[]>([]);
 
+    const addSectorsToProcessSectors = () => {
+        addProcessSectors(choosenSectors);
+    };
+
+    const addChoosenSector = (sector: Sector) => {
+        setChoosenSectors(current => [...current, sector]);
+
+    };
+    
     return (
         <Drawer
             className='addSectorDrawer'
@@ -39,10 +49,10 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
                 width: '100%', counterReset: 'gradient-counter',
             }}>
                 {sectorsData.map((sector: Sector) => (
-                    <AddSectorCard sector={sector} addProcessSector={addProcessSector} />
+                    <AddSectorCard sector={sector} addChoosenSector={addChoosenSector} />
                 ))}
             </List>
-            <Button variant="outlined" style={{ alignSelf: 'center' }}>הוסף</Button>
+            <Button variant="outlined" onClick={addSectorsToProcessSectors}>הוספה</Button>
         </Drawer>
     );
 }
