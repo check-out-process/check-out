@@ -20,6 +20,11 @@ export function getSectors(): Promise<Sector[]> {
         id: "4",
         name: "נקיון כללי",
         owner: "ליאור בכר"
+    },
+    {
+        id: "5",
+        name: "נקיון hhכללי",
+        owner: "ליאור בכר"
     }
     ])
 }

@@ -20,15 +20,16 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose, sectorsData, addProcessSectors }: IAddSectorDrawerProps) => {
     const [choosenSectors, setChoosenSectors] = useState<Sector[]>([]);
 
-    const addSectorsToProcessSectors = () => {
+    const handleAddSectorsToProcessSectors = () => {
         addProcessSectors(choosenSectors);
+        handleDrawerClose();
     };
 
     const addChoosenSector = (sector: Sector) => {
         setChoosenSectors(current => [...current, sector]);
 
     };
-    
+
     return (
         <Drawer
             className='addSectorDrawer'
@@ -45,15 +46,19 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
                 </Typography>
             </DrawerHeader>
             <Divider />
-            <List className="sectorsList" style={{
-                width: '100%', counterReset: 'gradient-counter',
-            }}>
-                {sectorsData.map((sector: Sector) => (
-                    <AddSectorCard sector={sector} addChoosenSector={addChoosenSector} />
-                ))}
-            </List>
-            <Button variant="outlined" onClick={addSectorsToProcessSectors}>הוספה</Button>
-        </Drawer>
+            {sectorsData.length > 0 &&
+                <div>
+
+                    <List className="sectorsList" style={{
+                        width: '100%', counterReset: 'gradient-counter',
+                    }}>
+                        {sectorsData.map((sector: Sector) => (
+                            <AddSectorCard sector={sector} addChoosenSector={addChoosenSector} />
+                        ))}
+                    </List>
+                    <Button variant="outlined" style={{ color: 'black', width: '80px', alignSelf: 'center', backgroundColor: 'rgb(189 212 232)', borderColor: 'rgb(189 212 232)' }} onClick={handleAddSectorsToProcessSectors}>הוספה</Button>
+                </div>}
+        </Drawer >
     );
 }
 

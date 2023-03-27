@@ -71,18 +71,20 @@ const ProcessSectorForm = () => {
 
   return (
     <div style={{ height: '100%' }}>
-      <div className="processSectorForm" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <List className="sectorsList" style={{
-          width: '100%', counterReset: 'gradient-counter',
-        }}>
-          {defaultSectorsData.map((sector: Sector) => (
-            <SectorCard sector={sector} removeProcessSector={removeProcessSector} />
-          ))}
-        </List>
-        <IconButton onClick={handleDrawerOpen} style={{ color: '#54546b' }}>
-          <AddCircleOutlineIcon />
-        </IconButton>
-        <div style={{ display: 'flex', position: 'absolute', bottom: 0 }}>
+      <div className="processSectorForm sectorsList" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
+        <div>
+          <List style={{
+            width: '100%', counterReset: 'gradient-counter',
+          }}>
+            {defaultSectorsData.map((sector: Sector) => (
+              <SectorCard sector={sector} removeProcessSector={removeProcessSector} />
+            ))}
+          </List>
+          <IconButton onClick={handleDrawerOpen} style={{ color: '#54546b' }}>
+            <AddCircleOutlineIcon />
+          </IconButton>
+        </div>
+        <div style={{ display: 'flex' }}>
           <Button variant="outlined" onClick={handleCancel} style={buttonsStyle()} >ביטול</Button>
           <Button variant="outlined" onClick={saveProcessSector} style={buttonsStyle()}>אישור</Button>
         </div>
