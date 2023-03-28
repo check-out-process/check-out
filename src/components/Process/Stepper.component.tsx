@@ -9,6 +9,8 @@ import { ProcessCreationProvider } from '../../context/ProcessCreationContext';
 import ProcessCreationBasicDetailsForm from './ProcessCreationBasicDetailsForm.component';
 import ProcessSectorForm from './ProcessSectorForm.component';
 import { ProcessSectorsProvider } from '../../context/ProcessSectorsContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -53,38 +55,12 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-function getSteps() {
-    return ['בחירת מיטה', 'בחירת סקטור'];
-}
-
-function getStepContent(step: number) {
-    switch (step) {
-        case 0:
-            return (
-                <ProcessCreationProvider>
-                    <ProcessCreationBasicDetailsForm />
-                </ProcessCreationProvider>
-            );
-        case 1:
-            return (
-
-                <ProcessSectorsProvider>
-                    <ProcessSectorForm />
-                </ProcessSectorsProvider>
-
-
-            )
-
-        default:
-            return 'Unknown step';
-    }
-}
 
 export default function HorizontalLinearStepper() {
+    const navigate = useNavigate();
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
-    const [skipped, setSkipped] = React.useState(new Set<number>());
-    const steps = getSteps();
+    const steps = ['בחירת מיטה', 'בחירת סקטור']
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -94,41 +70,51 @@ export default function HorizontalLinearStepper() {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    function getStepContent(step: number) {
+        switch (step) {
+            case 0:
+                return (
+                    <ProcessCreationProvider>
+                        <ProcessCreationBasicDetailsForm />
+                    </ProcessCreationProvider>
+                );
+            case 1:
+                return (
+                    <ProcessSectorsProvider>
+                        <ProcessSectorForm />
+                    </ProcessSectorsProvider>
+                );
+            default:
+                navigate('/home', { replace: true });
+    
+        }
+    }
+
     return (
         <div className={classes.root}>
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent", width: "40%" }}>
                     {steps.map((label, index) => {
-                        const stepProps: { completed?: boolean } = {};
-                        const labelProps: { optional?: React.ReactNode } = {};
                         return (
-                            <Step key={label} {...stepProps}>
-                                <StepLabel {...labelProps}>{label}</StepLabel>
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
                             </Step>
                         );
                     })}
                 </Stepper>
             </div>
             <div>
-
                 <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                
                 <div className={classes.buttonRoot} style={{ display: "flex", justifyContent: "center" }}>
-                    <Button
-                        disabled={activeStep === 0}
-                        variant="contained"
-                        color="primary" onClick={handleBack} className={classes.cancelButton}>
+                    <Button disabled={activeStep === 0} variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
                         הקודם
                     </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNext}
-                        className={classes.continueButton}
+                    <Button variant="contained" color="primary" onClick={handleNext} className={classes.continueButton}
                     >
                         {activeStep === steps.length - 1 ? 'סיום' : 'המשך'}
                     </Button>
                 </div>
-
             </div>
         </div>
     );
