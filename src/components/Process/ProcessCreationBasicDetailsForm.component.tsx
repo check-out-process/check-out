@@ -14,10 +14,11 @@ import BaseModal from '../Common/Modal/BaseModal.component';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root:{
+    root: {
+      marginRight: "0",
       '@media (min-width: 500px)': {
-        width:'100%',
-        marginRight:'36%'
+        width: '100%',
+        marginRight: "30%"
       }
     },
     select: {
@@ -102,40 +103,44 @@ const ProcessCreationBasicDetailsForm = () => {
   }
 
   const onModalStatusChange = (confirm: boolean) => {
-      setOpen(false);
-      if (confirm){
-        processDetails.deparmentUuid = undefined
-        processDetails.roomUuid = undefined;
-        processDetails.bedUuid = undefined;
-        setDepartment(undefined);
-        setRoom(undefined);
-        setBed(undefined);
-        setProcessDetails({ ...processDetails })
-      }
+    setOpen(false);
+    if (confirm) {
+      processDetails.deparmentUuid = undefined
+      processDetails.roomUuid = undefined;
+      processDetails.bedUuid = undefined;
+      setDepartment(undefined);
+      setRoom(undefined);
+      setBed(undefined);
+      setProcessDetails({ ...processDetails })
+    }
   }
 
   return (
-    <div>
+
+    <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <div className={classes.root}>
         <div className={classes.select}>
           <DepartmentList department={department} setDepartment={onDepartmentChange} />
         </div>
+
         <div className={classes.select}>
           <RoomList department={department} room={room} setRoom={onRoomChange} />
         </div>
+
         <div className={classes.select}>
           <BedList room={room} bed={bed} setBed={onBedChange} />
         </div>
 
+
         <ProcessBasicDetailsForm />
-        <div className={classes.buttonRoot}>
+        {/* <div className={classes.buttonRoot}>
           <Button className={classes.cancelButton} variant="contained" color="primary" onClick={onCancelClick}>
             <Typography align="center" variant="h6" component="h2">ביטול</Typography>
           </Button>
           <Button className={classes.continueButton} disabled={!isCurrentStepValid()} variant="contained" color="primary" onClick={onContinueClick}>
             <Typography align="center" variant="h6" component="h2">המשך</Typography>
           </Button>
-        </div>
+        </div> */}
         {open ? <BaseModal open={open} setOpen={onModalStatusChange} /> : null}
       </div>
     </div>

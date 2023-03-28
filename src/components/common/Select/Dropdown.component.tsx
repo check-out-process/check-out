@@ -83,9 +83,6 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defau
           className={classes.select}
           onChange={handleChange}
         >
-          <MenuItem value={undefined}>
-            <h1>None</h1>
-          </MenuItem>
           {data.map((rowData, index) => {
             return (
               <MenuItem className={classes.option} key={index} value={rowData.value}>

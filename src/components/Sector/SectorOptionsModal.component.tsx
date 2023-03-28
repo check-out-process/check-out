@@ -24,6 +24,7 @@ const style = (refOffsetTop: number) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     padding: 0,
+    outline: 'none',
     top: (87 + refOffsetTop)
 });
 

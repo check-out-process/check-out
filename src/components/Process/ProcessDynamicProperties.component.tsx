@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             direction: "rtl",
             marginRight: '1%',
-            display: 'flex'
+            display: 'flex',
+            backgroundColor: "transparent"
         }
     }),
 );

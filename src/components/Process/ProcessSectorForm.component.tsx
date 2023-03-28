@@ -78,10 +78,10 @@ const ProcessSectorForm = () => {
               <AddCircleOutlineIcon />
             </IconButton>
           </div>
-          <div style={{ display: 'flex' }}>
+          {/* <div style={{ display: 'flex' }}>
             <Button variant="outlined" onClick={handleCancel} style={buttonsStyle()} >ביטול</Button>
             <Button variant="outlined" onClick={saveProcessSector} style={buttonsStyle()}>אישור</Button>
-          </div>
+          </div> */}
         </div >
         <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} />
       </div>
