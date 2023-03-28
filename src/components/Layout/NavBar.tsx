@@ -13,7 +13,7 @@ const NavBarLayout =() =>{
   };
 
     return (
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', height: '100%' }}>
         <header>
             <Tabs value={value} centered onChange={handleChange}>
                 <Tab label="תהליכים" to='/' component={Link}/>
