@@ -1,0 +1,10 @@
+.sectorOptionsModal::after {
+    content: " ";
+    position: absolute;
+    right: 106px;
+    top: -12px;
+    border-top: none;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 15px solid rgb(198, 203, 215);
+  }
