@@ -18,10 +18,12 @@ type ButtonProps = {
 function ProcessSectorsProvider({ children }: ButtonProps) {
     const [processSectors, setProcessSectors] = useState<Sector[]>([]);
     const [notDefaultSectors, setNotDefaultSectors] = useState<Sector[]>([]);
+    const [choosenNotDefaultSectors, setChoosenNotDefaultSectors] = useState<Sector[]>([]);
 
     const addProcessSectors = (sectors: Sector[]) => {
         setProcessSectors(current => [...current, ...sectors]);
 
+        setChoosenNotDefaultSectors(notDefaultSectors.filter((currentSector) => sectors.map(({ id }) => id).includes(currentSector.id)));
         setNotDefaultSectors((current) =>
             current.filter((currentSector) => !sectors.map(({ id }) => id).includes(currentSector.id))
         );
@@ -31,7 +33,12 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
         setProcessSectors((current) =>
             current.filter((currentSector) => currentSector.id !== sector.id)
         );
-        // if its not default sector add to  notDefaultSectorsData
+        if (choosenNotDefaultSectors.map(({ id }) => id).includes(sector.id)) {
+            setChoosenNotDefaultSectors((current) =>
+                current.filter((currentSector) => currentSector.id !== sector.id)
+            );
+            setNotDefaultSectors(current => [...current, sector]);
+        }
     };
 
     return (
