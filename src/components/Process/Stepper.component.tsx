@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: "transparent",
              width: "40%",
             '@media (max-width: 500px)': {
-                width: '90%',
+                width: '70%',
             } 
         }
     }),
