@@ -1,28 +1,29 @@
 import { Sector } from "./models/Sector";
+import {v4 as uuidv4} from 'uuid';
 
 export function getSectors(): Promise<Sector[]> {
     return Promise.resolve([{
-        id: "1",
+        id:  uuidv4(),
         name: "נקיון בומים",
         owner: "אפק לב"
     },
     {
-        id: "2",
+        id: uuidv4(),
         name: "טקסטיל",
         owner: "ליאור בכר"
     },
     {
-        id: "3",
+        id:  uuidv4(),
         name: "כוח עזר",
         owner: "ליאור בכר"
     },
     {
-        id: "4",
+        id:  uuidv4(),
         name: "נקיון כללי",
         owner: "ליאור בכר"
     },
     {
-        id: "5",
+        id:  uuidv4(),
         name: "נקיון hhכללי",
         owner: "ליאור בכר"
     }
