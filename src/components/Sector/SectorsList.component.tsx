@@ -22,7 +22,7 @@ const SectorsList: React.FC<ISectorsListProps> = ({ choosenSectorsData, removePr
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
                         {choosenSectorsData.map((sector: Sector, index: number) => (
-                            <SectorCard sector={sector} removeProcessSector={removeProcessSector} index={index} />
+                            <SectorCard key ={sector.id} sector={sector} removeProcessSector={removeProcessSector} index={index} />
                         ))}
                     </List>
                     {provided.placeholder}
