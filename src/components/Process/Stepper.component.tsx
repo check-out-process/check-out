@@ -52,6 +52,13 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: theme.spacing(1),
             marginBottom: theme.spacing(1),
         },
+        stepper:{
+            backgroundColor: "transparent",
+             width: "40%",
+            '@media (max-width: 500px)': {
+                width: '90%',
+            } 
+        }
     }),
 );
 
@@ -93,7 +100,7 @@ export default function HorizontalLinearStepper() {
     return (
         <div className={classes.root}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent", width: "40%" }}>
+                <Stepper activeStep={activeStep}  className={classes.stepper}>
                     {steps.map((label, index) => {
                         return (
                             <Step key={label}>
