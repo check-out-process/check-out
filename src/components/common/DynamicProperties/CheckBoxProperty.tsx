@@ -1,29 +1,21 @@
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import InputLabel from '@mui/material/InputLabel';
-// import MenuItem from '@mui/material/MenuItem';
-// import FormControl from '@mui/material/FormControl';
-// import Select, { SelectChangeEvent } from '@mui/material/Select';
-// import { Typography } from '@mui/material';
+import * as React from 'react';
+import { Checkbox, Typography } from '@material-ui/core';
+import { DynamicPropertyType } from './PropertiesFactory.component';
 
-// export type DropdownProps = {
-//     title : string;
-// }
+const CheckBoxProperty: React.FC<DynamicPropertyType> = ({ property, onChange }) => {
+    const [checked, setChecked] = React.useState(property.value);
 
-// const Dropdown: React.FC<DropdownProps> = ({title, data, onChange}) => {
-//     const [element, setElement] = React.useState('');
-  
-//     const handleChange = (event: SelectChangeEvent) => {
-//       setElement(event.target.value as string);
-//       onChange(event)
-//     };
-  
-//     return (
-//       <Box sx={{ minWidth: 120 }}>
-//           <Typography variant="h6" component="h2">{title}</Typography>
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+        onChange(property.propertyName, event.target.checked)
+    };
 
-//       </Box>
-//     );
-//   }
-  
-//   export default Dropdown
+    return (
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <Typography style={{ marginRight: '2%' }} align="right" variant="h6" component="h2">{property.propertyDisplayName}:</Typography>
+            <Checkbox checked={checked} onChange={handleChange} color="primary" />
+        </div>
+    );
+}
+
+export default CheckBoxProperty

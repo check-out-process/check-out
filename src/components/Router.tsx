@@ -1,12 +1,12 @@
 import React from 'react';
-import Box from '@mui/material/Box';
+import * as ReactDOM from "react-dom";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider, Route
 } from "react-router-dom";
 import NavBarLayout from './Layout/NavBar';
-import ProcessCreation from './Process/ProcessCreation';
+import ProcessCreation from './Process/ProcessCreation.component';
 
 const Router = () => {
 
@@ -20,9 +20,9 @@ const Router = () => {
   )
 
   return (
-    <Box sx={{height: '100%'}}>
+    <div style={{height: '100%'}}>
       <RouterProvider router={router} />
-    </Box>
+    </div>
   );
 
 }

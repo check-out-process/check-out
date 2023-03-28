@@ -23,7 +23,9 @@ const NavBarLayout =() =>{
             </Tabs>
         </header>
         <main>
+          <div>
             <Outlet/>
+            </div>
         </main>
         
       </Box>

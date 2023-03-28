@@ -1,40 +1,69 @@
-import { SelectChangeEvent } from '@mui/material';
-import Box from '@mui/material/Box';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getBeds } from '../../services/Bed.service';
 import { Bed } from '../../services/models/Bed';
-import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
-import Dropdown, { DropdownKeyPair } from '../Common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
+import { Room } from '../../services/models/Room';
+import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
+
+export type RoomListType = {
+    room: Room,
+    bed: Bed,
+    setBed: (bed: Bed) => void
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        loading: {
+            width: '80%',
+            marginRight: '1%',
+            '@media (min-width: 500px)': {
+                width: '40%',
+            }
+        }
+    }),
+);
 
 
-const BedList = () =>{
-    const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
-    const [bedsDropdownData,setBedsDropdownData] = useState<DropdownKeyPair[]>([])
+const BedList: React.FC<RoomListType> = ({ room, bed, setBed }) => {
+    const [bedsDropdownData, setBedsDropdownData] = useState<DropdownKeyPair[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const classes = useStyles();
+
 
     useEffect(() => {
-        if (processDetails.roomUuid !== undefined){
+        if (room !== undefined) {
             fetchBeds()
+        }else{
+            setBedsDropdownData([])
         }
-    },[processDetails.roomUuid])
+    }, [room])
 
-    const fetchBeds = () =>{
-        getBeds(processDetails.roomUuid).then((beds: Bed[]) => {
-            const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({id: bed.uuid, value: bed.name }))
-            setBedsDropdownData(data)            
+    const fetchBeds = () => {
+        setIsLoading(true);
+        getBeds(room.uuid).then((beds: Bed[]) => {
+            const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
+            setBedsDropdownData(data);
+            setIsLoading(false);
         })
     }
 
-    function onChange(event: SelectChangeEvent): void {
-        processDetails.bedUuid = event.target.value as string
-        setProcessDetails({...processDetails})
+    function onChange(event: onChangeEvent): void {
+        setBed(event.target.value as Bed)
     }
 
     return (
-      <Box>
-        <Dropdown title='בחירת מיטה' data={bedsDropdownData} onChange={onChange}/>
-      </Box>
+        <div>
+            <Dropdown
+                title='בחירת מיטה'
+                defaultValue={bed}
+                data={bedsDropdownData}
+                disabled={isLoading}
+                onChange={onChange} />
+            {isLoading ? <LinearProgress className={classes.loading} /> : null}
+
+        </div>
     );
-   
+
 }
 
 export default BedList
