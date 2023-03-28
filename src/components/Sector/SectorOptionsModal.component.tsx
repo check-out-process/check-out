@@ -1,5 +1,6 @@
 import { Button, Modal, } from "@material-ui/core";
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
+import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 import { Sector } from "../../services/models/Sector";
 import './SectorOptionsModal.component.css';
 
@@ -8,7 +9,6 @@ interface ISectorCardProps {
     setOpen: Dispatch<SetStateAction<boolean>>
     refOffsetTop: number,
     sector: Sector,
-    removeProcessSector: any
 }
 const style = (refOffsetTop: number) => ({
     position: 'absolute' as 'absolute',
@@ -27,7 +27,8 @@ const style = (refOffsetTop: number) => ({
     top: (87 + refOffsetTop)
 });
 
-const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffsetTop, sector, removeProcessSector }: ISectorCardProps) => {
+const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffsetTop, sector }: ISectorCardProps) => {
+    const { removeProcessSector } = useContext(ProcessSectorsContext);
 
     const handleClose = () => setOpen(false);
 

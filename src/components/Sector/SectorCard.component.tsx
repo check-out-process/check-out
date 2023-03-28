@@ -8,10 +8,9 @@ import { Draggable } from "react-beautiful-dnd";
 
 interface ISectorCardProps {
     sector: Sector,
-    removeProcessSector: any,
     index: number;
 }
-const SectorCard: React.FC<ISectorCardProps> = ({ sector, removeProcessSector, index }: ISectorCardProps) => {
+const SectorCard: React.FC<ISectorCardProps> = ({ sector, index }: ISectorCardProps) => {
     const [open, setOpen] = useState(false);
     const [offsetTop, setOffsetTop] = useState(0);
     const ref = useRef(null)
@@ -43,7 +42,7 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, removeProcessSector, i
                                 <MoreHorizIcon />
                             </IconButton>
                         </Card>
-                        <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} sector={sector} removeProcessSector={removeProcessSector} />
+                        <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} sector={sector} />
                     </div>
             )}
         </Draggable>

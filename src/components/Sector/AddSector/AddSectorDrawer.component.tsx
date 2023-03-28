@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Drawer, List, Divider, Typography, IconButton, Button, styled } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './AddSectorDrawer.component.css';
 import AddSectorCard from './AddSectorCard.component';
 import { Sector } from '../../../services/models/Sector';
+import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
 
 interface IAddSectorDrawerProps {
     open: boolean,
     handleDrawerClose: any,
-    sectorsData: Sector[],
-    addProcessSectors: any,
 }
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -17,7 +16,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     alignItems: 'flex-start',
 }));
 
-const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose, sectorsData, addProcessSectors }: IAddSectorDrawerProps) => {
+const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose }: IAddSectorDrawerProps) => {
+    const { notDefaultSectors, addProcessSectors } = useContext(ProcessSectorsContext);
     const [choosenSectors, setChoosenSectors] = useState<Sector[]>([]);
 
     const handleAddSectorsToProcessSectors = () => {
@@ -51,13 +51,13 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
                 </Typography>
             </DrawerHeader>
             <Divider />
-            {sectorsData.length > 0 &&
+            {notDefaultSectors.length > 0 &&
                 <div>
 
                     <List className="sectorsList" style={{
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
-                        {sectorsData.map((sector: Sector) => (
+                        {notDefaultSectors.map((sector: Sector) => (
                             <AddSectorCard key ={sector.id} sector={sector} addChoosenSector={addChoosenSector} removeChoosenSector={removeChoosenSector}/>
                         ))}
                     </List>

@@ -1,15 +1,14 @@
 import { List } from "@material-ui/core";
-import React from 'react';
+import React, { useContext } from 'react';
 import { Sector } from "../../services/models/Sector";
 import SectorCard from "./SectorCard.component";
 import { Droppable, } from "react-beautiful-dnd";
+import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 
-interface ISectorsListProps {
-    choosenSectorsData: Sector[],
-    removeProcessSector: (sector: Sector) => void,
-}
 
-const SectorsList: React.FC<ISectorsListProps> = ({ choosenSectorsData, removeProcessSector }: ISectorsListProps) => {
+const SectorsList: React.FC = () => {
+    const { processSectors } = useContext(ProcessSectorsContext);
+
     return (
         <Droppable droppableId="sectorsList">
             {(provided, snapshot) => (
@@ -21,8 +20,8 @@ const SectorsList: React.FC<ISectorsListProps> = ({ choosenSectorsData, removePr
                     <List style={{
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
-                        {choosenSectorsData.map((sector: Sector, index: number) => (
-                            <SectorCard key ={sector.id} sector={sector} removeProcessSector={removeProcessSector} index={index} />
+                        {processSectors.map((sector: Sector, index: number) => (
+                            <SectorCard key={sector.id} sector={sector} index={index} />
                         ))}
                     </List>
                     {provided.placeholder}
