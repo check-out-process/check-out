@@ -6,6 +6,7 @@ import InputTextProperty from "./InputTextProperty.component";
 
 export type DynamicPropertyType = {
   property: ProcssPropertiesSchema,
+  error?: boolean
   onChange: (key: any, value: any) => void
 }
 

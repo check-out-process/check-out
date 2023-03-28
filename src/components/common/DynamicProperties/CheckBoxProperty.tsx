@@ -11,15 +11,9 @@ const CheckBoxProperty: React.FC<DynamicPropertyType> = ({ property, onChange })
     };
 
     return (
-        <div style={{display:'flex', flexDirection:'row'}}>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
             <Typography style={{ marginRight: '2%' }} align="right" variant="h6" component="h2">{property.propertyDisplayName}:</Typography>
-
-            <Checkbox
-                checked={checked}
-                onChange={handleChange}
-                color="primary"     
-            />
-
+            <Checkbox checked={checked} onChange={handleChange} color="primary" />
         </div>
     );
 }

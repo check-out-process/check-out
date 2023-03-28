@@ -1,13 +1,14 @@
-import Box from '@mui/material/Box';
 import React from 'react';
+import { ProcessCreationProvider } from '../../context/ProcessCreationContext';
 import ProcessCreationBasicDetailsForm from './ProcessCreationBasicDetailsForm.component';
-
 
 const ProcessCreation = () =>{
     return    (
-      <Box>
-        <ProcessCreationBasicDetailsForm/>
-      </Box>
+      <div>
+        <ProcessCreationProvider>
+          <ProcessCreationBasicDetailsForm/>
+        </ProcessCreationProvider>
+      </div>
     );
    
 }

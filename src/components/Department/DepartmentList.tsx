@@ -1,39 +1,65 @@
-import React, { useContext,useEffect, useState } from 'react';
+import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
+import React, { useContext, useEffect, useState } from 'react';
 import { getDepartments } from '../../services/Department.service';
 import { Department } from '../../services/models/Department';
-import {ProcessCreationDetailsContext} from '../../context/ProcessCreationContext';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
+
+export type DepartmentList = {
+    department: Department,
+    setDepartment: (department: Department) => void
+}
 
 
-const DepartmentList = () => {
-    const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
-    const [departmentsDropdownData,setDepartmentsDropdownData] = useState<DropdownKeyPair[]>([])
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        loading: {
+            width: '80%',
+            marginRight: '1%',
+            '@media (min-width: 500px)': {
+                width: '40%',
+            }
+        }
+    }),
+);
+
+
+const DepartmentList: React.FC<DepartmentList> = ({ department, setDepartment }) => {
+    const [departmentsDropdownData, setDepartmentsDropdownData] = useState<DropdownKeyPair[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const classes = useStyles();
+
 
     useEffect(() => {
         fetchDepartments()
-    },[])
+    }, [])
 
-    const fetchDepartments = () =>{
+    const fetchDepartments = () => {
+        setIsLoading(true)
         getDepartments().then((departments: Department[]) => {
-            const data: DropdownKeyPair[] = departments.map((department: Department) => (
-                {id: department.uuid, value: department.name }
-                ))
-            setDepartmentsDropdownData(data)            
+            const data: DropdownKeyPair[] = departments.map((department: Department) =>
+                ({ value: department, displayName: department.name }));
+            setDepartmentsDropdownData(data)
+            setIsLoading(false)
         })
     }
 
     function onChange(event: onChangeEvent): void {
-        processDetails.deparmentUuid = event.target.value as string
-        setProcessDetails({...processDetails})
+        setDepartment(event.target.value as Department);
     }
-    
+
 
     return (
-      <div>
-             <Dropdown title='בחירת מחלקה' data={departmentsDropdownData} onChange={onChange}/>
-      </div>
+        <div>
+            <Dropdown
+                defaultValue={department}
+                title='בחירת מחלקה'
+                data={departmentsDropdownData}
+                disabled={isLoading}
+                onChange={onChange} />
+            {isLoading ? <LinearProgress className={classes.loading} /> : null}
+        </div>
     );
-   
+
 }
 
 export default DepartmentList
