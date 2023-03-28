@@ -32,10 +32,12 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
     const handleClose = () => setOpen(false);
 
     const handleEdit = () => {
+        handleClose();
     };
 
     const handleRemove = () => {
         removeProcessSector(sector);
+        handleClose();
     };
 
     return (

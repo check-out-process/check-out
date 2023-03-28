@@ -18,7 +18,7 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, removeProcessSector, i
 
     const ownerTitle = `אחראי: ${sector.owner}`;
 
-    const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleOpen = () => {
         setOffsetTop(window.pageYOffset + ref.current.getBoundingClientRect().top)
         setOpen(true);
     }
@@ -39,7 +39,7 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, removeProcessSector, i
                                     {ownerTitle}
                                 </Typography>
                             </CardContent>
-                            <IconButton className="iconButton" aria-label="previous" style={{ marginRight: 'auto' }} onClick={(event) => handleOpen(event)}>
+                            <IconButton className="iconButton" aria-label="previous" style={{ marginRight: 'auto' }} onClick={handleOpen}>
                                 <MoreHorizIcon />
                             </IconButton>
                         </Card>
