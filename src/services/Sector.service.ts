@@ -1,7 +1,7 @@
 import { Sector } from "./models/Sector";
 import {v4 as uuidv4} from 'uuid';
 
-export function getSectors(): Promise<Sector[]> {
+export function getDefaultSectors(): Promise<Sector[]> {
     return Promise.resolve([{
         id:  uuidv4(),
         name: "נקיון בומים",
@@ -27,5 +27,19 @@ export function getSectors(): Promise<Sector[]> {
         name: "נקיון hhכללי",
         owner: "ליאור בכר"
     }
+    ])
+}
+
+export function getNotDefaultSectors(): Promise<Sector[]> {
+    return Promise.resolve([{
+        id:  uuidv4(),
+        name: "תחזוקה",
+        owner: "אפק לב"
+    },
+    {
+        id:  uuidv4(),
+        name: "אינסטלטור",
+        owner: "ליאור בכר"
+    },
     ])
 }
