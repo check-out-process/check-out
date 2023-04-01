@@ -4,9 +4,12 @@ import { getDepartments } from '../../services/Department.service';
 import { Department } from '../../services/models/Department';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 
-export type DepartmentList = {
+export type DepartmentListProps = {
     department: Department,
-    setDepartment: (department: Department) => void
+    setDepartment: (department: Department) => void,
+    departments: Department[],
+    setDepartments: (departments: Department[]) => void,
+
 }
 
 
@@ -23,19 +26,26 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const DepartmentList: React.FC<DepartmentList> = ({ department, setDepartment }) => {
+const DepartmentList: React.FC<DepartmentListProps> = ({ department, setDepartment, departments, setDepartments }) => {
     const [departmentsDropdownData, setDepartmentsDropdownData] = useState<DropdownKeyPair[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const classes = useStyles();
 
 
     useEffect(() => {
-        fetchDepartments()
+        if (departments.length == 0) {
+            fetchDepartments()
+        }else{
+            const data: DropdownKeyPair[] = departments.map((department: Department) =>
+                ({ value: department, displayName: department.name }));
+            setDepartmentsDropdownData(data)
+        }
     }, [])
 
     const fetchDepartments = () => {
         setIsLoading(true)
         getDepartments().then((departments: Department[]) => {
+            setDepartments(departments)
             const data: DropdownKeyPair[] = departments.map((department: Department) =>
                 ({ value: department, displayName: department.name }));
             setDepartmentsDropdownData(data)

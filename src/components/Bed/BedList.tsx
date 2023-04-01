@@ -5,10 +5,12 @@ import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropd
 import { Room } from '../../services/models/Room';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 
-export type RoomListType = {
+export type RoomListProps = {
     room: Room,
     bed: Bed,
-    setBed: (bed: Bed) => void
+    setBed: (bed: Bed) => void,
+    beds?: Bed[],
+    setBeds?: (beds: Bed[]) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -24,27 +26,34 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const BedList: React.FC<RoomListType> = ({ room, bed, setBed }) => {
+const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) => {
     const [bedsDropdownData, setBedsDropdownData] = useState<DropdownKeyPair[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const classes = useStyles();
 
 
     useEffect(() => {
-        if (room !== undefined) {
+        if (room !== undefined && bed === undefined){
             fetchBeds()
-        }else{
-            setBedsDropdownData([])
+        }
+        else if (room !== undefined && bed !== undefined){
+            const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
+            setBedsDropdownData(data);
+        }
+        if (room == undefined && bed === undefined){
+            setBedsDropdownData([]);
         }
     }, [room])
 
     const fetchBeds = () => {
-        setIsLoading(true);
-        getBeds(room.uuid).then((beds: Bed[]) => {
-            const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
-            setBedsDropdownData(data);
-            setIsLoading(false);
-        })
+            setIsLoading(true);
+            getBeds(room.uuid).then((beds: Bed[]) => {
+                setBeds(beds)
+                const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
+                setBedsDropdownData(data);
+                setIsLoading(false);
+            })
+        
     }
 
     function onChange(event: onChangeEvent): void {

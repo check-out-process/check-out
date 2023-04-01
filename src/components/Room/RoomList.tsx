@@ -9,7 +9,9 @@ import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/co
 export type RoomListType = {
     department: Department,
     room: Room,
-    setRoom: (room: Room) => void
+    setRoom: (room: Room) => void,
+    rooms: Room[],
+    setRooms: (rooms: Room[]) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,26 +28,30 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-const RoomList: React.FC<RoomListType> = ({ department, room, setRoom }) => {
+const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, setRooms }) => {
     const [roomsDropdownData, setRoomsDropdownData] = useState<DropdownKeyPair[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const classes = useStyles();
 
     useEffect(() => {
-        if (department !== undefined) {
+        if (department !== undefined && room === undefined){
+            setRoomsDropdownData([]);
             fetchRooms()
-        } else {
-            setRoomsDropdownData([])
+        }
+        else if (department !== undefined && room !== undefined){
+            const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
+            setRoomsDropdownData(data);
         }
     }, [department])
 
     const fetchRooms = () => {
-        setIsLoading(true);
-        getRooms(department.uuid).then((rooms: Room[]) => {
-            const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
-            setRoomsDropdownData(data);
-            setIsLoading(false);
-        })
+            setIsLoading(true);
+            getRooms(department.uuid).then((rooms: Room[]) => {
+                setRooms(rooms)
+                const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
+                setRoomsDropdownData(data);
+                setIsLoading(false);
+            })
     }
 
     function onChange(event: onChangeEvent): void {

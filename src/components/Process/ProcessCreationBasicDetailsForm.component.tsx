@@ -57,61 +57,27 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const ProcessCreationBasicDetailsForm = () => {
   const classes = useStyles();
-  const [department, setDepartment] = useState<Department>()
-  const [room, setRoom] = useState<Room>()
-  const [bed, setBed] = useState<Bed>()
-  const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
+  const { department,
+    setDepartment,
+    room,
+    setRoom,
+    bed,
+    setBed,
+    departments,
+    setDepartments,
+    rooms,
+    setRooms,
+    beds,
+    setBeds
+  } = useContext(ProcessCreationDetailsContext);
   const [open, setOpen] = useState<boolean>(false);
 
-
-
-  const onDepartmentChange = (department: Department) => {
-    processDetails.deparmentUuid = department.uuid;
-    processDetails.roomUuid = undefined;
-    processDetails.bedUuid = undefined;
-    setRoom(undefined);
-    setBed(undefined);
-    setProcessDetails({ ...processDetails })
-    setDepartment(department);
-  }
-
-  const onRoomChange = (room: Room) => {
-    processDetails.roomUuid = room.uuid;
-    processDetails.bedUuid = undefined;
-    setProcessDetails({ ...processDetails })
-    setRoom(room)
-    setBed(undefined);
-  }
-
-  const onBedChange = (bed: Bed) => {
-    processDetails.bedUuid = bed.uuid;
-    setProcessDetails({ ...processDetails })
-    setBed(bed)
-  }
-
-  const isCurrentStepValid = (): boolean => {
-    return (department !== undefined) && (room !== undefined) && (bed !== undefined);
-  }
-
-
-  const onContinueClick = () => {
-    console.log(processDetails)
-  }
-
-  const onCancelClick = () => {
-    setOpen(true);
-  }
-
-  const onModalStatusChange = (confirm: boolean) => {
+  const onCloseModal = (confirm: boolean) => {
     setOpen(false);
     if (confirm) {
-      processDetails.deparmentUuid = undefined
-      processDetails.roomUuid = undefined;
-      processDetails.bedUuid = undefined;
       setDepartment(undefined);
       setRoom(undefined);
       setBed(undefined);
-      setProcessDetails({ ...processDetails })
     }
   }
 
@@ -120,28 +86,19 @@ const ProcessCreationBasicDetailsForm = () => {
     <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <div className={classes.root}>
         <div className={classes.select}>
-          <DepartmentList department={department} setDepartment={onDepartmentChange} />
+          <DepartmentList department={department} setDepartment={setDepartment} departments={departments} setDepartments={setDepartments} />
         </div>
 
         <div className={classes.select}>
-          <RoomList department={department} room={room} setRoom={onRoomChange} />
+          <RoomList department={department} room={room} setRoom={setRoom} rooms={rooms} setRooms={setRooms} />
         </div>
 
         <div className={classes.select}>
-          <BedList room={room} bed={bed} setBed={onBedChange} />
+          <BedList room={room} bed={bed} setBed={setBed} beds={beds} setBeds={setBeds} />
         </div>
-
 
         <ProcessBasicDetailsForm />
-        {/* <div className={classes.buttonRoot}>
-          <Button className={classes.cancelButton} variant="contained" color="primary" onClick={onCancelClick}>
-            <Typography align="center" variant="h6" component="h2">ביטול</Typography>
-          </Button>
-          <Button className={classes.continueButton} disabled={!isCurrentStepValid()} variant="contained" color="primary" onClick={onContinueClick}>
-            <Typography align="center" variant="h6" component="h2">המשך</Typography>
-          </Button>
-        </div> */}
-        {open ? <BaseModal open={open} setOpen={onModalStatusChange} /> : null}
+        {open ? <BaseModal open={open} setOpen={onCloseModal} /> : null}
       </div>
     </div>
   );
