@@ -65,7 +65,9 @@ const ProcessCreationBasicDetailsForm = () => {
           <BedList room={room} bed={bed} setBed={setBed} beds={beds} setBeds={setBeds} />
         </div>
 
-        <ProcessBasicDetailsForm />
+        <div className={classes.select}>
+          <ProcessBasicDetailsForm />
+        </div>
         {open ? <BaseModal open={open} setOpen={onCloseModal} /> : null}
       </div>
     </div>
