@@ -1,0 +1,10 @@
+.MuiStepLabel-root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.MuiStepConnector-root {
+    flex: 1 1 auto;
+    margin-bottom: 20px;
+}

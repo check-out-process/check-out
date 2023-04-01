@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -10,6 +10,38 @@ import ProcessSectorForm from './ProcessSectorForm.component';
 import { useNavigate } from 'react-router-dom';
 import BaseModal from '../Common/Modal/BaseModal.component';
 import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
+import { StepConnector } from '@material-ui/core';
+import './Stepper.component.css';
+const ColorlibConnector = withStyles({
+    alternativeLabel: {
+        top: 22,
+    },
+    active: {
+        '& $line': {
+            backgroundColor: 'blue',
+        },
+    },
+    completed: {
+        '& $line': {
+            backgroundColor: 'blue',
+        },
+    },
+    line: {
+        height: 3,
+        border: 0,
+        backgroundColor: 'gray',
+        borderRadius: 1,
+
+        // '@media (min-width: 500px)': {
+        //     marginRight: '-20px',
+        //     width: '112%',
+        // },
+        // '@media (max-width: 500px)': {
+        //     marginRight: '-18px',
+        //     width: '132%',
+        // }
+    },
+})(StepConnector);
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -76,6 +108,7 @@ const steps: StepperType[] = [
     }
 ]
 
+
 export default function HorizontalLinearStepper() {
     const navigate = useNavigate();
     const classes = useStyles();
@@ -109,7 +142,7 @@ export default function HorizontalLinearStepper() {
     return (
         <div className={classes.root}>
             <div style={{ display: "flex", justifyContent: "center" }}>
-                <Stepper activeStep={activeStep} className={classes.stepper}>
+                <Stepper activeStep={activeStep} className={classes.stepper} connector={<ColorlibConnector />} >
                     {steps.map((step: StepperType, index) => {
                         return (
                             <Step key={step.title}>
