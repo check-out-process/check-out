@@ -40,30 +40,30 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const ProcessBasicDetailsForm = () => {
-    const [processProperties, setProcessProperties] = useState<ProcssPropertiesSchema[]>([])
-    const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
-    const classes = useStyles();
+    // const [processProperties, setProcessProperties] = useState<ProcssPropertiesSchema[]>([])
+    // const { processDetails, setProcessDetails } = useContext(ProcessCreationDetailsContext);
+    // const classes = useStyles();
 
 
-    useEffect(() => {
-        fetchProcessProperties()
-    }, [])
+    // useEffect(() => {
+    //     fetchProcessProperties()
+    // }, [])
 
-    const fetchProcessProperties = () => {
-        getProcessPropertiesSchema().then((processProperties: ProcssPropertiesSchema[]) => {
-            setProcessProperties(processProperties)
-        })
-    }
+    // const fetchProcessProperties = () => {
+    //     getProcessPropertiesSchema().then((processProperties: ProcssPropertiesSchema[]) => {
+    //         setProcessProperties(processProperties)
+    //     })
+    // }
 
-    const onChange = (key: any, value: any): void => {
-        processDetails.properties[key] = value
-        setProcessDetails({ ...processDetails })
-    }
+    // const onChange = (key: any, value: any): void => {
+    //     processDetails.properties[key] = value
+    //     setProcessDetails({ ...processDetails })
+    // }
 
     return (
         <div>
-            <Typography style={{ marginTop: '1%', marginRight: '2%' }} align="right" variant="h6" component="h2">תיאור חופשי:</Typography>
-            <TextareaAutosize minRows={6} placeholder="תיאור" className={classes.textArea} />
+            {/* <Typography style={{ marginTop: '1%', marginRight: '2%' }} align="right" variant="h6" component="h2">תיאור חופשי:</Typography>
+            <TextareaAutosize minRows={6} placeholder="תיאור" className={classes.textArea} /> */}
 
             {/* <Accordion className={classes.root}>
                 <AccordionSummary style={{borderBottom: '1px solid rgba(0, 0, 0, .125)',boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)'}}
