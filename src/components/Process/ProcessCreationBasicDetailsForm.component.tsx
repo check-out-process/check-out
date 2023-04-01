@@ -1,11 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import BedList from '../Bed/BedList';
 import DepartmentList from '../Department/DepartmentList';
 import RoomList from '../Room/RoomList';
 import ProcessBasicDetailsForm from './ProcessDynamicProperties.component';
-import { ProcessCreationDetailsContext, ProcessCreationProvider } from '../../context/ProcessCreationContext'
+import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext'
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import BaseModal from '../Common/Modal/BaseModal.component';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,16 +37,6 @@ const ProcessCreationBasicDetailsForm = () => {
     beds,
     setBeds
   } = useContext(ProcessCreationDetailsContext);
-  const [open, setOpen] = useState<boolean>(false);
-
-  const onCloseModal = (confirm: boolean) => {
-    setOpen(false);
-    if (confirm) {
-      setDepartment(undefined);
-      setRoom(undefined);
-      setBed(undefined);
-    }
-  }
 
   return (
 
@@ -65,12 +54,12 @@ const ProcessCreationBasicDetailsForm = () => {
           <BedList room={room} bed={bed} setBed={setBed} beds={beds} setBeds={setBeds} />
         </div>
 
-        <ProcessBasicDetailsForm />
-        {open ? <BaseModal open={open} setOpen={onCloseModal} /> : null}
+        <div className={classes.select}>
+          <ProcessBasicDetailsForm />
+        </div>
       </div>
     </div>
   );
-
 }
 
 export default ProcessCreationBasicDetailsForm

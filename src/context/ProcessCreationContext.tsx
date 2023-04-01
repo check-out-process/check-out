@@ -1,14 +1,8 @@
-import React, { useState, useEffect, createContext, ReactNode } from 'react';
+import React, { useState, createContext, ReactNode } from 'react';
 import { Bed } from '../services/models/Bed';
 import { Department } from '../services/models/Department';
 import { Room } from '../services/models/Room';
 
-export type ProcessBasicDetailsType = {
-    deparmentUuid?: string;
-    roomUuid?: string;
-    bedUuid?: string;
-    properties: { [id: string]: any }
-}
 
 export type ProcessCreationContextType = {
     departments?: Department[],
@@ -23,7 +17,9 @@ export type ProcessCreationContextType = {
     setBed?: (bed: Bed) => void,
     beds?: Bed[],
     setBeds?: (beds: Bed[]) => void,
-    isCurrentStepValid?: () => boolean
+    isCurrentStepValid?: () => boolean,
+    properties?: { [key: string]: any },
+    setProperty?: (key: string, value: any) => void
 }
 const ProcessCreationDetailsContext = createContext<ProcessCreationContextType>({});
 
@@ -35,6 +31,8 @@ function ProcessCreationProvider({ children }: { children: ReactNode }) {
     const [department, setDepartment] = useState<Department>()
     const [room, setRoom] = useState<Room>()
     const [bed, setBed] = useState<Bed>()
+
+    const [properties, setProperties] = useState<{[key: string]: any}>({})
 
     const onDepartmentChange = (department: Department) => {
         setDepartment(department)
@@ -49,6 +47,11 @@ function ProcessCreationProvider({ children }: { children: ReactNode }) {
 
     const isCurrentStepValid = (): boolean => {
         return (department !== undefined) && (room !== undefined) && (bed !== undefined);
+    }
+
+    const setProperty = (key: string, value: any) => {
+        properties[key] = value
+        setProperties({...properties})
     }
 
 
@@ -68,7 +71,9 @@ function ProcessCreationProvider({ children }: { children: ReactNode }) {
                 beds: beds,
                 bed: bed,
                 setBed: setBed,
-                isCurrentStepValid: isCurrentStepValid
+                isCurrentStepValid: isCurrentStepValid,
+                properties: properties,
+                setProperty: setProperty
             }}>
             {children}
         </ProcessCreationDetailsContext.Provider>

@@ -34,10 +34,11 @@ const useStyles = makeStyles({
 
 export type BaseModalProps = {
     open: boolean;
-    setOpen: (open: boolean) => void
+    setOpen: (open: boolean) => void,
+    title: string
 }
 
-const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen }) => {
+const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen, title }) => {
     const classes = useStyles();
 
     const handleConfirm = () => {
@@ -59,7 +60,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen }) => {
 
                     <CardContent>
                         <Typography align="center" variant="body2" color="textSecondary" component="p">
-                          ? האם ברצונך לבטל את יצירת התהליך 
+                            {title}
                         </Typography>
                     </CardContent>
 
