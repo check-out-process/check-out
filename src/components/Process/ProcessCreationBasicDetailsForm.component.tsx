@@ -4,12 +4,7 @@ import DepartmentList from '../Department/DepartmentList';
 import RoomList from '../Room/RoomList';
 import ProcessBasicDetailsForm from './ProcessDynamicProperties.component';
 import { ProcessCreationDetailsContext, ProcessCreationProvider } from '../../context/ProcessCreationContext'
-import { Button } from '@mui/material';
-import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { Department } from '../../services/models/Department';
-import { Room } from '../../services/models/Room';
-import { Bed } from '../../services/models/Bed';
 import BaseModal from '../Common/Modal/BaseModal.component';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,33 +18,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     select: {
       marginTop: '2%'
-    },
-    buttonRoot: {
-      marginRight: '1%',
-      display: 'flex',
-      marginTop: '3%',
-      alignItems: 'flex-end'
-    },
-    cancelButton: {
-      textAlign: 'center',
-      justifyContent: 'flex-start',
-      '@media (min-width: 500px)': {
-        width: '20%',
-      },
-      '@media (max-width: 500px)': {
-        width: '40%',
-      }
-    },
-    continueButton: {
-      marginRight: '1%',
-      textAlign: 'center',
-      justifyContent: 'flex-start',
-      '@media (min-width: 500px)': {
-        width: '20%',
-      },
-      '@media (max-width: 500px)': {
-        width: '40%',
-      }
     }
   }),
 );

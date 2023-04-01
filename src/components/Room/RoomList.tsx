@@ -17,7 +17,7 @@ export type RoomListType = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         loading: {
-            width: '80%',
+            width: '97%',
             marginRight: '1%',
             '@media (min-width: 500px)': {
                 width: '40%',
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     }),
 );
-
 
 
 const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, setRooms }) => {
@@ -50,7 +49,7 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
                 setRooms(rooms)
                 const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
                 setRoomsDropdownData(data);
-                setIsLoading(false);
+                // setIsLoading(false);
             })
     }
 

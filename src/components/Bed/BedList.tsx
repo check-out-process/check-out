@@ -16,7 +16,7 @@ export type RoomListProps = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         loading: {
-            width: '80%',
+            width: '97%',
             marginRight: '1%',
             '@media (min-width: 500px)': {
                 width: '40%',

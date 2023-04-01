@@ -25,27 +25,25 @@ const useStyles = makeStyles((theme: Theme) =>
             marginRight: '1%',
             display: 'flex',
             marginTop: '3%',
-            alignItems: 'flex-end'
+            justifyContent: 'center'
         },
         cancelButton: {
             textAlign: 'center',
-            justifyContent: 'flex-start',
             '@media (min-width: 500px)': {
                 width: '20%',
             },
             '@media (max-width: 500px)': {
-                width: '40%',
+                width: '50%',
             }
         },
         continueButton: {
             marginRight: '1%',
             textAlign: 'center',
-            justifyContent: 'flex-start',
             '@media (min-width: 500px)': {
                 width: '20%',
             },
             '@media (max-width: 500px)': {
-                width: '40%',
+                width: '50%',
             }
         },
         instructions: {
@@ -77,8 +75,6 @@ const steps: StepperType[] = [
         element: <ProcessSectorForm />
     }
 ]
-
-
 
 export default function HorizontalLinearStepper() {
     const navigate = useNavigate();
@@ -126,7 +122,7 @@ export default function HorizontalLinearStepper() {
             <div>
                 <Typography className={classes.instructions}>{steps[activeStep].element}</Typography>
 
-                <div className={classes.buttonRoot} style={{ display: "flex", justifyContent: "center" }}>
+                <div className={classes.buttonRoot} style={{ display: "flex", justifyContent: "start-end" }}>
                     <Button disabled={activeStep === 0} variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
                         הקודם
                     </Button>
