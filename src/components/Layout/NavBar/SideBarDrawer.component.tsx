@@ -78,7 +78,7 @@ const menuOptions: MenuOptionType[] = [
     }
 ]
 
-const SizeBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
+const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -116,4 +116,4 @@ const SizeBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
     );
 }
 
-export default SizeBarDrawer; 
+export default SideBarDrawer; 

@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import SizeBarDrawer from './SizeBarDrawer.component';
+import SideBarDrawer from './SideBarDrawer.component';
 
 
 export default function NavBarLayout() {
@@ -15,7 +15,7 @@ export default function NavBarLayout() {
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" onClick={() => { setOpen(true) }} color="inherit">
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -24,7 +24,7 @@ export default function NavBarLayout() {
           <Outlet />
         </div>
       </main>
-      <SizeBarDrawer open={open} setOpen={setOpen} />
+      <SideBarDrawer open={open} setOpen={setOpen} />
     </div>
   );
 }
