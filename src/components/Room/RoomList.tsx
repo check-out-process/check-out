@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
+
 const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, setRooms }) => {
     const [roomsDropdownData, setRoomsDropdownData] = useState<DropdownKeyPair[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -49,7 +50,7 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
                 setRooms(rooms)
                 const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
                 setRoomsDropdownData(data);
-                // setIsLoading(false);
+                setIsLoading(false);
             })
     }
 
