@@ -114,6 +114,8 @@ export default function HorizontalLinearStepper() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const [open, setOpen] = useState<boolean>(false);
+    const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
+
     const isLastStep = (): boolean => activeStep === steps.length - 1;
     const { isCurrentStepValid } = useContext(ProcessCreationDetailsContext);
 
@@ -124,7 +126,6 @@ export default function HorizontalLinearStepper() {
         else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
-
     };
 
     const handleBack = () => {
@@ -136,6 +137,14 @@ export default function HorizontalLinearStepper() {
             navigate('/home', { replace: true });
         } else {
             setOpen(false)
+        }
+    }
+
+    const onCancel = (confirm: boolean) => {
+        if (confirm) {
+            navigate('/home', { replace: true });
+        } else {
+            setCancelModalOpen(false)
         }
     }
 
@@ -156,14 +165,19 @@ export default function HorizontalLinearStepper() {
                 <Typography className={classes.instructions}>{steps[activeStep].element}</Typography>
 
                 <div className={classes.buttonRoot} style={{ display: "flex", justifyContent: "start-end" }}>
-                    <Button disabled={activeStep === 0} variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
+                    {activeStep > 0 ? <Button variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
                         הקודם
-                    </Button>
+                    </Button> : null}
+
+                    {activeStep === 0 ? <Button variant="contained" color="primary" onClick={() => { setCancelModalOpen(true) }} className={classes.continueButton}
+                    >ביטול</Button> : null}
+
                     <Button variant="contained" color="primary" disabled={!isCurrentStepValid()} onClick={handleNext} className={classes.continueButton}
                     >
                         {isLastStep() ? 'סיום' : 'המשך'}
                     </Button>
-                    {open ? <BaseModal open={open} setOpen={onSave} /> : null}
+                    {open ? <BaseModal open={open} setOpen={onSave} title="? האם ברצונך לשמור את התהליך" /> : null}
+                    {cancelModalOpen ? <BaseModal open={cancelModalOpen} setOpen={onCancel} title="? האם ברצונך לבטל את יצירת התהליך" /> : null}
                 </div>
             </div>
         </div>
