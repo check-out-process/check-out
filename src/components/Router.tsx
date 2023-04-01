@@ -5,7 +5,7 @@ import {
   createRoutesFromElements,
   RouterProvider, Route
 } from "react-router-dom";
-import NavBarLayout from './Layout/NavBar';
+import NavBarLayout from './Layout/NavBar/NavBar.component';
 import ProcessCreation from './Process/ProcessCreation.component';
 
 const Router = () => {

@@ -57,27 +57,23 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defaultValue, onChange }) => {
-  const [element, setElement] = React.useState();
   const classes = useStyles();
 
   const handleChange = (event: onChangeEvent) => {
-    console.log(element)
-    setElement(event.target.value as any);
     onChange(event)
   };
 
   return (
     <div style={{ minWidth: 120 }}>
-      <Typography className={classes.title} align="right" variant="h6" component="h2">{title}</Typography>
+      <Typography className={classes.title} align="right" variant="h6" component="span">{title}</Typography>
 
       <FormControl fullWidth variant="filled">
-        {<Select
+        <Select
           disabled={disabled}
           value={defaultValue ? defaultValue : undefined}
           defaultValue={defaultValue ? defaultValue : undefined}
           className={classes.select}
           onChange={handleChange}
-          disableUnderline
           input={<OutlinedInput margin='dense' classes={{ input: classes.input }} />}
         >
           {data.map((rowData, index) => {
@@ -87,7 +83,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defau
               </MenuItem>
             )
           })}
-        </Select>}
+        </Select>
       </FormControl>
     </div>
   );
