@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import NavBarLayout from './Layout/NavBar/NavBar.component';
 import ProcessCreation from './Process/ProcessCreation.component';
+import ProcessList from './Process/ProcessList/ProcessList.componet';
 
 const Router = () => {
 
@@ -14,6 +15,7 @@ const Router = () => {
     createRoutesFromElements(
       <Route path="/" element={<NavBarLayout />}>
         <Route path="/home" element={<About />} />
+        <Route path="/processes" element={<ProcessList />} />
         <Route path="/processcreation" element={<ProcessCreation />} />
       </Route>
     )
