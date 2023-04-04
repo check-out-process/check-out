@@ -20,9 +20,13 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
         }
     }
 
+    const onProcessCardClick = () => {
+
+    }
+
     return (
         <div>
-            <Card style={{ backgroundColor: getColor() }}>
+            <Card style={{ backgroundColor: getColor() }} onClick={onProcessCardClick} >
                 <CardContent style={{ height: '65px', display: 'flex', justifyContent: 'space-between' }}>
                     <div style={{ width: '50%', marginTop: '-10px' }}>
                         <Typography align='right' variant="subtitle1" component="div">
@@ -41,7 +45,6 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
                             מצב: {process.status}
                         </Typography>
                     </div>
-
                 </CardContent>
                 <div style={{ marginTop: '1px' }}>
                     <Divider />
