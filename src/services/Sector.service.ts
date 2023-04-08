@@ -1,45 +1,54 @@
 import { Sector } from "./models/Sector";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import { User } from "./models/User";
 
 export function getDefaultSectors(): Promise<Sector[]> {
     return Promise.resolve([{
-        id:  uuidv4(),
+        id: uuidv4(),
         name: "נקיון בומים",
-        owner: "אפק לב"
+        defaultResposibleUserId: 1
     },
     {
         id: uuidv4(),
         name: "טקסטיל",
-        owner: "ליאור בכר"
+        defaultResposibleUserId: 2
     },
     {
-        id:  uuidv4(),
+        id: uuidv4(),
         name: "כוח עזר",
-        owner: "ליאור בכר"
+        defaultResposibleUserId: 2
     },
     {
-        id:  uuidv4(),
+        id: uuidv4(),
         name: "נקיון כללי",
-        owner: "ליאור בכר"
+        defaultResposibleUserId: 1
     },
-    {
-        id:  uuidv4(),
-        name: "נקיון hhכללי",
-        owner: "ליאור בכר"
-    }
     ])
 }
 
 export function getNotDefaultSectors(): Promise<Sector[]> {
     return Promise.resolve([{
-        id:  uuidv4(),
+        id: uuidv4(),
         name: "תחזוקה",
-        owner: "אפק לב"
+        defaultResposibleUserId: 1
     },
     {
-        id:  uuidv4(),
+        id: uuidv4(),
         name: "אינסטלטור",
-        owner: "ליאור בכר"
+        defaultResposibleUserId: 2
     },
+    ])
+}
+
+export function getSectorResposibleUsers(sectorId: string): Promise<User[]> {
+    return Promise.resolve([
+        {
+            id: 1,
+            name: "אפק לב"
+        },
+        {
+            id: 2,
+            name: "ליאור בכר"
+        },
     ])
 }

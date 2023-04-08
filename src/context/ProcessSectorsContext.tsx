@@ -8,6 +8,7 @@ export type ProcessSectorsContextType = {
     setNotDefaultSectors?: (notDefaultSectors: Sector[]) => void,
     addProcessSectors?: (sectors: Sector[]) => void,
     removeProcessSector?: (sector: Sector) => void,
+    changeSectorOwner?: (sectorId: string, ownerId: number) => void,
 }
 const ProcessSectorsContext = createContext<ProcessSectorsContextType>({});
 
@@ -41,6 +42,18 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
         }
     };
 
+    const changeSectorOwner = (sectorId: string, ownerId: number) => {
+        setProcessSectors((current) =>
+            current.map(currentSector => {
+                if (currentSector.id === sectorId) {
+                    currentSector.ownerId = ownerId;
+                }
+
+                return currentSector;
+            }
+            ));
+    };
+
     return (
         <ProcessSectorsContext.Provider value={{
             processSectors: processSectors,
@@ -48,7 +61,8 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
             notDefaultSectors: notDefaultSectors,
             setNotDefaultSectors: setNotDefaultSectors,
             addProcessSectors: addProcessSectors,
-            removeProcessSector: removeProcessSector
+            removeProcessSector: removeProcessSector,
+            changeSectorOwner: changeSectorOwner
         }}>
             {children}
         </ProcessSectorsContext.Provider>
