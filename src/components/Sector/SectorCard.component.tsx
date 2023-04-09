@@ -15,7 +15,7 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, index }: ISectorCardPr
     const [offsetTop, setOffsetTop] = useState(0);
     const ref = useRef(null)
 
-    const ownerTitle = `אחראי: ${sector.owner}`;
+    const ownerTitle =""// `אחראי: ${sector.defaultResposibleUserName}`;need to get it
 
     const handleOpen = () => {
         setOffsetTop(window.pageYOffset + ref.current.getBoundingClientRect().top)

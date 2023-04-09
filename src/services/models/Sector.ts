@@ -1,5 +1,6 @@
 export type Sector = {
     id: string;
     name: string;
-    owner: string;
+    defaultResposibleUserId: number;
+    ownerId?: number;
 }

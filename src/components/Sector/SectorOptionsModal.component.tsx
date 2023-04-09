@@ -1,7 +1,8 @@
 import { Button, Modal, } from "@material-ui/core";
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 import { Sector } from "../../services/models/Sector";
+import EditSectorModal from "./EditSectorModal.component";
 import './SectorOptionsModal.component.css';
 
 interface ISectorCardProps {
@@ -30,11 +31,12 @@ const style = (refOffsetTop: number) => ({
 
 const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffsetTop, sector }: ISectorCardProps) => {
     const { removeProcessSector } = useContext(ProcessSectorsContext);
+    const [openEditModal, setOpenEditModal] = useState(false);
 
     const handleClose = () => setOpen(false);
 
     const handleEdit = () => {
-        handleClose();
+        setOpenEditModal(true)
     };
 
     const handleRemove = () => {
@@ -44,18 +46,21 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
 
     return (
         open ?
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description">
+            <div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description">
 
-                <div className="sectorOptionsModal"
-                    style={style(refOffsetTop) as React.CSSProperties} >
-                    <Button onClick={handleEdit} >עריכה</Button>
-                    <Button onClick={handleRemove}>הסרה</Button>
-                </div>
-            </Modal>
+                    <div className="sectorOptionsModal"
+                        style={style(refOffsetTop) as React.CSSProperties} >
+                        <Button onClick={handleEdit} >עריכה</Button>
+                        <Button onClick={handleRemove}>הסרה</Button>
+                    </div>
+                </Modal>
+                <EditSectorModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} sector={sector}/>
+            </div>
             : null
     )
 }
