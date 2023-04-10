@@ -27,7 +27,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     return (
         <div>
             <Card style={{ backgroundColor: getColor() }} onClick={onProcessCardClick} >
-                <CardContent style={{ height: '65px', display: 'flex', justifyContent: 'space-between' }}>
+                <CardContent style={{ height: '56px', display: 'flex', justifyContent: 'space-between' }}>
                     <div style={{ width: '50%', marginTop: '-10px' }}>
                         <Typography align='right' variant="subtitle1" component="div">
                             מחלקה: {process.departmentName}
@@ -39,9 +39,8 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
                             מיטה: {process.bedName}
                         </Typography>
                     </div>
-                    <Divider orientation="vertical" flexItem />
                     <div style={{ width: '50%', marginRight: '15px', marginTop: '-10px' }}>
-                        <Typography align='right' variant="subtitle1" component="div">
+                        <Typography align='left' variant="subtitle1" component="div">
                             מצב: {process.status}
                         </Typography>
                     </div>
@@ -49,7 +48,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
                 <div style={{ marginTop: '1px' }}>
                     <Divider />
                 </div>
-                <CardActions style={{ justifyContent: 'space-between' }}>
+                <CardActions style={{ justifyContent: 'space-between',  marginTop: '-7px' }}>
 
                     <Typography align='right' variant="subtitle1" component="div">
                         נוצר על ידי: {process.createdBy}

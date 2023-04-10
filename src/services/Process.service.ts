@@ -67,7 +67,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
     },
     {
         uuid: 'df-df-dsf-sd-fds-fsd-',
-        departmentName: '1',
+        departmentName: '2',
         roomName: '1',
         bedName: '3',
         createdBy: 'ליאור בכר',
@@ -76,12 +76,12 @@ export function getProcesses(userId: string): Promise<Process[]> {
     },
     {
         uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
-        departmentName: '2',
+        departmentName: '8',
         roomName: '3',
         bedName: '4',
         createdBy: 'אפק לב',
         createdAt: 'שבוע',
-        status:'סיום'
+        status:'בתהליך'
     },
     {
         uuid: 'df-df-dsf-sd-fds-fsd-',
