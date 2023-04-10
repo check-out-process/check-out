@@ -28,7 +28,7 @@ export default function NavBarLayout() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <main className={classes.height}>
+      <main>
         <div className={classes.height}>
           <Outlet />
         </div>
