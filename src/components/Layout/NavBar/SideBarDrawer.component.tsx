@@ -66,7 +66,7 @@ const menuOptions: MenuOptionType[] = [
     },
     {
         title: 'תהליכים',
-        route: '/',
+        route: '/processes',
         icon: <ListIcon/>
 
     },
