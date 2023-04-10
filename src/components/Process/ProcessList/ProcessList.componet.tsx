@@ -23,7 +23,7 @@ const ProcessList = () => {
     }
 
     return (
-        <div >
+        <div>
             <div style={{ marginTop: '10px' }}>
                 <ProcessListHeader processes={processes} setProcesses={setCurrentProcesses} />
             </div>

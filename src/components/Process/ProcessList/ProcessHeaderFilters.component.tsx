@@ -9,13 +9,6 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        title: {
-            flexGrow: 1,
-            textAlign: 'right'
-        },
-        iconTitle: {
-            justifyContent: 'flex-end'
-        },
         drawer: {
             width: drawerWidth,
             flexShrink: 0
@@ -33,6 +26,9 @@ const useStyles = makeStyles((theme: Theme) =>
             // necessary for content to be below app bar
             ...theme.mixins.toolbar,
             justifyContent: 'flex-start',
+        },
+        filters: {
+            marginTop: '5px' 
         }
     }),
 );
@@ -114,17 +110,18 @@ const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses
                 </div>
                 <Divider />
 
-                <Typography style={{ marginTop: '3px' }} align='center' variant="h5" component="div">חיפוש מתקדם</Typography>
+                <Typography className={classes.filters} align='center' variant="h5" component="div">חיפוש מתקדם</Typography>
 
-                <Typography align='right' variant="subtitle1" component="div">מחלקה</Typography>
+                <Typography className={classes.filters} align='right' variant="subtitle1" component="div">מחלקה</Typography>
                 <OutlinedInput placeholder="מחלקה" onChange={event => setDepartment(event.target.value)} />
 
-                <Typography align='right' variant="subtitle1" component="div">חדר</Typography>
+                <Typography className={classes.filters} align='right' variant="subtitle1" component="div">חדר</Typography>
                 <OutlinedInput placeholder="חדר" onChange={event => setRoom(event.target.value)} />
 
-                <Typography align='right' variant="subtitle1" component="div">מיטה</Typography>
+                <Typography className={classes.filters} align='right' variant="subtitle1" component="div">מיטה</Typography>
                 <OutlinedInput placeholder="מיטה" onChange={event => setBed(event.target.value)} />
-                <div style={{ marginTop: '4px' }}>
+                
+                <div className={classes.filters}>
                     {statues.map((status: string) => {
                         return (
                             <div style={{ display: 'flex' }}>
@@ -143,7 +140,7 @@ const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses
                 </div>
 
 
-                <Button style={{ marginTop: '3px' }} variant="contained" color="primary" onClick={onSearchClick}>חיפוש</Button>
+                <Button className={classes.filters} variant="contained" color="primary" onClick={onSearchClick}>חיפוש</Button>
             </Drawer>
         </div>
     );
