@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Process } from '../../../services/models/Process';
 import { Divider } from '@material-ui/core';
-import { useStyles } from './ProcessCard.component.style';
+import { useStyles } from './ProcessCard.component.styles';
 
 
 export type ProcessCardProps = {
