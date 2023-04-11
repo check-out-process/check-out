@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
             marginTop: '1px'
         },
         cardActions:{
-            justifyContent: 'space-between',  marginTop: '-7px'
+            justifyContent: 'space-between',  marginTop: '-4px', height: '15px'
         }
     }),
 );

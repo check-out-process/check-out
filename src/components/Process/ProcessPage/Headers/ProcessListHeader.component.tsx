@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Process } from "../../../../services/models/Process";
 import { Button, Typography} from "@material-ui/core";
 import ProcessFilters from "./ProcessFilters.component";
-import { useStyles } from "./ProcessListHeader.component.style";
+import { useStyles } from "./ProcessListHeader.component.styles";
 
 
 export type ProcessListHeaderProps = {

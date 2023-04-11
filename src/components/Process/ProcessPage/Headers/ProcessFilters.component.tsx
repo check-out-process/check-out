@@ -4,7 +4,7 @@ import { Process } from "../../../../services/models/Process";
 import { Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, OutlinedInput, TextField, Theme, Typography, createStyles, makeStyles } from "@material-ui/core";
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {useStyles} from "./ProcessFilters.component.style";
+import {useStyles} from "./ProcessFilters.component.styles";
 
 
 export type ProcessFiltersProps = {
