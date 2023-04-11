@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import ProcessCard from './ProcessCard.component';
 import { getProcesses } from '../../../services/Process.service';
 import { Process } from '../../../services/models/Process';
 import { Typography } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
-import ProcessListHeader from './ProcessListHeader.component';
+import ProcessListHeader from './Headers/ProcessListHeader.component';
+import { FixedSizeList, ListChildComponentProps } from 'react-window';
+
 
 const ProcessList = () => {
     const [processes, setProcesses] = useState<Process[]>([])
@@ -20,7 +22,8 @@ const ProcessList = () => {
     const fetchProcesses = () => {
         getProcesses('dfdfd').then(((processes: Process[]) => {
             setProcesses(processes)
-            initFirstPage(processes)
+            setCurrentProcesses(processes)
+            // initFirstPage(processes)
         }))
     }
 
@@ -48,16 +51,20 @@ const ProcessList = () => {
         calculatePagesNumber(processes)
         const pages = splitProcessesIntoChunks(processes)
         setPageProcessMap(pages)
-        setCurrentProcesses(pages[0])
+        // setCurrentProcesses(pages[0])
+        setCurrentProcesses(processes)
     }
+
     return (
         <div>
             <div style={{ marginTop: '10px' }}>
                 <ProcessListHeader processes={processes} setProcesses={initFirstPage} />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', height:'29em' }}>
 
-                {currentProcesses?.length > 0 ?
+
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent:'center', marginTop:'6px'}}>
+                
+                {/* {currentProcesses?.length > 0 ?
 
                     currentProcesses.map((process: Process, index: number) => {
                         return (
@@ -69,14 +76,26 @@ const ProcessList = () => {
 
                     :
                     <Typography style={{ marginBottom: '10px' }} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography>
-                }
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                } */}
                 {currentProcesses?.length > 0 ?
-                    <Pagination style={{ direction: 'ltr', marginTop: '10px' }} count={pages} color="primary" variant="outlined" shape="rounded" onChange={onPageNumberClick} />
-                    : null}
+                    <FixedSizeList direction='rtl' height={450} width='98%' itemSize={140} itemCount={currentProcesses.length}>
+                        {memo((props: ListChildComponentProps) => {
+                            const { index, style } = props;
+                            return (
+                                <div key={index} style={{ ...style, marginTop: '15px' }}>
+                                    <ProcessCard key={index} process={currentProcesses[index]} />
+                                </div>
+                            );
+                        })}
+                    </FixedSizeList> : 
+                    <Typography style={{ marginBottom: '10px' }} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography>}
+                
             </div>
-
+            {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {currentProcesses?.length > 0 ?
+                    <Pagination style={{ direction: 'ltr', marginTop: '10px' }} count={pages} color="primary" size='large' variant="outlined" shape="rounded" onChange={onPageNumberClick} />
+                    : null}
+            </div> */}
         </div>
     );
 

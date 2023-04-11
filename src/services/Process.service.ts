@@ -54,7 +54,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '3',
         createdBy: 'ליאור בכר',
         createdAt: 'שעתיים',
-        status:'בתהליך'
+        status: 'בתהליך'
     },
     {
         uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
@@ -63,7 +63,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '4',
         createdBy: 'אפק לב',
         createdAt: 'שבוע',
-        status:'סיום'
+        status: 'סיום'
     },
     {
         uuid: 'df-df-dsf-sd-fds-fsd-',
@@ -72,7 +72,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '3',
         createdBy: 'ליאור בכר',
         createdAt: 'שעתיים',
-        status:'בתהליך'
+        status: 'בתהליך'
     },
     {
         uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
@@ -81,7 +81,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '4',
         createdBy: 'אפק לב',
         createdAt: 'שבוע',
-        status:'בתהליך'
+        status: 'בתהליך'
     },
     {
         uuid: 'df-df-dsf-sd-fds-fsd-',
@@ -90,7 +90,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '3',
         createdBy: 'ליאור בכר',
         createdAt: 'שעתיים',
-        status:'בתהליך'
+        status: 'בתהליך'
     },
     {
         uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
@@ -99,7 +99,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '4',
         createdBy: 'אפק לב',
         createdAt: 'שבוע',
-        status:'סיום'
+        status: 'סיום'
     },
     {
         uuid: 'df-df-dsf-sd-fds-fsd-',
@@ -108,7 +108,7 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '3',
         createdBy: 'ליאור בכר',
         createdAt: 'שעתיים',
-        status:'בתהליך'
+        status: 'בתהליך'
     },
     {
         uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
@@ -117,7 +117,79 @@ export function getProcesses(userId: string): Promise<Process[]> {
         bedName: '4',
         createdBy: 'אפק לב',
         createdAt: 'שבוע',
-        status:'סיום'
+        status: 'סיום'
+    },
+    {
+        uuid: 'df-df-dsf-sd-fds-fsd-',
+        departmentName: '1',
+        roomName: '1',
+        bedName: '3',
+        createdBy: 'ליאור בכר',
+        createdAt: 'שעתיים',
+        status: 'בתהליך'
+    },
+    {
+        uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
+        departmentName: '2',
+        roomName: '3',
+        bedName: '4',
+        createdBy: 'אפק לב',
+        createdAt: 'שבוע',
+        status: 'סיום'
+    },
+    {
+        uuid: 'df-df-dsf-sd-fds-fsd-',
+        departmentName: '3',
+        roomName: '1',
+        bedName: '3',
+        createdBy: 'ליאור בכר',
+        createdAt: 'שעתיים',
+        status: 'בתהליך'
+    },
+    {
+        uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
+        departmentName: '4',
+        roomName: '3',
+        bedName: '4',
+        createdBy: 'אפק לב',
+        createdAt: 'שבוע',
+        status: 'בתהליך'
+    },
+    {
+        uuid: 'df-df-dsf-sd-fds-fsd-',
+        departmentName: '5',
+        roomName: '1',
+        bedName: '3',
+        createdBy: 'ליאור בכר',
+        createdAt: 'שעתיים',
+        status: 'בתהליך'
+    },
+    {
+        uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
+        departmentName: '6',
+        roomName: '3',
+        bedName: '4',
+        createdBy: 'אפק לב',
+        createdAt: 'שבוע',
+        status: 'סיום'
+    },
+    {
+        uuid: 'df-df-dsf-sd-fds-fsd-',
+        departmentName: '7',
+        roomName: '1',
+        bedName: '3',
+        createdBy: 'ליאור בכר',
+        createdAt: 'שעתיים',
+        status: 'בתהליך'
+    },
+    {
+        uuid: 'df-df-dsעיעחיעf-sd-fds-fsd-',
+        departmentName: '8',
+        roomName: '3',
+        bedName: '4',
+        createdBy: 'אפק לב',
+        createdAt: 'שבוע',
+        status: 'סיום'
     }
     ])
 }   
