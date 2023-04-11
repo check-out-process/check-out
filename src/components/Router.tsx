@@ -8,7 +8,7 @@ import {
 import HomePage from './HomePage/homePage.component';
 import NavBarLayout from './Layout/NavBar/NavBar.component';
 import ProcessCreation from './Process/ProcessCreation.component';
-import ProcessList from './Process/ProcessList/ProcessList.componet';
+import ProcessList from './Process/ProcessPage/ProcessList.componet';
 
 const Router = () => {
 

@@ -5,12 +5,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Process } from '../../../services/models/Process';
 import { Divider } from '@material-ui/core';
+import { useStyles } from './ProcessCard.component.style';
+
 
 export type ProcessCardProps = {
     process: Process
 }
 
 const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
+    const classes = useStyles();
     const getColor = () => {
         switch (process.status) {
             case 'בתהליך':
@@ -25,10 +28,10 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     }
 
     return (
-        <div>
-            <Card style={{ backgroundColor: getColor() }} onClick={onProcessCardClick} >
-                <CardContent style={{ height: '56px', display: 'flex', justifyContent: 'space-between' }}>
-                    <div style={{ width: '50%', marginTop: '-10px' }}>
+        <div className={classes.root}>
+            <Card className={classes.card} style={{ backgroundColor: getColor()}} onClick={onProcessCardClick} >
+                <CardContent className={classes.cardContent}>
+                    <div className={classes.rightDescription}>
                         <Typography align='right' variant="subtitle1" component="div">
                             מחלקה: {process.departmentName}
                         </Typography>
@@ -39,17 +42,16 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
                             מיטה: {process.bedName}
                         </Typography>
                     </div>
-                    <div style={{ width: '50%', marginRight: '15px', marginTop: '-10px' }}>
+                    <div className={classes.leftDescription}>
                         <Typography align='left' variant="subtitle1" component="div">
                             מצב: {process.status}
                         </Typography>
                     </div>
                 </CardContent>
-                <div style={{ marginTop: '1px' }}>
+                <div className={classes.devider}>
                     <Divider />
                 </div>
-                <CardActions style={{ justifyContent: 'space-between',  marginTop: '-7px' }}>
-
+                <CardActions className={classes.cardActions}>
                     <Typography align='right' variant="subtitle1" component="div">
                         נוצר על ידי: {process.createdBy}
                     </Typography>
