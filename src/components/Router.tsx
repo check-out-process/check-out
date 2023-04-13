@@ -9,6 +9,7 @@ import HomePage from './HomePage/homePage.component';
 import NavBarLayout from './Layout/NavBar/NavBar.component';
 import ProcessCreation from './Process/ProcessCreation.component';
 import ProcessList from './Process/ProcessPage/ProcessList.componet';
+import ProcessSectorsList from './Process/ProcessPage/Sectors/ProcessSectorsList.component';
 
 const Router = () => {
 
@@ -17,6 +18,7 @@ const Router = () => {
       <Route path="/" element={<NavBarLayout />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/processes" element={<ProcessList />} />
+        <Route path="/processes/sectors" element={<ProcessSectorsList />} />
         <Route path="/processcreation" element={<ProcessCreation />} />
       </Route>
     )

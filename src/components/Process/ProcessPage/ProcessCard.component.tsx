@@ -6,7 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import { Process } from '../../../services/models/Process';
 import { Divider } from '@material-ui/core';
 import { useStyles } from './ProcessCard.component.styles';
-
+import {
+    useNavigate
+} from "react-router-dom";
 
 export type ProcessCardProps = {
     process: Process
@@ -14,6 +16,8 @@ export type ProcessCardProps = {
 
 const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     const classes = useStyles();
+    const navigate = useNavigate();
+
     const getColor = () => {
         switch (process.status) {
             case 'בתהליך':
@@ -23,13 +27,15 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
         }
     }
 
-    const onProcessCardClick = () => {
-
-    }
+    const navigateTo = () => navigate('/processes/sectors', {
+        state: {
+            processId: process.uuid,
+        }
+    });
 
     return (
         <div className={classes.root}>
-            <Card className={classes.card} style={{ backgroundColor: getColor()}} onClick={onProcessCardClick} >
+            <Card className={classes.card} style={{ backgroundColor: getColor() }} onClick={navigateTo} >
                 <CardContent className={classes.cardContent}>
                     <div className={classes.rightDescription}>
                         <Typography align='right' variant="subtitle1" component="div">
