@@ -46,11 +46,16 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
 
     const fetchRooms = () => {
             setIsLoading(true);
-            getRooms(department.uuid).then((rooms: Room[]) => {
+            getRooms(department.id).then((rooms: Room[]) => {
                 setRooms(rooms)
                 const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
                 setRoomsDropdownData(data);
                 setIsLoading(false);
+            }).
+            catch(err => {
+                setIsLoading(false);
+                setRoomsDropdownData([])
+                setRooms([])
             })
     }
 

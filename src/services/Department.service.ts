@@ -1,16 +1,7 @@
 import { Department } from "./models/Department";
+import axios from 'axios'
 
 
 export function getDepartments(): Promise<Department[]> {
-    return Promise.resolve([{
-        id: 1,
-        uuid: "dfdsfdsfsdds",
-        name: "מחלקה מספר 1"
-    },
-    {
-        id: 2,
-        uuid: "dsfdsgdgfgfdhgfhghgf",
-        name: "מחלקה מספר 2"
-    }
-])
+    return axios.get('http://localhost:2222/departments').then(res => res.data)
 }

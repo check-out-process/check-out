@@ -1,6 +1,5 @@
 export type Room = {
-    id: number;
-    uuid: string;
+    id: string;
     name: string,
-    departmentUuid: string;
+    departmentId: string;
 }

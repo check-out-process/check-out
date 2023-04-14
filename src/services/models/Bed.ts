@@ -1,7 +1,5 @@
 export type Bed = {
-    id: number;
-    uuid: string;
+    id: string;
     name: string
-    departmentUuid: string;
-    roomUuid: string
+    roomId: string
 }
