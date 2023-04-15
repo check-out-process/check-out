@@ -5,92 +5,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ProcessCreationBasicDetailsForm from './ProcessCreationBasicDetailsForm.component';
-import ProcessSectorForm from './ProcessSectorForm.component';
+import ProcessSectorForm from '../ProcessCreationForms/ProcessSectorForm.component';
 import { useNavigate } from 'react-router-dom';
-import BaseModal from '../Common/Modal/BaseModal.component';
-import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
-import { StepConnector } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import { useStyles, ColorlibConnector } from './Stepper.component.styles';
 import './Stepper.component.css';
-const ColorlibConnector = withStyles({
-    alternativeLabel: {
-        top: 22,
-    },
-    active: {
-        '& $line': {
-            backgroundColor: 'blue',
-        },
-    },
-    completed: {
-        '& $line': {
-            backgroundColor: 'blue',
-        },
-    },
-    line: {
-        height: 3,
-        border: 0,
-        backgroundColor: 'gray',
-        borderRadius: 1,
-
-        // '@media (min-width: 500px)': {
-        //     marginRight: '-20px',
-        //     width: '112%',
-        // },
-        // '@media (max-width: 500px)': {
-        //     marginRight: '-18px',
-        //     width: '132%',
-        // }
-    },
-})(StepConnector);
-
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            width: '100%',
-            '@media (max-width: 500px)': {
-                width: '100%',
-
-            }
-        },
-        buttonRoot: {
-            marginRight: '1%',
-            display: 'flex',
-            marginTop: '3%',
-            justifyContent: 'center'
-        },
-        cancelButton: {
-            textAlign: 'center',
-            '@media (min-width: 500px)': {
-                width: '20%',
-            },
-            '@media (max-width: 500px)': {
-                width: '50%',
-            }
-        },
-        continueButton: {
-            marginRight: '1%',
-            textAlign: 'center',
-            '@media (min-width: 500px)': {
-                width: '20%',
-            },
-            '@media (max-width: 500px)': {
-                width: '50%',
-            }
-        },
-        instructions: {
-            marginTop: theme.spacing(1),
-            marginBottom: theme.spacing(1),
-        },
-        stepper: {
-            backgroundColor: "transparent",
-            width: "40%",
-            '@media (max-width: 500px)': {
-                width: '90%',
-            }
-        }
-    }),
-);
+import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
+import BaseModal from '../../Common/Modal/BaseModal.component';
+import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 
 export type StepperType = {
     title: string,
@@ -115,10 +37,10 @@ export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [open, setOpen] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
-
-    const isLastStep = (): boolean => activeStep === steps.length - 1;
+    const { enqueueSnackbar } = useSnackbar();
     const { isCurrentStepValid } = useContext(ProcessCreationDetailsContext);
 
+    const isLastStep = (): boolean => activeStep === steps.length - 1;
     const handleNext = () => {
         if (isLastStep()) {
             setOpen(true)
@@ -134,6 +56,7 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
+            enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
             navigate('/home', { replace: true });
         } else {
             setOpen(false)
@@ -164,13 +87,17 @@ export default function HorizontalLinearStepper() {
             <div>
                 <Typography className={classes.instructions}>{steps[activeStep].element}</Typography>
 
-                <div className={classes.buttonRoot} style={{ display: "flex", justifyContent: "start-end" }}>
-                    {activeStep > 0 ? <Button variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
-                        הקודם
-                    </Button> : null}
+                <div className={classes.buttonRoot}>
+                    {activeStep > 0 ?
+                        <Button variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
+                            הקודם
+                        </Button> :
+                        null}
 
-                    {activeStep === 0 ? <Button variant="contained" color="primary" onClick={() => { setCancelModalOpen(true) }} className={classes.continueButton}
-                    >ביטול</Button> : null}
+                    {activeStep === 0 ?
+                        <Button variant="contained" color="primary" onClick={() => { setCancelModalOpen(true) }} className={classes.continueButton}
+                        >ביטול</Button> :
+                        null}
 
                     <Button variant="contained" color="primary" disabled={!isCurrentStepValid()} onClick={handleNext} className={classes.continueButton}
                     >

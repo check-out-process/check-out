@@ -1,22 +1,25 @@
+import { Config } from "../config";
 import { Room } from "./models/Room";
+import axios from 'axios'
+
 
 const delay = (ms: any) => new Promise(
     resolve => setTimeout(resolve, ms)
   );
 
 export async function getRooms(departmentUuid: string): Promise<Room[]>{
+    // return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
+
     return new Promise(async (resolve) => {
         await delay(2000);
         resolve([{
-            id: 1,
-            uuid: "dfdsfdsfsdds",
+            id: "dfdsfdsfsdds",
             name: "חדר מספר 1",
-            departmentUuid: "sdfdsfdsfds"
+            departmentId: "sdfdsfdsfds"
         },
         {
-            id: 2,
-            departmentUuid: "dskfljdkslfjkldsfj",
-            uuid: "dsfdsgdgfgfdhgfhghgf",
+            departmentId: "dskfljdkslfjkldsfj",
+            id: "dsfdsgdgfgfdhgfhghgf",
             name: "חדר מספר 2"
             }
     ])

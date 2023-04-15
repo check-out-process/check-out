@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Process } from "../../../../services/models/Process";
+import { Process } from "../../../services/models/Process";
 import { Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, OutlinedInput, TextField, Theme, Typography, createStyles, makeStyles } from "@material-ui/core";
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';

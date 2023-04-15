@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import BedList from '../Bed/BedList';
-import DepartmentList from '../Department/DepartmentList';
-import RoomList from '../Room/RoomList';
+import BedList from '../../Bed/BedList';
+import DepartmentList from '../../Department/DepartmentList';
+import RoomList from '../../Room/RoomList';
 import ProcessBasicDetailsForm from './ProcessDynamicProperties.component';
-import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext'
+import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext'
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) =>

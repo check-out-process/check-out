@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Process } from "../../../../services/models/Process";
+import { Process } from "../../../services/models/Process";
 import { Button, Typography} from "@material-ui/core";
 import ProcessFilters from "./ProcessFilters.component";
 import { useStyles } from "./ProcessListHeader.component.styles";
