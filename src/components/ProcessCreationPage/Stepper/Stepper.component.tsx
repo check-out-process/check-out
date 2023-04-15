@@ -5,14 +5,14 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ProcessCreationBasicDetailsForm from '../ProcessCreationBasicDetailsForm.component';
-import ProcessSectorForm from '../ProcessSectorForm.component';
+import ProcessSectorForm from '../ProcessCreationForms/ProcessSectorForm.component';
 import { useNavigate } from 'react-router-dom';
-import BaseModal from '../../Common/Modal/BaseModal.component';
-import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
 import { useSnackbar } from 'notistack';
 import { useStyles, ColorlibConnector } from './Stepper.component.styles';
 import './Stepper.component.css';
+import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
+import BaseModal from '../../Common/Modal/BaseModal.component';
+import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 
 export type StepperType = {
     title: string,

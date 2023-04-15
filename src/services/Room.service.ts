@@ -8,7 +8,7 @@ const delay = (ms: any) => new Promise(
   );
 
 export async function getRooms(departmentUuid: string): Promise<Room[]>{
-    return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
+    // return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
 
     return new Promise(async (resolve) => {
         await delay(2000);
