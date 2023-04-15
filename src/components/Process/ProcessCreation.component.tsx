@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProcessCreationProvider } from '../../context/ProcessCreationContext';
 import { ProcessSectorsProvider } from '../../context/ProcessSectorsContext';
-import CustomizedSteppers from './Stepper.component';
+import CustomizedSteppers from './Stepper/Stepper.component';
 
 const ProcessCreation = () => {
   return (
