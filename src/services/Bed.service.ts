@@ -1,3 +1,4 @@
+import { Config } from "../config";
 import { Bed } from "./models/Bed";
 import axios from 'axios'
 
@@ -9,7 +10,7 @@ const delay = (ms: any) => new Promise(
 
 
 export function getBeds(departmentId: string,roomUuid: string): Promise<Bed[]> {
-    return axios.get(`http://localhost:2222/${departmentId}/rooms/${roomUuid}/beds`).then(res => res.data)
+    return axios.get(`${Config.serverUrl}/${departmentId}/rooms/${roomUuid}/beds`).then(res => res.data)
 
     // return new Promise(async (resolve) => {
     //     await delay(2000);

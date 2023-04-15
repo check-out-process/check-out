@@ -11,6 +11,8 @@ import { useNavigate } from 'react-router-dom';
 import BaseModal from '../Common/Modal/BaseModal.component';
 import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
 import { StepConnector } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+
 import './Stepper.component.css';
 const ColorlibConnector = withStyles({
     alternativeLabel: {
@@ -30,16 +32,7 @@ const ColorlibConnector = withStyles({
         height: 3,
         border: 0,
         backgroundColor: 'gray',
-        borderRadius: 1,
-
-        // '@media (min-width: 500px)': {
-        //     marginRight: '-20px',
-        //     width: '112%',
-        // },
-        // '@media (max-width: 500px)': {
-        //     marginRight: '-18px',
-        //     width: '132%',
-        // }
+        borderRadius: 1
     },
 })(StepConnector);
 
@@ -115,6 +108,8 @@ export default function HorizontalLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [open, setOpen] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
+    const { enqueueSnackbar } = useSnackbar();
+
 
     const isLastStep = (): boolean => activeStep === steps.length - 1;
     const { isCurrentStepValid } = useContext(ProcessCreationDetailsContext);
@@ -134,6 +129,7 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
+            enqueueSnackbar('התהליך נוצר בהצלחה',{variant : 'success'})
             navigate('/home', { replace: true });
         } else {
             setOpen(false)

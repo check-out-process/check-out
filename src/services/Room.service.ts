@@ -1,3 +1,4 @@
+import { Config } from "../config";
 import { Room } from "./models/Room";
 import axios from 'axios'
 
@@ -7,7 +8,7 @@ const delay = (ms: any) => new Promise(
   );
 
 export async function getRooms(departmentUuid: string): Promise<Room[]>{
-    return axios.get(`http://localhost:2222/${departmentUuid}/rooms`).then(res => res.data)
+    return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
 
     return new Promise(async (resolve) => {
         await delay(2000);
