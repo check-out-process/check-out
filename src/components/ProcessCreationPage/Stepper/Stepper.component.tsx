@@ -13,6 +13,8 @@ import './Stepper.component.css';
 import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
 import BaseModal from '../../Common/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
+import { createProcessInstance } from '../../../services/ProcessInstance.service';
+import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
 
 export type StepperType = {
     title: string,
@@ -38,7 +40,8 @@ export default function HorizontalLinearStepper() {
     const [open, setOpen] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
-    const { isCurrentStepValid } = useContext(ProcessCreationDetailsContext);
+    const { isCurrentStepValid, department, room, bed } = useContext(ProcessCreationDetailsContext);
+    const { processSectors } = useContext(ProcessSectorsContext);
 
     const isLastStep = (): boolean => activeStep === steps.length - 1;
     const handleNext = () => {
@@ -56,6 +59,17 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
+            createProcessInstance({
+                name: "",
+                description: "",
+                processType: 1,
+                orderedSectors: processSectors,
+                creatorId: 1,
+                departmentId: department.id,
+                roomId: room.id,
+                bedId: bed.id
+            })
+            //add if sucess or fail when send api
             enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
             navigate('/home', { replace: true });
         } else {
