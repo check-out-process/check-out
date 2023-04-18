@@ -5,7 +5,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import './SectorOptionsModal.component.css';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common/Select/Dropdown.component";
 import { User } from "../../services/models/User";
-import { getSectorResposibleUsers } from "../../services/Sector.service";
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 
 interface IEditSectorModalProps {
@@ -49,12 +48,10 @@ const EditSectorModal: React.FC<IEditSectorModalProps> = ({ openEditModal, setOp
     }
 
     const fetchSectorOwnerOptions = () => {
-        getSectorResposibleUsers(sector.id).then((owners: User[]) => {
-            const data: DropdownKeyPair[] = owners.map((user: User) =>
-                ({ value: user, displayName: user.name }));
-            setSectorOwnerOptions(data);
-            setSectorOwner(owners.find(owner => owner.id == sector.defaultResposibleUserId))
-        })
+        const data: DropdownKeyPair[] = sector.responsibleUsers.map((user: User) =>
+            ({ value: user, displayName: user.fullname }));
+        setSectorOwnerOptions(data);
+        setSectorOwner(sector.defaultResponsibleUser);
     }
 
 

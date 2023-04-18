@@ -1,4 +1,4 @@
 
 export const Config = {
-    serverUrl : 'http://localhost:2222'
+    serverUrl : 'http://localhost:8080'
 }

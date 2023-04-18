@@ -10,7 +10,7 @@ import './ProcessSectorForm.component.css';
 import { ProcessSectorsContext } from "../../../context/ProcessSectorsContext";
 
 const ProcessSectorForm = () => {
-  const { processSectors, setProcessSectors, setNotDefaultSectors } = useContext(ProcessSectorsContext);
+  const { processSectors, setProcessSectors, setDrawerSectors } = useContext(ProcessSectorsContext);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
@@ -19,15 +19,15 @@ const ProcessSectorForm = () => {
   }, [])
 
   const fetchDefaultSectors = () => {
-    getDefaultSectors().then((sectors: Sector[]) => {
+    getDefaultSectors("").then((sectors: Sector[]) => {
       setProcessSectors(sectors)
     })
   }
 
   const fetchNotDefaultSectors = () => {
     //change to get all sectors
-    getNotDefaultSectors().then((sectors: Sector[]) => {
-      setNotDefaultSectors(sectors)
+    getNotDefaultSectors(1).then((sectors: Sector[]) => {
+      setDrawerSectors(sectors)
     })
   }
 
