@@ -13,12 +13,23 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SideBarOption from './SideBarOption.component';
+
 
 export type SizeBarDrawerProps = {
     open: boolean,
     setOpen: (open: boolean) => void
 }
-type MenuOptionType = { title: string, route: string, icon: any }  
+
+export type MenuOptionType = {
+    title: string;
+    route?: string;
+    icon: any;
+    items: MenuOptionType[]
+}
 
 
 const drawerWidth = 240;
@@ -55,26 +66,47 @@ const menuOptions: MenuOptionType[] = [
     {
         title: 'עמוד ראשי',
         route: '/home',
-        icon: <HomeIcon/>
+        icon: <HomeIcon />,
+        items: []
 
     },
     {
         title: 'יצירת תהליך',
         route: '/processcreation',
-        icon: <AccountTreeIcon/>
+        icon: <AccountTreeIcon />,
+        items: []
+
 
     },
     {
         title: 'תהליכים',
         route: '/processes',
-        icon: <ListIcon/>
-
+        icon: <ListIcon />,
+        items: []
     },
     {
         title: 'עמוד מנהלים',
-        route: '/managment',
-        icon: <AdminPanelSettingsIcon/>
-
+        icon: <AdminPanelSettingsIcon />,
+        items: [
+            {
+                title: 'הוספת מחלקה',
+                route: '/managment/department-creation',
+                icon: <ListIcon />,
+                items: []
+            },
+            {
+                title: 'הוספת חדר',
+                route: '/managment/room-creation',
+                icon: <ListIcon />,
+                items: []
+            },
+            {
+                title: 'ניהול יוזרים',
+                route: '/managment/users',
+                icon: <ListIcon />,
+                items: []
+            }
+        ]
     }
 ]
 
@@ -103,12 +135,10 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
                 </div>
                 <Divider />
                 <List>
-                    {menuOptions.map((option: MenuOptionType) => (
-                        <ListItem button key={option.title} onClick={() => { onOptionClick(option.route) }}>
-                            <ListItemText className={classes.title} primary={option.title} />
-                            <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
-                        </ListItem>
+                    {menuOptions.map((option: MenuOptionType, index: number) => (
+                        <SideBarOption key={index} option={option} setOpen={setOpen}/>
                     ))}
+
                 </List>
                 <Divider />
             </Drawer>
