@@ -1,15 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, Card, CardContent, Divider, IconButton, OutlinedInput, Typography } from "@material-ui/core"
+import { Button, Divider, IconButton, OutlinedInput, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { User } from '../../../../services/models/User';
-import { deleteUser, getUser } from '../../../../services/user.service';
+import { User } from '../../services/models/User';
+import { deleteUser, getUser } from '../../services/user.service';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { red } from '@material-ui/core/colors';
-import UserLogo from '../../../../style/images/userLogo.png';
+import UserLogo from '../../style/images/userLogo.png';
 import Paper from '@material-ui/core/Paper';
-import DeleteIcon from '@material-ui/icons/Delete';
-import BaseModal from '../../../Common/Modal/BaseModal.component';
+import BaseModal from '../Common/Modal/BaseModal.component';
 
 
 const useStyles = makeStyles((theme: Theme) =>

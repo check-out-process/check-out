@@ -1,18 +1,20 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Button, CircularProgress, Fab, OutlinedInput, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { User } from '../../../services/models/User';
-import { getUsers } from '../../../services/user.service';
+import { User } from '../../services/models/User';
+import { getUsers } from '../../services/user.service';
 import { enqueueSnackbar, useSnackbar } from 'notistack';
 import UserCard from './UserCard.component';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import AddIcon from '@material-ui/icons/Add';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const UserManagmentPage: React.FC<{}> = ({ }) => {
     const [users, setUsers] = useState<User[]>([])
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -28,6 +30,10 @@ const UserManagmentPage: React.FC<{}> = ({ }) => {
             setLoading(false)
             enqueueSnackbar('קרתה שגיאה במהלך נסיון לשלוף את כל המחלקות', { variant: 'error' })
         })
+    }
+
+    const onAddUserClick = () => {
+        navigate('/managment/users/create-user');
     }
 
     return (
@@ -46,8 +52,8 @@ const UserManagmentPage: React.FC<{}> = ({ }) => {
                         );
                     })}
                 </FixedSizeList> : null}
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', bottom: 5, left: 5, position: 'absolute', width: '100%' }}>
-                <Fab color="secondary">
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', bottom: 5, left: 5, position: 'absolute', width: '95%' }}>
+                <Fab onClick={onAddUserClick} color="secondary">
                     <AddIcon />
                 </Fab>
             </div>

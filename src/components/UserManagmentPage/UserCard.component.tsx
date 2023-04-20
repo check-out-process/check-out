@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Card, CardContent, Fab, IconButton, OutlinedInput, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { User } from '../../../services/models/User';
+import { User } from '../../services/models/User';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';

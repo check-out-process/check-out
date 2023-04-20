@@ -9,10 +9,12 @@ import HomePage from './HomePage/homePage.component';
 import NavBarLayout from './Layout/NavBar/NavBar.component';
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
-import DepartmentCreationPage from './Admin/DepartmentCreationPage.component';
-import RoomCreationPage from './Admin/RoomCreationPage.component';
-import UserManagmentPage from './Admin/Users/UserManagmentPage.component';
-import UserPage from './Admin/Users/UserPage/UserPage.component';
+import DepartmentCreationPage from './UserManagmentPage/DepartmentCreationPage.component';
+import RoomCreationPage from './UserManagmentPage/RoomCreationPage.component';
+import UserPage from './User/UserPage.component';
+import UserManagmentPage from './UserManagmentPage/UserManagmentPage.component';
+import AddUser from './User/UserForm';
+import AddUserPage from './User/AddUserPage.component';
 
 const Router = () => {
 
@@ -26,6 +28,7 @@ const Router = () => {
         <Route path="/managment/room-creation" element={<RoomCreationPage />}/>
         <Route path="/managment/users" element={<UserManagmentPage />}/>
         <Route path="/managment/users/:userId" element={<UserPage />}/>
+        <Route path="/managment/users/create-user" element={<AddUserPage />}/>
       </Route>
     )
   )

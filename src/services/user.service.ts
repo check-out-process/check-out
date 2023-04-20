@@ -28,3 +28,7 @@ export function deleteUser(userId: number): Promise<User>{
     return axios.delete(`${Config.serverUrl}/users/${userId}`).then(res => res.data)
 }
 
+export function createUser(user: User): Promise<User>{
+    return axios.post(`${Config.serverUrl}/users`,user,{headers:{'Content-Type':'application/json'}}).then(res => res.data)
+}
+
