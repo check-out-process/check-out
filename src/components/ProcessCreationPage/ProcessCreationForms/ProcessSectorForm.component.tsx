@@ -43,11 +43,6 @@ const ProcessSectorForm = () => {
   const handleCancel = () => {
   };
 
-  const saveProcessSector = () => {
-    console.log(processSectors);
-    // send api request to save and move to open process page
-  };
-
   const buttonsStyle = () => ({
     marginRight: '10px', height: '32px', width: '85px', marginBottom: '6px', marginTop: '8px'
   });

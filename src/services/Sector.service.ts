@@ -14,7 +14,7 @@ export function getDefaultSectors(processId: string): Promise<Sector[]> {
     // }).then(res => res.data);
 
 
-    return Promise.resolve([,{
+    return Promise.resolve([{
         id: uuidv4(),
         name: "נקיון בומים",
         defaultResponsibleUser: {

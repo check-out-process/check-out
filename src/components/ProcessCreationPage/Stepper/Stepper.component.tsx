@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -40,7 +39,7 @@ export default function HorizontalLinearStepper() {
     const [open, setOpen] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
-    const { isCurrentStepValid, department, room, bed } = useContext(ProcessCreationDetailsContext);
+    const { isCurrentStepValid, department, room, bed, properties } = useContext(ProcessCreationDetailsContext);
     const { processSectors } = useContext(ProcessSectorsContext);
 
     const isLastStep = (): boolean => activeStep === steps.length - 1;
@@ -60,18 +59,21 @@ export default function HorizontalLinearStepper() {
     const onSave = (confirm: boolean) => {
         if (confirm) {
             createProcessInstance({
-                name: "",
-                description: "",
-                processType: 1,
+                name: `${bed.name}/${room.name}/${department.name}`, //what it should be
+                description: properties.description ?? "", 
+                processType: 1, //take from enum 
                 orderedSectors: processSectors,
                 creatorId: 1,
                 departmentId: department.id,
                 roomId: room.id,
                 bedId: bed.id
-            })
-            //add if sucess or fail when send api
-            enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
-            navigate('/home', { replace: true });
+            }).then(() => {
+                enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
+                navigate('/home', { replace: true });
+            }).catch(err => {
+                enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
+                navigate('/home', { replace: true });
+            })           
         } else {
             setOpen(false)
         }
