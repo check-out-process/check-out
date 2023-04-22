@@ -25,9 +25,10 @@ const ProcessSectorForm = () => {
   }
 
   const fetchNotDefaultSectors = () => {
-    //change to get all sectors
-    getNotDefaultSectors(1).then((sectors: Sector[]) => {
-      setDrawerSectors(sectors)
+    getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((sectors: Sector[]) => {
+      const defaultSectorsIds = processSectors.map(sector => sector.id);
+    
+      setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
     })
   }
 

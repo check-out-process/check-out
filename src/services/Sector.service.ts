@@ -1,18 +1,20 @@
 import { Sector } from "./models/Sector";
 import { v4 as uuidv4 } from 'uuid';
-import { Role, User } from "./models/User";
+import { Role } from "./models/User";
 import axios from 'axios'
 import { Config } from "../config";
 
-export function getDefaultSectors(processTypeId: string): Promise<Sector[]> {
+export function getDefaultSectors(processId: string): Promise<Sector[]> {
     // const url = `${Config.serverUrl}/process-templates`;
+
     // return axios.get(url, {
     //     params: {
-    //         processId: processTypeId,
+    //         processId,
     //     }
     // }).then(res => res.data);
 
-    return Promise.resolve([{
+
+    return Promise.resolve([,{
         id: uuidv4(),
         name: "נקיון בומים",
         defaultResponsibleUser: {
@@ -59,14 +61,16 @@ export function getDefaultSectors(processTypeId: string): Promise<Sector[]> {
     ])
 }
 
-export function getNotDefaultSectors(processtype: number): Promise<Sector[]> {
-    // const url = `${Config.serverUrl}/sectors/filters`;
-
+export function getNotDefaultSectors(processTypeId: string): Promise<Sector[]> {
+    // const url = `${Config.serverUrl}/sectors`;
+    
     // return axios.get(url, {
     //     params: {
-    //         processtype,
+    //         processId: processTypeId,
     //     }
-    // }).then(res => res.data);
+    // }).then(
+    //     res => 
+    //     res.data);
 
     return Promise.resolve([{
         id: uuidv4(),
