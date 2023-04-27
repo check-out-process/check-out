@@ -10,7 +10,7 @@ import './ProcessSectorForm.component.css';
 import { ProcessSectorsContext } from "../../../context/ProcessSectorsContext";
 
 const ProcessSectorForm = () => {
-  const { processSectors, setProcessSectors, setNotDefaultSectors } = useContext(ProcessSectorsContext);
+  const { processSectors, setProcessSectors, setDrawerSectors } = useContext(ProcessSectorsContext);
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
@@ -19,15 +19,16 @@ const ProcessSectorForm = () => {
   }, [])
 
   const fetchDefaultSectors = () => {
-    getDefaultSectors().then((sectors: Sector[]) => {
+    getDefaultSectors("").then((sectors: Sector[]) => {
       setProcessSectors(sectors)
     })
   }
 
   const fetchNotDefaultSectors = () => {
-    //change to get all sectors
-    getNotDefaultSectors().then((sectors: Sector[]) => {
-      setNotDefaultSectors(sectors)
+    getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((sectors: Sector[]) => {
+      const defaultSectorsIds = processSectors.map(sector => sector.id);
+    
+      setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
     })
   }
 
@@ -40,11 +41,6 @@ const ProcessSectorForm = () => {
   };
 
   const handleCancel = () => {
-  };
-
-  const saveProcessSector = () => {
-    console.log(processSectors);
-    // send api request to save and move to open process page
   };
 
   const buttonsStyle = () => ({
