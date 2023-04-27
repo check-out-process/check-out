@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import ProcessCard from './ProcessCard.component';
-import { getProcesses } from '../../../services/Process.service';
-import { Process } from '../../../services/models/Process';
+import { getProcesses } from '../../services/Process.service';
+import { Process } from '../../services/models/Process';
 import { CircularProgress, Typography } from '@material-ui/core';
 import ProcessListHeader from './Headers/ProcessListHeader.component';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
