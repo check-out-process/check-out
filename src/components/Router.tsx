@@ -7,8 +7,10 @@ import {
 } from "react-router-dom";
 import HomePage from './HomePage/homePage.component';
 import NavBarLayout from './Layout/NavBar/NavBar.component';
+import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.component';
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
+import SectorInstancePage from './ProcessPage/Sectors/SectorInstancePage/SectorInstancePage.component';
 
 const Router = () => {
 
@@ -17,6 +19,8 @@ const Router = () => {
       <Route path="/" element={<NavBarLayout />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/processes" element={<ProcessList />} />
+        <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
+        <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
         <Route path="/processcreation" element={<ProcessCreation />} />
       </Route>
     )
