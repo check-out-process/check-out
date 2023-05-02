@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CheckOutLogo from '../../style/images/checkOutLogo.png';
+import { UserContext } from "../../context/UserContext";
+import { Role } from "../../services/models/User";
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -35,9 +37,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LogInPage({ setLogedIn }: any) {
+    const { setUser } = useContext(UserContext);
     const classes = useStyles();
 
+
     const logIn = () => {
+        setUser({
+            id: 1,
+            fullname: "string",
+            username: "string",
+            role: Role.Process_Executer
+        }) //when login save user
         setLogedIn(true);
     }
 
