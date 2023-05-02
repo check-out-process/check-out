@@ -69,10 +69,10 @@ export default function HorizontalLinearStepper() {
                 bedId: bed.id
             }).then(() => {
                 enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
-                navigate('/home', { replace: true });
+                navigate('/', { replace: true });
             }).catch(err => {
                 enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
-                navigate('/home', { replace: true });
+                navigate('/', { replace: true });
             })           
         } else {
             setOpen(false)
@@ -81,7 +81,7 @@ export default function HorizontalLinearStepper() {
 
     const onCancel = (confirm: boolean) => {
         if (confirm) {
-            navigate('/home', { replace: true });
+            navigate('/', { replace: true });
         } else {
             setCancelModalOpen(false)
         }

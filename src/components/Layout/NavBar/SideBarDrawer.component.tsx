@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const menuOptions: MenuOptionType[] = [
     {
         title: 'עמוד ראשי',
-        route: '/home',
+        route: '/',
         icon: <HomeIcon/>
 
     },
