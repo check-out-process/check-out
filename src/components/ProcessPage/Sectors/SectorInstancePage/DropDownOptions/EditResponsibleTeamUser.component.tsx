@@ -6,9 +6,10 @@ interface IEditResponsibleTeamUserProps {
     resposibleTeamUserOptions: DropdownKeyPair[],
     resposibleTeamUser: User,
     setResposibleTeamUser: (user: User) => void,
+    disabled: boolean
 }
 
-const EditResponsibleTeamUser: React.FC<IEditResponsibleTeamUserProps> = ({ resposibleTeamUserOptions, resposibleTeamUser, setResposibleTeamUser }: IEditResponsibleTeamUserProps) => {
+const EditResponsibleTeamUser: React.FC<IEditResponsibleTeamUserProps> = ({ resposibleTeamUserOptions, resposibleTeamUser, setResposibleTeamUser, disabled }: IEditResponsibleTeamUserProps) => {
     function onChange(event: onChangeEvent): void {
         const user = event.target.value as User;
         setResposibleTeamUser(user);
@@ -17,9 +18,9 @@ const EditResponsibleTeamUser: React.FC<IEditResponsibleTeamUserProps> = ({ resp
     return (
         resposibleTeamUser && <Dropdown
             defaultValue={resposibleTeamUser}
-            title='בחירת מטפל'
+            title='אחראי:'
             data={resposibleTeamUserOptions}
-            disabled={false}
+            disabled={disabled}
             onChange={onChange} />
     )
 }

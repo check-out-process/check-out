@@ -15,6 +15,7 @@ const ProcessSectorCard: React.FC<IProcessSectorCardProps> = ({ sector, processI
     const navigateTo = () => navigate(`/processes/${processId}/sectors/${sector.id}`, {
         state: {
             sector,
+            isViewMode: true
         }
     });
     

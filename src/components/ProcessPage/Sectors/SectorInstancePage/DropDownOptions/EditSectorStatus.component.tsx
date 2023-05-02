@@ -5,10 +5,11 @@ import { Status } from '../../../../../services/models/Status';
 interface IEditSectorStatusProps {
     sectorStatusOptions: DropdownKeyPair[],
     sectorStatus: Status,
-    setSectorStatus: (status: Status) => void
+    setSectorStatus: (status: Status) => void,
+    disabled: boolean
 }
 
-const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ sectorStatusOptions, sectorStatus, setSectorStatus }: IEditSectorStatusProps) => {
+const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ sectorStatusOptions, sectorStatus, setSectorStatus, disabled }: IEditSectorStatusProps) => {
     function onChange(event: onChangeEvent): void {
         const status = event.target.value as Status;
         setSectorStatus(status);
@@ -17,9 +18,9 @@ const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ sectorStatusOption
     return (
          <Dropdown
             defaultValue={sectorStatus}
-            title='עדכון סטטוס'
+            title= 'סטטוס:'
             data={sectorStatusOptions}
-            disabled={false}
+            disabled={disabled}
             onChange={onChange} />
     )
 }

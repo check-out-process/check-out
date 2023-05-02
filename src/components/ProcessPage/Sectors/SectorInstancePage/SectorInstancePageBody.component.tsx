@@ -11,9 +11,10 @@ import { CircularProgress } from '@material-ui/core';
 
 interface ISectorInstancePageBodyProps {
     sector: ProcessSector,
+    isViewMode: boolean
 }
 
-const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector }: ISectorInstancePageBodyProps) => {
+const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector, isViewMode }: ISectorInstancePageBodyProps) => {
     const [resposibleTeamUserOptions, setResposibleTeamUserOptions] = useState<DropdownKeyPair[]>([]);
     const [resposibleTeamUser, setResposibleTeamUser] = useState<User>();
     const [resposibleUserOptions, setResposibleUserOptions] = useState<DropdownKeyPair[]>([]);
@@ -57,9 +58,9 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             components: (): ReactNode => {
                 return (
                     <div>
-                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} />
-                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUserr} />
-                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} />
+                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode}/>
+                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUserr} disabled={isViewMode}/>
+                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode}/>
                     </div>
 
                 )

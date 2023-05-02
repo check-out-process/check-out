@@ -5,10 +5,11 @@ import Dropdown, { DropdownKeyPair, onChangeEvent } from '../../../../Common/Sel
 interface IEditResponsibleUserProps {
     resposibleUserOptions: DropdownKeyPair[],
     resposibleUser: User,
-    setResposibleUser: (user: User) => void
+    setResposibleUser: (user: User) => void,
+    disabled: boolean
 }
 
-const EditResponsibleUser: React.FC<IEditResponsibleUserProps> = ({ resposibleUserOptions, resposibleUser, setResposibleUser }: IEditResponsibleUserProps) => {
+const EditResponsibleUser: React.FC<IEditResponsibleUserProps> = ({ resposibleUserOptions, resposibleUser, setResposibleUser, disabled }: IEditResponsibleUserProps) => {
     function onChange(event: onChangeEvent): void {
         const user = event.target.value as User;
         setResposibleUser(user);
@@ -17,9 +18,9 @@ const EditResponsibleUser: React.FC<IEditResponsibleUserProps> = ({ resposibleUs
     return (
         resposibleUser &&  <Dropdown
             defaultValue={resposibleUser}
-            title='בחירת מטפל'
+            title='מטפל:'
             data={resposibleUserOptions}
-            disabled={false}
+            disabled={disabled}
             onChange={onChange} />
     )
 }
