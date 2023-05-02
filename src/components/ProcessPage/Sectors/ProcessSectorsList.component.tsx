@@ -2,7 +2,7 @@ import { CircularProgress, List, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
 import { ProcessSector } from "../../../services/models/ProcessSector";
 import { getProcessSectors } from "../../../services/ProcessSector.service";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import PageHeader from "../Header/header.component";
 
@@ -11,7 +11,6 @@ const ProcessSectorsList: React.FC = () => {
     const [processSectors, setProcessSectors] = useState<ProcessSector[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
-    const navigate = useNavigate();
     const location = useLocation();
     const processId = location.state.processId;
 
