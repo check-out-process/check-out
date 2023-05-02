@@ -27,7 +27,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
         }
     }
 
-    const navigateTo = () => navigate('/processes/sectors', {
+    const navigateTo = () => navigate(`/processes/${process.uuid}/sectors`, {
         state: {
             processId: process.uuid,
         }
