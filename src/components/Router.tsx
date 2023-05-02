@@ -12,14 +12,13 @@ import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.compone
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
 import SectorInstancePage from './ProcessPage/Sectors/SectorInstancePage/SectorInstancePage.component';
-import { UserProvider } from '../context/UserContext';
 
 const Router = () => {
-  const [logedIn, setLogedIn] = React.useState(false); //get it from context/store that when refresh sty true
+  const logInValue = localStorage.getItem('logIn');
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      logedIn ?
+      logInValue && logInValue === 'true' ?
         <Route path="/" element={<NavBarLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/processes" element={<ProcessList />} />
@@ -29,9 +28,7 @@ const Router = () => {
         </Route>
         : <Route >
           <Route path="/" element={
-            <UserProvider>
-              <LogInPage setLogedIn={setLogedIn} />
-            </UserProvider>
+            <LogInPage />
           } />
         </Route>
     )

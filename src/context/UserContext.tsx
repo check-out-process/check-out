@@ -17,8 +17,8 @@ function UserProvider({ children }: ButtonProps) {
 
     return (
         <UserContext.Provider value={{
-            user: user,
-            setUser: setUser
+            user,
+            setUser,
         }}>
             {children}
         </UserContext.Provider>

@@ -36,19 +36,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function LogInPage({ setLogedIn }: any) {
+export default function LogInPage() {
     const { setUser } = useContext(UserContext);
     const classes = useStyles();
 
 
     const logIn = () => {
-        setUser({
+        const user = {
             id: 1,
             fullname: "string",
             username: "string",
             role: Role.Process_Executer
-        }) //when login save user
-        setLogedIn(true);
+        }
+
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('logIn', 'true');
     }
 
     return (
