@@ -1,6 +1,6 @@
 import React from 'react';
-import { ProcessSector } from "../../../../services/models/ProcessSector";
-import BaseSectorCard from "../../../Common/Sector/BaseSectorCard.component";
+import { ProcessSector } from "../../../services/models/ProcessSector";
+import BaseSectorCard from "../../Common/Sector/BaseSectorCard.component";
 
 interface IProcessSectorCardProps {
     sector: ProcessSector,
@@ -9,7 +9,7 @@ interface IProcessSectorCardProps {
 const ProcessSectorCard: React.FC<IProcessSectorCardProps> = ({ sector }: IProcessSectorCardProps) => {
     return (
         <div>
-            <BaseSectorCard sector={sector} withModal={false} handleOpen={() => {}} />
+            <BaseSectorCard sector={sector} withModal={false}/>
         </div>
     )
 }

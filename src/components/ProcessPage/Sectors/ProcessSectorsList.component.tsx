@@ -1,7 +1,7 @@
 import { CircularProgress, IconButton, List, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
-import { ProcessSector } from "../../../../services/models/ProcessSector";
-import { getProcessSectors } from "../../../../services/ProcessSector.service";
+import { ProcessSector } from "../../../services/models/ProcessSector";
+import { getProcessSectors } from "../../../services/ProcessSector.service";
 import { useLocation, useNavigate } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';

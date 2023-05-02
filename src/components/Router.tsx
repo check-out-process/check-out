@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import HomePage from './HomePage/homePage.component';
 import NavBarLayout from './Layout/NavBar/NavBar.component';
-import ProcessSectorsList from './Process/ProcessPage/Sectors/ProcessSectorsList.component';
+import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.component';
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
 
