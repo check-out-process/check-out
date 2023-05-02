@@ -3,10 +3,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize/TextareaAutosize';
 import Typography from '@material-ui/core/Typography';
 import React, { ChangeEventHandler, useContext, useEffect, useState } from 'react';
-import { ProcessCreationDetailsContext } from '../../context/ProcessCreationContext';
-import { ProcssPropertiesSchema } from '../../services/models/Process';
-import { getProcessPropertiesSchema } from '../../services/Process.service';
-import DynamicPropertiesFactory from '../Common/DynamicProperties/PropertiesFactory.component';
+import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
 
 
 const useStyles = makeStyles((theme: Theme) =>

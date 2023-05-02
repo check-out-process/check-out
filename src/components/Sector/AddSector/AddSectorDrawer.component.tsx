@@ -17,11 +17,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerClose }: IAddSectorDrawerProps) => {
-    const { notDefaultSectors, addProcessSectors } = useContext(ProcessSectorsContext);
+    const { drawerSectors, addProcessSectors } = useContext(ProcessSectorsContext);
     const [choosenSectors, setChoosenSectors] = useState<Sector[]>([]);
 
     const handleAddSectorsToProcessSectors = () => {
         addProcessSectors(choosenSectors);
+        setChoosenSectors([]);
         handleDrawerClose();
     };
 
@@ -51,13 +52,13 @@ const AddSectorDrawer: React.FC<IAddSectorDrawerProps> = ({ open, handleDrawerCl
                 </Typography>
             </DrawerHeader>
             <Divider />
-            {notDefaultSectors.length > 0 &&
+            {drawerSectors.length > 0 &&
                 <div>
 
                     <List className="sectorsList" style={{
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
-                        {notDefaultSectors.map((sector: Sector) => (
+                        {drawerSectors.map((sector: Sector) => (
                             <AddSectorCard key ={sector.id} sector={sector} addChoosenSector={addChoosenSector} removeChoosenSector={removeChoosenSector}/>
                         ))}
                     </List>

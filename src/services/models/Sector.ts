@@ -1,6 +1,9 @@
+import { User } from "./User";
+
 export type Sector = {
     id: string;
     name: string;
-    defaultResposibleUserId: number;
-    ownerId?: number;
+    defaultResponsibleUser: User;
+    responsibleUsers: User[];
+    committingUsers: User[];
 }

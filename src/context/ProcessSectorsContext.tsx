@@ -1,14 +1,15 @@
 import React, { useState, createContext, ReactNode } from 'react';
 import { Sector } from '../services/models/Sector';
+import { User } from '../services/models/User';
 
 export type ProcessSectorsContextType = {
     processSectors?: Sector[],
     setProcessSectors?: (processSectors: Sector[]) => void,
-    notDefaultSectors?: Sector[],
-    setNotDefaultSectors?: (notDefaultSectors: Sector[]) => void,
+    drawerSectors?: Sector[],
+    setDrawerSectors?: (sectors: Sector[]) => void,
     addProcessSectors?: (sectors: Sector[]) => void,
     removeProcessSector?: (sector: Sector) => void,
-    changeSectorOwner?: (sectorId: string, ownerId: number) => void,
+    changeSectorOwner?: (sectorId: string, user: User) => void,
 }
 const ProcessSectorsContext = createContext<ProcessSectorsContextType>({});
 
@@ -18,14 +19,12 @@ type ButtonProps = {
 
 function ProcessSectorsProvider({ children }: ButtonProps) {
     const [processSectors, setProcessSectors] = useState<Sector[]>([]);
-    const [notDefaultSectors, setNotDefaultSectors] = useState<Sector[]>([]);
-    const [choosenNotDefaultSectors, setChoosenNotDefaultSectors] = useState<Sector[]>([]);
+    const [drawerSectors, setDrawerSectors] = useState<Sector[]>([]);
 
     const addProcessSectors = (sectors: Sector[]) => {
         setProcessSectors(current => [...current, ...sectors]);
 
-        setChoosenNotDefaultSectors(notDefaultSectors.filter((currentSector) => sectors.map(({ id }) => id).includes(currentSector.id)));
-        setNotDefaultSectors((current) =>
+        setDrawerSectors((current) =>
             current.filter((currentSector) => !sectors.map(({ id }) => id).includes(currentSector.id))
         );
     };
@@ -34,19 +33,15 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
         setProcessSectors((current) =>
             current.filter((currentSector) => currentSector.id !== sector.id)
         );
-        if (choosenNotDefaultSectors.map(({ id }) => id).includes(sector.id)) {
-            setChoosenNotDefaultSectors((current) =>
-                current.filter((currentSector) => currentSector.id !== sector.id)
-            );
-            setNotDefaultSectors(current => [...current, sector]);
-        }
+
+        setDrawerSectors(current => [...current, sector]);
     };
 
-    const changeSectorOwner = (sectorId: string, ownerId: number) => {
+    const changeSectorOwner = (sectorId: string, user: User) => {
         setProcessSectors((current) =>
             current.map(currentSector => {
                 if (currentSector.id === sectorId) {
-                    currentSector.ownerId = ownerId;
+                    currentSector.defaultResponsibleUser = user;
                 }
 
                 return currentSector;
@@ -58,8 +53,8 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
         <ProcessSectorsContext.Provider value={{
             processSectors: processSectors,
             setProcessSectors: setProcessSectors,
-            notDefaultSectors: notDefaultSectors,
-            setNotDefaultSectors: setNotDefaultSectors,
+            drawerSectors: drawerSectors,
+            setDrawerSectors: setDrawerSectors,
             addProcessSectors: addProcessSectors,
             removeProcessSector: removeProcessSector,
             changeSectorOwner: changeSectorOwner
