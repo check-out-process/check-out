@@ -12,7 +12,7 @@ interface IBaseSectorCardProps {
 }
 
 const BaseSectorCard: React.FC<IBaseSectorCardProps> = ({ sector, withModal, handleOpen }: IBaseSectorCardProps) => {
-    const ownerTitle = "אפק לב"//need to get it
+    const ownerTitle = "אחראי: אפק לב"//need to get it
 
     return (
         <div>
@@ -25,7 +25,8 @@ const BaseSectorCard: React.FC<IBaseSectorCardProps> = ({ sector, withModal, han
                         {ownerTitle}
                     </Typography>
                 </CardContent>
-                {withModal && <IconButton className="iconButton" aria-label="previous" style={{ marginRight: 'auto', padding: '0px', marginLeft: '12px' }} onClick={handleOpen}>
+                {withModal && 
+                <IconButton className="iconButton" aria-label="previous" style={{ marginRight: 'auto', padding: '0px', marginLeft: '12px' }} onClick={handleOpen}>
                     <MoreHorizIcon />
                 </IconButton>}
             </Card>

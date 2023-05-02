@@ -1,5 +1,6 @@
 import React, { useState, createContext, ReactNode } from 'react';
 import { Sector } from '../services/models/Sector';
+import { User } from '../services/models/User';
 
 export type ProcessSectorsContextType = {
     processSectors?: Sector[],
@@ -8,7 +9,7 @@ export type ProcessSectorsContextType = {
     setDrawerSectors?: (sectors: Sector[]) => void,
     addProcessSectors?: (sectors: Sector[]) => void,
     removeProcessSector?: (sector: Sector) => void,
-    changeSectorOwner?: (sectorId: string, ownerId: number) => void,
+    changeSectorOwner?: (sectorId: string, user: User) => void,
 }
 const ProcessSectorsContext = createContext<ProcessSectorsContextType>({});
 
@@ -36,11 +37,11 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
         setDrawerSectors(current => [...current, sector]);
     };
 
-    const changeSectorOwner = (sectorId: string, ownerId: number) => {
+    const changeSectorOwner = (sectorId: string, user: User) => {
         setProcessSectors((current) =>
             current.map(currentSector => {
                 if (currentSector.id === sectorId) {
-                    currentSector.defaultResponsibleUser.id = ownerId;
+                    currentSector.defaultResponsibleUser = user;
                 }
 
                 return currentSector;

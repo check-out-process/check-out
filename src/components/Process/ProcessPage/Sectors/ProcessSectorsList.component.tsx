@@ -62,7 +62,7 @@ const ProcessSectorsList: React.FC = () => {
                 ))}
             </List>}
             {processSectors?.length == 0 && !loading ?
-                <Typography align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography> : null}
+                <Typography align='center' variant="h5" component="h2">לא נמצאו סקטורים</Typography> : null}
 
         </div>
     )
