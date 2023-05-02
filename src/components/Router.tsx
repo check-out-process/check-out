@@ -22,9 +22,9 @@ const Router = () => {
         <Route path="/" element={<NavBarLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/processes" element={<ProcessList />} />
-        <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
-        <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
-        <Route path="/processcreation" element={<ProcessCreation />} />
+          <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
+          <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
+          <Route path="/processcreation" element={<ProcessCreation />} />
         </Route>
         : <Route >
           <Route path="/" element={<LogInPage setLogedIn={setLogedIn} />} />
