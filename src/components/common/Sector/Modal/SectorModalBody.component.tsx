@@ -4,16 +4,35 @@ import { Role, User } from "../../../../services/models/User";
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
 import { Sector } from "../../../../services/models/Sector";
 import { Button } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
+
 
 interface ISectorModalBodyProps {
     sector: Sector,
     handleClose: () => void
 }
 
-const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose }: ISectorModalBodyProps) => {
-    const { changeSectorOwner } = useContext(ProcessSectorsContext);
-    const [sectorOwnerOptions, setSectorOwnerOptions] = useState<DropdownKeyPair[]>([]);
+const useStyles = makeStyles(() =>
+    createStyles({
+        saveButton: {
+            position: 'absolute',
+            bottom: 0,
+            marginBottom: '15px',
+        },
+        saveButtonDiv: {
+            display: 'flex',
+            justifyContent: 'center'
+        }
+    }),
+);
 
+
+const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose }: ISectorModalBodyProps) => {
+    const classes = useStyles();
+
+    const { changeSectorOwner } = useContext(ProcessSectorsContext);
+
+    const [sectorOwnerOptions, setSectorOwnerOptions] = useState<DropdownKeyPair[]>([]);
     const [sectorOwner, setSectorOwner] = useState<User>(sector.defaultResponsibleUser);
 
     useEffect(() => {
@@ -47,8 +66,10 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
                 data={sectorOwnerOptions}
                 disabled={false}
                 onChange={onChange} />
+            <div className={classes.saveButtonDiv}>
+                <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }}>שמור</Button>
+            </div>
 
-            <Button variant="contained" color="primary" onClick={() => { onSave() }}>שמור</Button>
         </div>
     )
 }
