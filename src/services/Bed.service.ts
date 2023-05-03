@@ -10,24 +10,30 @@ const delay = (ms: any) => new Promise(
 
 
 export function getBeds(departmentId: string,roomUuid: string): Promise<Bed[]> {
-    // return axios.get(`${Config.serverUrl}/${departmentId}/rooms/${roomUuid}/beds`).then(res => res.data)
+    const url = `${Config.serverUrl}/beds`;
 
-    return new Promise(async (resolve) => {
-        await delay(2000);
-        resolve(
-            [{
+    return axios.get(url, {
+        params: {
+            roomId: roomUuid,
+        }
+    }).then(res => res.data);
+
+    // return new Promise(async (resolve) => {
+    //     await delay(2000);
+    //     resolve(
+    //         [{
                 
-                id: "dfdsfdsfsdds",
-                name: 'מיטה מספר 1',
-                roomId: 'ssds'
-            },
-            {
+    //             id: "dfdsfdsfsdds",
+    //             name: 'מיטה מספר 1',
+    //             roomId: 'ssds'
+    //         },
+    //         {
                 
-                id: "dsfdsgdgfgfdhgfhghgf",
-                name: 'מיטה מספר 2',
-                roomId: 'ssds'
-            }
-        ]
-        )
-    })
+    //             id: "dsfdsgdgfgfdhgfhghgf",
+    //             name: 'מיטה מספר 2',
+    //             roomId: 'ssds'
+    //         }
+    //     ]
+    //     )
+    // })
 }

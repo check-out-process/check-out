@@ -26,21 +26,17 @@ const ProcessSectorForm = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    fetchDefaultSectors();
-    fetchNotDefaultSectors();
+    fetchSectors();
   }, [])
 
-  const fetchDefaultSectors = () => {
-    getDefaultSectors("").then((sectors: Sector[]) => {
-      setProcessSectors(sectors)
-    })
-  }
+  const fetchSectors = () => {
+    getDefaultSectors("2f39fa94-ac5d-4de2-861d-d80f1c146beb").then((sectors: Sector[]) => {
+      setProcessSectors(sectors);
+      getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((NotDefaultSectors: Sector[]) => {
+        const defaultSectorsIds = sectors.map(sector => sector.id);
 
-  const fetchNotDefaultSectors = () => {
-    getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((sectors: Sector[]) => {
-      const defaultSectorsIds = processSectors.map(sector => sector.id);
-    
-      setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
+        setDrawerSectors(NotDefaultSectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
+      })
     })
   }
 

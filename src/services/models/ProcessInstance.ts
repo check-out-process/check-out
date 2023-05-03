@@ -1,10 +1,10 @@
-import { Sector } from "./Sector";
+import { Sector, NewSectorInstanceData } from "./Sector";
 
 export declare class CreateProcessInstanceFromDataParams {
     name: string;
     description: string;
     processType: number;
-    orderedSectors: Sector[];
+    orderedSectors: NewSectorInstanceData[];
     creatorId: number;
     departmentId: string;
     roomId: string;

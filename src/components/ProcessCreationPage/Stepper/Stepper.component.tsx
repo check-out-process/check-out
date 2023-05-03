@@ -14,6 +14,7 @@ import BaseModal from '../../Common/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 import { createProcessInstance } from '../../../services/ProcessInstance.service';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
+import { Sector, NewSectorInstanceData } from '../../../services/models/Sector';
 
 export type StepperType = {
     title: string,
@@ -58,12 +59,14 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
+            const sectorInstanceCreation: NewSectorInstanceData[] = processSectors.map((sector: Sector) =>
+                ({ sectorId: sector.id, workerId: sector.defaultResponsibleUser.id, responsibleUserId: sector.defaultResponsibleUser.id }));
             createProcessInstance({
                 name: `${bed.name}/${room.name}/${department.name}`, //what it should be
-                description: properties.description ?? "", 
+                description: properties.description ?? "",
                 processType: 1, //take from enum 
-                orderedSectors: processSectors,
-                creatorId: 1,
+                orderedSectors: sectorInstanceCreation,
+                creatorId: 4444,
                 departmentId: department.id,
                 roomId: room.id,
                 bedId: bed.id
@@ -73,7 +76,7 @@ export default function HorizontalLinearStepper() {
             }).catch(err => {
                 enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
                 navigate('/', { replace: true });
-            })           
+            })
         } else {
             setOpen(false)
         }

@@ -5,10 +5,10 @@ import axios from 'axios'
 
 const delay = (ms: any) => new Promise(
     resolve => setTimeout(resolve, ms)
-  );
+);
 
-export async function getRooms(departmentUuid: string): Promise<Room[]>{
-    // return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
+export async function getRooms(departmentUuid: string): Promise<Room[]> {
+    return axios.get(`${Config.serverUrl}/departments/${departmentUuid}/rooms`).then(res => res.data)
 
     return new Promise(async (resolve) => {
         await delay(2000);
@@ -24,6 +24,4 @@ export async function getRooms(departmentUuid: string): Promise<Room[]>{
             }
     ])
     }) 
-        
-    
- }
+}

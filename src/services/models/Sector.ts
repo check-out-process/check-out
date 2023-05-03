@@ -7,3 +7,9 @@ export type Sector = {
     responsibleUsers: User[];
     committingUsers: User[];
 }
+
+export type NewSectorInstanceData = {
+    sectorId: string;
+    workerId: number;
+    responsibleUserId: number;
+}
