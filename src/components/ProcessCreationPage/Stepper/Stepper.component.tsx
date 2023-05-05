@@ -62,9 +62,9 @@ export default function HorizontalLinearStepper() {
             const sectorInstanceCreation: NewSectorInstanceData[] = processSectors.map((sector: Sector) =>
                 ({ sectorId: sector.id, workerId: sector.defaultResponsibleUser.id, responsibleUserId: sector.defaultResponsibleUser.id }));
             createProcessInstance({
-                name: `${bed.name}/${room.name}/${department.name}`, //what it should be
+                name: `${bed.name}/${room.name}/${department.name}`,
                 description: properties.description ?? "",
-                processType: 1, //take from enum 
+                processType: 1, //take from db 
                 orderedSectors: sectorInstanceCreation,
                 creatorId: 4444,
                 departmentId: department.id,
