@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import CheckOutLogo from '../../style/images/checkOutLogo.png';
-import { UserContext } from "../../context/UserContext";
-import { Role } from "../../services/models/User";
+import { login } from "../../services/Auth.service";
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -37,21 +37,26 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LogInPage() {
-    const { setUser } = useContext(UserContext);
     const classes = useStyles();
+    const navigate = useNavigate();
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [password, setPassword] = useState("");
 
+    const onChangePhoneNumber = (e: any) => {
+        const username = e.target.value;
+        setPhoneNumber(username);
+    };
 
-    const logIn = () => {
-        const user = {
-            id: 1,
-            fullname: "string",
-            username: "string",
-            role: Role.Process_Executer
-        }
+    const onChangePassword = (e: any) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
 
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('logIn', 'true');
+    const onLogIn = () => {
+        login(phoneNumber, password)
+            .then(() => {
+                // navigate('/')
+            });
     }
 
     return (
@@ -68,11 +73,12 @@ export default function LogInPage() {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        placeholder="*איימל"
-                        name="email"
-                        autoComplete="email"
+                        id="phoneNumber"
+                        placeholder="*מספר טלפון"
+                        name="phoneNumber"
+                        autoComplete="phoneNumber"
                         autoFocus
+                        onChange={onChangePhoneNumber}
                     />
                     <TextField
                         variant="outlined"
@@ -84,6 +90,7 @@ export default function LogInPage() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={onChangePassword}
                     />
                     <Grid item xs>
                         <Link href="#" variant="body2">
@@ -91,12 +98,11 @@ export default function LogInPage() {
                         </Link>
                     </Grid>
                     <Button
-                        type="submit"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={logIn}
+                        onClick={onLogIn}
                     >
                         כניסה
                     </Button>

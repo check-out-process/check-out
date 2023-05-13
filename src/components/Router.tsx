@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as ReactDOM from "react-dom";
 import {
   createBrowserRouter,
@@ -12,25 +12,29 @@ import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.compone
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
 import SectorInstancePage from './ProcessPage/Sectors/SectorInstancePage/SectorInstancePage.component';
+import { getUser } from '../services/Token.service';
 
 const Router = () => {
-  const logInValue = localStorage.getItem('logIn');
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    const user = getUser();
+    setUser(user);
+  }, [])
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      logInValue && logInValue === 'true' ?
-        <Route path="/" element={<NavBarLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/processes" element={<ProcessList />} />
-          <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
-          <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
-          <Route path="/processcreation" element={<ProcessCreation />} />
-        </Route>
-        : <Route >
-          <Route path="/" element={
-            <LogInPage />
-          } />
-        </Route>
+      user ? <Route path="/" element={<NavBarLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/processes" element={<ProcessList />} />
+        <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
+        <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
+        <Route path="/processcreation" element={<ProcessCreation />} />
+      </Route> : <Route >
+        <Route path="/" element={
+          <LogInPage />
+        } />
+      </Route>
     )
   )
 
