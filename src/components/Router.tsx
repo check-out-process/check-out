@@ -12,6 +12,7 @@ import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.compone
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
 import SectorInstancePage from './ProcessPage/Sectors/SectorInstancePage/SectorInstancePage.component';
+import ScanBedPage from './ScanBedPage/ScanBedPage.component';
 
 const Router = () => {
   const logInValue = localStorage.getItem('logIn');
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
           <Route path="/processcreation" element={<ProcessCreation />} />
+          <Route path="/bedScan" element={<ScanBedPage />} />
         </Route>
         : <Route >
           <Route path="/" element={

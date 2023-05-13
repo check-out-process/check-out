@@ -9,6 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import ListIcon from '@mui/icons-material/List';
+import ScannerIcon from '@mui/icons-material/Scanner';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import { useNavigate } from 'react-router-dom';
@@ -68,6 +69,12 @@ const menuOptions: MenuOptionType[] = [
         title: 'תהליכים',
         route: '/processes',
         icon: <ListIcon/>
+
+    },
+    {
+        title: 'סריקת מיטה',
+        route: '/bedScan',
+        icon: <ScannerIcon/>
 
     },
     {
