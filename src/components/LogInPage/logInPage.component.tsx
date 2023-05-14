@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container";
 import CheckOutLogo from '../../style/images/checkOutLogo.png';
 import { login } from "../../services/Auth.service";
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from "../../context/UserContext";
+import { enqueueSnackbar } from "notistack";
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -36,9 +38,10 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function LogInPage() {
+const LogInPage: React.FC = () => {
     const classes = useStyles();
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [password, setPassword] = useState("");
 
@@ -53,10 +56,17 @@ export default function LogInPage() {
     };
 
     const onLogIn = () => {
-        login(phoneNumber, password)
-            .then(() => {
-                // navigate('/')
-            });
+        login(phoneNumber, password).then((user) => {
+            setUser(user);
+            navigate('/', { replace: true });
+        }).catch(err => {
+            if (err.response.status === 404 || 400) {
+                enqueueSnackbar('פרטים לא נכונים', { variant: 'error' })
+            } else {
+                enqueueSnackbar('הייתה בעיה בכניסה למערכת', { variant: 'error' })
+            }
+
+        });
     }
 
     return (
@@ -111,3 +121,5 @@ export default function LogInPage() {
         </Container>
     );
 }
+
+export default LogInPage

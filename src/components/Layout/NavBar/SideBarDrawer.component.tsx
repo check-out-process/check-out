@@ -8,17 +8,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import ListIcon from '@mui/icons-material/List';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
+import { logout } from '../../../services/Auth.service';
 
 export type SizeBarDrawerProps = {
     open: boolean,
     setOpen: (open: boolean) => void
 }
-type MenuOptionType = { title: string, route: string, icon: any }  
+type MenuOptionType = { title: string, route?: string, icon: any, onClick?: () => void }
 
 
 const drawerWidth = 240;
@@ -55,25 +56,27 @@ const menuOptions: MenuOptionType[] = [
     {
         title: 'עמוד ראשי',
         route: '/',
-        icon: <HomeIcon/>
+        icon: <HomeIcon />
 
     },
     {
         title: 'יצירת תהליך',
         route: '/processcreation',
-        icon: <AccountTreeIcon/>
-
-    },
-    {
-        title: 'תהליכים',
-        route: '/processes',
-        icon: <ListIcon/>
+        icon: <AccountTreeIcon />
 
     },
     {
         title: 'עמוד מנהלים',
         route: '/managment',
-        icon: <AdminPanelSettingsIcon/>
+        icon: <AdminPanelSettingsIcon />
+
+    },
+    {
+        title: 'התנתקות',
+        onClick: () => {
+            logout();
+        },
+        icon: <LogoutIcon />
 
     }
 ]
@@ -104,7 +107,7 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
                 <Divider />
                 <List>
                     {menuOptions.map((option: MenuOptionType) => (
-                        <ListItem button key={option.title} onClick={() => { onOptionClick(option.route) }}>
+                        <ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => {option.onClick()}}>
                             <ListItemText className={classes.title} primary={option.title} />
                             <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
                         </ListItem>
