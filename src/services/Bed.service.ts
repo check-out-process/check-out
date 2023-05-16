@@ -1,22 +1,11 @@
 import { Config } from "../config";
 import { Bed } from "./models/Bed";
-import axios from 'axios'
+import instance from './Api.service'
 
 
 
-const delay = (ms: any) => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
-
-
-export function getBeds(departmentId: string,roomUuid: string): Promise<Bed[]> {
-    const url = `${Config.serverUrl}/beds`;
-
-    return axios.get(url, {
-        params: {
-            roomId: roomUuid,
-        }
-    }).then(res => res.data);
+export function getBeds(roomUuid: string): Promise<Bed[]> {
+    return instance.get(`${Config.serverUrl}/beds`).then(res => res.data)
 
     // return new Promise(async (resolve) => {
     //     await delay(2000);
