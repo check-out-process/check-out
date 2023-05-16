@@ -11,9 +11,9 @@ import ProcessSectorsList from './ProcessPage/Sectors/ProcessSectorsList.compone
 import ProcessCreation from './ProcessCreationPage/ProcessCreation.component';
 import ProcessList from './ProcessPage/ProcessList.componet';
 import SectorInstancePage from './ProcessPage/Sectors/SectorInstancePage/SectorInstancePage.component';
-import ScanBedPage from './ScanBedPage/ScanBedPage.component';
 import { getUser } from '../services/Token.service';
 import { UserContext } from '../context/UserContext';
+import ScanBedPage from './ProcessPage/ScanBed/ScanBedPage.component';
 
 const Router = () => {
   const { user, setUser } = useContext(UserContext);
@@ -31,7 +31,7 @@ const Router = () => {
           <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
           <Route path="/processcreation" element={<ProcessCreation />} />
-          <Route path="/bedScan" element={<ScanBedPage />} />
+          <Route path="/scanBed" element={<ScanBedPage />} />
         </Route> :
         <Route >
           <Route path="/" element={

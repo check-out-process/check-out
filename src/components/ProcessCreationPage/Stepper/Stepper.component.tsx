@@ -14,6 +14,7 @@ import BaseModal from '../../Common/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 import { createProcessInstance } from '../../../services/ProcessInstance.service';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
+import { getUser } from '../../../services/Token.service';
 
 export type StepperType = {
     title: string,
@@ -63,7 +64,7 @@ export default function HorizontalLinearStepper() {
                 description: properties.description ?? "", 
                 processType: 1, //take from enum 
                 orderedSectors: processSectors,
-                creatorId: 1,
+                creatorId: getUser().id,
                 departmentId: department.id,
                 roomId: room.id,
                 bedId: bed.id
