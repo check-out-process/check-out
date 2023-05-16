@@ -4,8 +4,8 @@ import instance from './Api.service'
 
 
 
-export function getBeds(departmentId: string,roomUuid: string): Promise<Bed[]> {
-    return instance.get(`${Config.serverUrl}/beds`).then(res => res.data)
+export function getBeds(roomId: string): Promise<Bed[]> {
+    return instance.get(`${Config.serverUrl}/beds/room/${roomId}`).then(res => res.data)
 
     // return new Promise(async (resolve) => {
     //     await delay(2000);
