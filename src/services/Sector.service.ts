@@ -1,7 +1,6 @@
 import { Sector } from "./models/Sector";
 import { v4 as uuidv4 } from 'uuid';
-import { Role, User } from "./models/User";
-import axios from 'axios'
+import { Role } from "./models/User";
 import { Config } from "../config";
 import instance from "./Api.service";
 
@@ -98,34 +97,9 @@ export function getNotDefaultSectors(processTypeId: string): Promise<Sector[]> {
     ])
 }
 
-export function getSectorResposibleTeamUserById(sectorId: string): Promise<User[]> {
-    return Promise.resolve([{
-        id: 1,
-        fullname: "string",
-        username: "string",
-        role: Role.Worker
-    },
-    {
-        id: 2,
-        fullname: "string2",
-        username: "string2",
-        role: Role.Worker
-    }
-    ])
-}
+export function getSectorById(sectorId: string): Promise<Sector> {
+    const url = `${Config.serverUrl}/sectors/${sectorId}`;
 
-export function getSectorresposibleUserById(sectorId: string): Promise<User[]> {
-    return Promise.resolve([{
-        id: 1,
-        fullname: "string",
-        username: "string",
-        role: Role.Worker
-    },
-    {
-        id: 2,
-        fullname: "string2",
-        username: "string2",
-        role: Role.Worker
-    }
-    ])
+    return instance.get(url).then(res => res.data);
+
 }

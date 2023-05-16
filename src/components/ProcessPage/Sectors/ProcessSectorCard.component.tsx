@@ -1,20 +1,21 @@
 import React from 'react';
-import { ProcessSector } from "../../../services/models/ProcessSector";
+import { SectorInstane } from "../../../services/models/ProcessSector";
 import BaseSectorCard from "../../Common/Sector/BaseSectorCard.component";
 import {
     useNavigate
 } from "react-router-dom";
 interface IProcessSectorCardProps {
-    sector: ProcessSector,
+    sector: SectorInstane,
     processId: string
 }
 
 const ProcessSectorCard: React.FC<IProcessSectorCardProps> = ({ sector, processId }: IProcessSectorCardProps) => {
     const navigate = useNavigate();
 
-    const navigateTo = () => navigate(`/processes/${processId}/sectors/${sector.id}`, {
+    const navigateTo = () => navigate(`/processes/${processId}/sectors/${sector.sectorId}`, {
         state: {
             sector,
+            processId,
             isViewMode: true
         }
     });

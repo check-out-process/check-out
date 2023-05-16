@@ -1,50 +1,65 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { ProcessSector } from "../../../../services/models/ProcessSector";
+import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
 import { Role, User } from '../../../../services/models/User';
-import { getSectorResposibleTeamUserById } from '../../../../services/Sector.service';
+import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from '../../../../services/models/Status';
 import EditResponsibleUser from './DropDownOptions/EditResponsibleUser.component';
 import EditSectorStatus from './DropDownOptions/EditSectorStatus.component';
 import { CircularProgress } from '@material-ui/core';
+import { updateSectorInstance } from '../../../../services/SectorInstance.service';
+import { enqueueSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
+import { UpdateSectorInstanceParams } from '@checkout/types';
+import { Sector } from '../../../../services/models/Sector';
 
 interface ISectorInstancePageBodyProps {
-    sector: ProcessSector,
-    isViewMode: boolean
+    sectorInstance: SectorInstane,
+    processId: string,
+    isViewMode: boolean,
+    isSaveMode: boolean
 }
 
-const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector, isViewMode }: ISectorInstancePageBodyProps) => {
+const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sectorInstance, processId, isViewMode, isSaveMode }: ISectorInstancePageBodyProps) => {
     const [resposibleTeamUserOptions, setResposibleTeamUserOptions] = useState<DropdownKeyPair[]>([]);
     const [resposibleTeamUser, setResposibleTeamUser] = useState<User>();
     const [resposibleUserOptions, setResposibleUserOptions] = useState<DropdownKeyPair[]>([]);
-    const [resposibleUser, setResposibleUserr] = useState<User>(null);
+    const [resposibleUser, setResposibleUser] = useState<User>(null);
     const [sectorStatusOptions, setSectorStatusOptions] = useState<DropdownKeyPair[]>([]);
-    const [sectorStatus, setSectorStatus] = useState<Status>(sector.status);
+    const [sectorStatus, setSectorStatus] = useState<Status>(sectorInstance.status);
 
-    const [loadingTeamUser, setLoadingTeamUser] = useState<boolean>(false);
-    const [loadingUser, setLoadingUser] = useState<boolean>(false);
+    const [loadingTeamUser, setLoadingTeamUser] = useState<boolean>(true);
+    const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
-    const getResposibleTeamUserKeyPair = (sectorId: string) => {
-        getSectorResposibleTeamUserById(sectorId).then(((responsibleTeamUsers: User[]) => {
-            const data: DropdownKeyPair[] = responsibleTeamUsers.map((user: User) =>
-                ({ value: user, displayName: user.fullname }));
+    const navigate = useNavigate();
 
-            setResposibleTeamUserOptions(data);
-            setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sector.resposibleTeamUserId))
-            setLoadingTeamUser(true);
+
+    const getUserKeyPairs = (sectorId: string) => {
+        getSectorById(sectorId).then(((sector: Sector) => {
+            changeResposibleTeamUserKeyPair(sector.responsibleUsers)
+            changeResposibleUserKeyPair(sector.committingUsers);
         }))
     }
 
-    const getResposibleUserKeyPair = (sectorId: string) => {
-        getSectorResposibleTeamUserById(sectorId).then(((responsibleUsers: User[]) => {
-            const data: DropdownKeyPair[] = responsibleUsers.map((user: User) =>
-                ({ value: user, displayName: user.fullname }));
+    const changeResposibleTeamUserKeyPair = (responsibleTeamUsers: User[]) => {
+        const data: DropdownKeyPair[] = responsibleTeamUsers.map((user: User) =>
+            ({ value: user, displayName: user.fullname }));
 
-            setResposibleUserOptions(data);
-            setResposibleUserr(responsibleUsers.find(user => user.id === sector.resposibleTeamUserId))
-            setLoadingTeamUser(true);
-        }))
+        setResposibleTeamUserOptions(data);
+        setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.resposibleTeamUserId))
+        setLoadingTeamUser(false);
+
+    }
+
+    const changeResposibleUserKeyPair = (responsibleUsers: User[]) => {
+        const data: DropdownKeyPair[] = responsibleUsers.map((user: User) =>
+            ({ value: user, displayName: user.fullname }));
+
+        setResposibleUserOptions(data);
+        setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.resposibleUserId))
+        setLoadingUser(false);
+
     }
 
     const getStatusKeyPair = () => {
@@ -58,16 +73,15 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             components: (): ReactNode => {
                 return (
                     <div>
-                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode}/>
-                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUserr} disabled={isViewMode}/>
-                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode}/>
+                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode} />
+                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUser} disabled={isViewMode} />
+                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode} />
                     </div>
 
                 )
             },
             fetchData: (sectorId: string) => {
-                getResposibleTeamUserKeyPair(sectorId);
-                getResposibleUserKeyPair(sectorId);
+                getUserKeyPairs(sectorId);
                 getStatusKeyPair();
             },
         }
@@ -76,13 +90,33 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
     useEffect(() => {
         setLoadingTeamUser(false);
         setLoadingUser(false);
-        editSectorInstanceByRole[Role.Process_Executer].fetchData(sector.id); //get from user context
+        editSectorInstanceByRole[Role.Process_Executer].fetchData(sectorInstance.sectorId); //get from user context
 
     }, [])
 
+    useEffect(() => {
+        if (isSaveMode === true) {
+            const body: UpdateSectorInstanceParams = {
+                commitingWorkerId: resposibleUser?.id,
+                responsiblePersonId: resposibleTeamUser?.id,
+                status: sectorStatus
+            }
+
+            updateSectorInstance(processId, sectorInstance.instanceId, body).then(() => {
+                enqueueSnackbar('הסקטור עודכן בהצלחה', { variant: 'success' })
+                navigate(-1);
+            }).catch(err => {
+                enqueueSnackbar('כישלון בעדכון הסקטור', { variant: 'error' })
+                navigate(-1);
+            })
+        }
+    }, [isSaveMode])
+
     return (
         <>
-            {loadingTeamUser && loadingUser ? <CircularProgress disableShrink /> : editSectorInstanceByRole[Role.Process_Executer].components()
+            {loadingTeamUser && loadingUser ?
+                <CircularProgress disableShrink /> :
+                editSectorInstanceByRole[Role.Process_Executer].components()
             }
         </>
     )

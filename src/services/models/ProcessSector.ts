@@ -1,7 +1,8 @@
 import { Status } from "./Status";
 
-export type ProcessSector = {
-    id: string;
+export type SectorInstane = {
+    instanceId: string;
+    sectorId: string;
     name: string;
     resposibleTeamUserId: number;
     resposibleUserId: number;
