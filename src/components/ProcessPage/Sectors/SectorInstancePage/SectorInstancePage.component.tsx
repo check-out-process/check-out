@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ProcessSector } from "../../../../services/models/ProcessSector";
+import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { useLocation } from 'react-router-dom';
 import PageHeader from '../../Header/header.component';
 import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
-import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { updateSectorInstance } from '../../../../services/SectorInstance.service';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -21,8 +19,10 @@ const SectorInstancePage: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [isViewMode, setIsViewMode] = useState<boolean>();
+    const [isSaveMode, setIsSaveMode] = useState<boolean>(false);
 
-    const sector: ProcessSector = location.state.sector;
+    const sectorInstance: SectorInstane = location.state.sector;
+    const processId: string = location.state.processId;
     const buttonText = isViewMode ? 'עריכה' : 'שמירה';
 
     useEffect(() => {
@@ -33,21 +33,14 @@ const SectorInstancePage: React.FC = () => {
         if (isViewMode) {
             setIsViewMode(false);
         } else {
-            //send correct put api req 
-            updateSectorInstance().then(() => {
-                enqueueSnackbar('הסקטור עודכן בהצלחה', { variant: 'success' })
-                navigate(-1);
-            }).catch(err => {
-                enqueueSnackbar('כישלון בעדכון הסקטור', { variant: 'error' })
-                navigate(-1);
-            })
+            setIsSaveMode(true);
         }
     }
 
     return (
         <div>
-            <PageHeader name={sector.name} isFirstPage={false} />
-            <SectorInstancePageBody sector={sector} isViewMode={isViewMode} />
+            <PageHeader name={sectorInstance.name} isFirstPage={false} />
+            <SectorInstancePageBody sectorInstance={sectorInstance} processId={processId} isViewMode={isViewMode} isSaveMode={isSaveMode}/>
             <Button className={classes.button} variant="contained" color="primary" onClick={() => { onClick() }}>{buttonText}</Button>
         </div>
     )

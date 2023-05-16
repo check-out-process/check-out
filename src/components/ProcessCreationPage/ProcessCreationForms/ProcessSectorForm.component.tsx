@@ -30,12 +30,14 @@ const ProcessSectorForm = () => {
     fetchNotDefaultSectors();
   }, [])
 
+  //hardcoded change
   const fetchDefaultSectors = () => {
-    getDefaultSectors("").then((sectors: Sector[]) => {
+    getDefaultSectors("49d3a54d-cdbb-495d-a32b-1b21bc1bbb81").then((sectors: Sector[]) => {
       setProcessSectors(sectors)
     })
   }
 
+    //hardcoded change
   const fetchNotDefaultSectors = () => {
     getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((sectors: Sector[]) => {
       const defaultSectorsIds = processSectors.map(sector => sector.id);
