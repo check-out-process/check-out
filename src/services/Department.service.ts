@@ -1,10 +1,10 @@
 import { Config } from "../config";
+import instance from "./Api.service";
 import { Department } from "./models/Department";
-import axios from 'axios'
 
 
 export function getDepartments(): Promise<Department[]> {
-    // return axios.get(`${Config.serverUrl}/departments`).then(res => res.data)
+    return instance.get(`${Config.serverUrl}/departments`).then(res => res.data)
     return Promise.resolve([{
         
         id: "dfdsfdsfsdds",

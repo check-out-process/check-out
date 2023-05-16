@@ -1,6 +1,6 @@
 import { Config } from "../config";
+import instance from "./Api.service";
 import { Room } from "./models/Room";
-import axios from 'axios'
 
 
 const delay = (ms: any) => new Promise(
@@ -8,7 +8,7 @@ const delay = (ms: any) => new Promise(
   );
 
 export async function getRooms(departmentUuid: string): Promise<Room[]>{
-    // return axios.get(`${Config.serverUrl}/${departmentUuid}/rooms`).then(res => res.data)
+    return instance.get(`${Config.serverUrl}/departments/${departmentUuid}/rooms`).then(res => res.data)
 
     return new Promise(async (resolve) => {
         await delay(2000);
