@@ -27,8 +27,8 @@ const ProcessListHeader: React.FC<ProcessListHeaderProps> = ({ processes, setPro
       <PageHeader name='התהליכים שלי' isFirstPage={true} />
       <div className={classes.optionRow}>
         <div className={classes.buttonDiv}>
-          <Button variant="contained" color="primary" onClick={() => { setOpen(true) }}>חיפוש מתקדם</Button>
-          <Button variant="contained" color="primary" onClick={() => { isClickScanBed() }}>סריקת מיטה</Button>
+          <Button variant="contained" color="primary" onClick={() => { setOpen(true) }} className={classes.button}>חיפוש מתקדם</Button>
+          <Button variant="contained" color="primary" onClick={() => { isClickScanBed() }} className={classes.button}>סריקת מיטה</Button>
         </div>
       </div>
 
