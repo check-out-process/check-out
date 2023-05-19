@@ -14,12 +14,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
 import { logout } from '../../../services/Auth.service';
+import { User } from '../../../services/models/User';
+import { Role } from '../../../services/models/User';
 
 export type SizeBarDrawerProps = {
     open: boolean,
-    setOpen: (open: boolean) => void
+    setOpen: (open: boolean) => void,
+    user: User
 }
-type MenuOptionType = { title: string, route?: string, icon: any, onClick?: () => void }
+type MenuOptionType = { title: string, route?: string, icon: any, onClick?: () => void, premmitedUserRole?: string[] }
 
 
 const drawerWidth = 240;
@@ -56,19 +59,21 @@ const menuOptions: MenuOptionType[] = [
     {
         title: 'עמוד ראשי',
         route: '/',
-        icon: <HomeIcon />
+        icon: <HomeIcon />,
 
     },
     {
         title: 'יצירת תהליך',
         route: '/processcreation',
-        icon: <AccountTreeIcon />
+        icon: <AccountTreeIcon />,
+        premmitedUserRole: [Role.Admin, Role.Process_Executer]
 
     },
     {
         title: 'עמוד מנהלים',
         route: '/managment',
-        icon: <AdminPanelSettingsIcon />
+        icon: <AdminPanelSettingsIcon />,
+        premmitedUserRole: [Role.Admin]
 
     },
     {
@@ -81,7 +86,7 @@ const menuOptions: MenuOptionType[] = [
     }
 ]
 
-const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
+const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -107,15 +112,16 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
                 <Divider />
                 <List>
                     {menuOptions.map((option: MenuOptionType) => (
-                        <ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => {option.onClick()}}>
-                            <ListItemText className={classes.title} primary={option.title} />
-                            <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
-                        </ListItem>
+                        !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
+                            < ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => { option.onClick() }} >
+                                <ListItemText className={classes.title} primary={option.title} />
+                                <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
+                            </ListItem> : <></>
                     ))}
                 </List>
                 <Divider />
-            </Drawer>
-        </div>
+            </Drawer >
+        </div >
     );
 }
 
