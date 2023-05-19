@@ -14,7 +14,7 @@ export function getNotDefaultSectors(processTypeId: string): Promise<Sector[]> {
 
     return instance.get(url, {
         params: {
-            processtype: 'e30a9c01-7423-44b7-9946-3eadff77bc25',
+            processtype: processTypeId,
         }
     }).then(
         res =>
