@@ -1,5 +1,5 @@
-import { Button, IconButton } from "@material-ui/core";
-import React, { useEffect, useContext } from 'react';
+import { IconButton, CircularProgress } from "@material-ui/core";
+import React, { useEffect, useContext, useState } from 'react';
 import { Sector } from "../../../services/models/Sector";
 import { getDefaultSectors, getNotDefaultSectors } from "../../../services/Sector.service";
 import AddSectorDrawer from "../../Sector/AddSector/AddSectorDrawer.component";
@@ -22,7 +22,8 @@ const useStyles = makeStyles(() =>
 );
 const ProcessSectorForm = () => {
   const { processSectors, setProcessSectors, setDrawerSectors } = useContext(ProcessSectorsContext);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -32,16 +33,18 @@ const ProcessSectorForm = () => {
 
   //hardcoded change
   const fetchDefaultSectors = () => {
+    setIsLoading(true);
     getDefaultSectors("49d3a54d-cdbb-495d-a32b-1b21bc1bbb81").then((sectors: Sector[]) => {
       setProcessSectors(sectors)
+      setIsLoading(false);
     })
   }
 
-    //hardcoded change
+  //hardcoded change
   const fetchNotDefaultSectors = () => {
     getNotDefaultSectors('138371ec-8bd2-4f8a-b1fb-00c8b280ef58').then((sectors: Sector[]) => {
       const defaultSectorsIds = processSectors.map(sector => sector.id);
-    
+
       setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
     })
   }
@@ -80,6 +83,7 @@ const ProcessSectorForm = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      {isLoading ? <CircularProgress /> :
       <div className={classes.processSectorContainer}>
         <div className="processSectorForm sectorsList" >
           <div>
@@ -91,6 +95,7 @@ const ProcessSectorForm = () => {
         </div >
         <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} />
       </div>
+      }
     </DragDropContext>
   )
 }
