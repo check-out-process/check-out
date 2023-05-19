@@ -15,6 +15,7 @@ import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCrea
 import { createProcessInstance } from '../../../services/ProcessInstance.service';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
 import { getUser } from '../../../services/Token.service';
+import { HttpStatusCode } from 'axios';
 
 export type StepperType = {
     title: string,
@@ -61,7 +62,7 @@ export default function HorizontalLinearStepper() {
         if (confirm) {
             createProcessInstance({
                 name: `${bed.name}/${room.name}/${department.name}`, //what it should be
-                description: properties.description ?? "", 
+                description: properties.description ?? "",
                 processType: 1, //take from enum 
                 orderedSectors: processSectors,
                 creatorId: getUser().id,
@@ -71,14 +72,19 @@ export default function HorizontalLinearStepper() {
             }).then(() => {
                 enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
                 navigate('/', { replace: true });
-            }).catch(err => {
-                enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
+            }).catch((err) => {
+                if (err.response?.status === HttpStatusCode.Conflict && err.response?.data?.message?.includes("bed")) {
+                    enqueueSnackbar('קיים תהליך פתוח למיטה שנבחרה', { variant: 'error' })
+                } else {
+                    enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
+                }
                 navigate('/', { replace: true });
-            })           
+            })
         } else {
             setOpen(false)
         }
     }
+
 
     const onCancel = (confirm: boolean) => {
         if (confirm) {
