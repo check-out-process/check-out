@@ -84,6 +84,34 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
                 getUserKeyPairs(sectorId);
                 getStatusKeyPair();
             },
+        },
+        [Role.Admin]: {
+            components: (): ReactNode => {
+                return (
+                    <div>
+                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode} />
+                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUser} disabled={isViewMode} />
+                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode} />
+                    </div>
+
+                )
+            },
+            fetchData: (sectorId: string) => {
+                getUserKeyPairs(sectorId);
+                getStatusKeyPair();
+            },
+        },
+        [Role.Worker]: {
+            components: (): ReactNode => {
+                return (
+                    <div>
+                        <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode} />
+                    </div>
+                )
+            },
+            fetchData: (sectorId: string) => {
+                getStatusKeyPair();
+            },
         }
     }
 
