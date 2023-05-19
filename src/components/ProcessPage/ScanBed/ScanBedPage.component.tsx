@@ -5,6 +5,15 @@ import { getProcessStatusByBedId } from '../../../services/ProcessInstance.servi
 import { enqueueSnackbar } from 'notistack';
 import EditSectorStatus from './EditSectorStatus.component';
 import { CircularProgress } from '@material-ui/core';
+import { createStyles, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles(() =>
+    createStyles({
+        scanBedPageContainer: {
+            height: '100%'
+        }
+    }),
+);
 
 const ScanBedPage: React.FC = () => {
     const [isScanMode, setIsScanMode] = useState(true);
@@ -12,6 +21,7 @@ const ScanBedPage: React.FC = () => {
     const [bedId, setBedId] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
+    const classes = useStyles();
 
     useEffect(() => {
         if (isScanMode === false) {
@@ -35,7 +45,7 @@ const ScanBedPage: React.FC = () => {
     return (
         <>
             {isLoading ? <CircularProgress /> :
-                <div style={{ height: '100%' }}>
+                <div className={classes.scanBedPageContainer}>
                     {processInstanceStatusRes ? <EditSectorStatus processInstanceStatusRes={processInstanceStatusRes} bedId={bedId} /> :
                         <ScanData setIsScanMode={setIsScanMode} setData={setBedId} />}
                 </div>

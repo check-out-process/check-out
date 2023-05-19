@@ -8,17 +8,40 @@ import { updateProcessStatus } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { Status } from '../../../services/models/Status';
 import BaseModal from '../../Common/Modal/BaseModal.component';
+import { createStyles, makeStyles } from "@material-ui/core";
 
 interface IEditSectorStatusProps {
     processInstanceStatusRes: ProcessInstanceStatusReturnedParamsUI,
     bedId: string
 }
 
+const useStyles = makeStyles(() =>
+    createStyles({
+        circularProgress: {
+            height: '100%'
+        },
+        endSectorButtonContainer: {
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        endSectorButton: {
+            width: '40%', 
+            height: '52px'
+        },
+        editSectorStatusContainer: {
+            height: '100%'
+        }
+    }),
+);
+
 const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ processInstanceStatusRes, bedId }: IEditSectorStatusProps) => {
     const navigate = useNavigate();
     const [isAnotherSectorEdit, setIsAnotherSectorEdit] = useState<boolean>(false);
     const [currentSectorInstance, setCurrentSectorInstance] = useState<SectorInstance>(processInstanceStatusRes.currentSectorInstance);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const classes = useStyles();
 
     const onEndSector = () => {
         const body = {
@@ -55,16 +78,16 @@ const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ processInstanceSta
 
     return (
         <>
-            {isLoading ? <CircularProgress style={{ height: '100%'}}/> :
-                <div style={{ height: '100%'}}>
+            {isLoading ? <CircularProgress className={classes.circularProgress}/> :
+                <div className={classes.editSectorStatusContainer}>
                     <PageHeader name={currentSectorInstance.name} isFirstPage={false} />
-                    <div style={{ height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className={classes.endSectorButtonContainer}>
                         <Button
                             fullWidth
                             variant="contained"
                             color="primary"
                             onClick={onEndSector}
-                            style={{ width: '40%', height: '52px' }}
+                            className={classes.endSectorButton}
                         >
                             סיום סקטור
                         </Button>
