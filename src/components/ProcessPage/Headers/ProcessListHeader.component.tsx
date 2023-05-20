@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import { Process } from "../../../services/models/Process";
+import { ProcessInstance } from "@checkout/types";
 import { Button } from "@material-ui/core";
 import ProcessFilters from "./ProcessFilters.component";
 import { useStyles } from "./ProcessListHeader.component.styles";
 import PageHeader from "../Header/header.component";
 import { useNavigate } from 'react-router-dom';
 
-
 export type ProcessListHeaderProps = {
-  processes: Process[];
-  setProcesses: (processes: Process[]) => void
+  processes: ProcessInstance[];
+  setProcesses: (processes: ProcessInstance[]) => void
 }
 
 

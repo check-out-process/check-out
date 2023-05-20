@@ -1,41 +1,32 @@
 import { CircularProgress, List, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
-import { SectorInstane } from "../../../services/models/ProcessSector";
-import { getProcessSectors } from "../../../services/ProcessSector.service";
 import { useLocation } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import PageHeader from "../Header/header.component";
 import { Status } from "../../../services/models/Status";
+import { getProcessSectorInstances } from "../../../services/ProcessInstance.service";
+import { SectorInstance } from '@checkout/types';
 
 
 const ProcessSectorsList: React.FC = () => {
-    const [processSectors, setProcessSectors] = useState<SectorInstane[]>();
+    const [processSectors, setProcessSectors] = useState<SectorInstance[]>();
     const [loading, setLoading] = useState<boolean>(false);
 
     const location = useLocation();
     const processId = location.state.processId;
 
     useEffect(() => {
-        fetchDefaultSectors();
+        fetchProcessSectorInstances();
     }, [])
 
-    const fetchDefaultSectors = () => {
+    const fetchProcessSectorInstances = () => {
         setLoading(true);
-        getProcessSectors(processId).then((sectors: SectorInstane[]) => {
+        getProcessSectorInstances(processId).then((sectors: SectorInstance[]) => {
             setProcessSectors(sectors);
             setLoading(false);
         })
     }
 
-    //change hardcode
-    const sectorInstane = {
-        instanceId: '0f108d1b-2b4a-4acb-8ae3-d2e20f49a129',
-        sectorId: 'b02b21d7-ae29-41ca-bd5b-921285efd701',
-        name: 'תחזוקה',
-        resposibleTeamUserId: 4444,
-        resposibleUserId: 3333,
-        status: Status.Waiting,
-    }
 
     return (
         <div>
@@ -44,10 +35,8 @@ const ProcessSectorsList: React.FC = () => {
             {processSectors?.length > 0 && <List style={{
                 width: '100%',
             }}>
-                {processSectors.map((sector: SectorInstane) => (
-                   
-                    // <ProcessSectorCard key={sector.id} sector={sector} processId={processId}/>
-                    <ProcessSectorCard key={sectorInstane.sectorId} sector={sectorInstane} processId={'9b60c643-2727-4daa-9188-a7f2a34f8c0d'}/>
+                {processSectors.map((sector: SectorInstance) => (
+                    <ProcessSectorCard key={sector.instanceId} sector={sector} processId={processId}/>
                 ))}
             </List>}
             {processSectors?.length == 0 && !loading ?

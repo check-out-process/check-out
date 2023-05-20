@@ -1,12 +1,12 @@
 import React from 'react';
 import { Card, CardContent, IconButton, Typography } from "@material-ui/core";
-import { SectorInstane } from "../../../services/models/ProcessSector";
+import { SectorInstance } from '@checkout/types';
 import { Sector } from "../../../services/models/Sector";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './BaseSectorCard.component.css';
 
 interface IBaseSectorCardProps {
-    sector: SectorInstane | Sector,
+    sector: SectorInstance | Sector,
     withModal: Boolean,
     handleOpen?: () => void
 }

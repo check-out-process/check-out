@@ -43,13 +43,13 @@ const ProcessSectorForm = () => {
       const sectors: Sector[] = [];
 
       processTemplate.relatedSectorsOrder.forEach(sectorId => {
-        const sector = processTemplate.relatedSectors.find(sector => sector.id === sectorId);
+        const sector = processTemplate?.relatedSectors?.find(sector => sector.id === sectorId);
        
         if (sector) {
           sectors.push(sector)
         }
       });
-      
+
       setProcessSectors(sectors)
       setIsLoading(false);
     })
