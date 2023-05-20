@@ -9,4 +9,5 @@ export declare class CreateProcessInstanceFromDataParams {
     departmentId: string;
     roomId: string;
     bedId: string;
+    isIsolation: boolean
 }

@@ -57,12 +57,12 @@ const ProcessBasicDetailsForm = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
+        setProperty('isIsolation', event.target.checked)
     };
 
 
     const onDescriptionChange = (event: any) => {
         setProperty('description', event.target.value)
-        console.log(properties)
     }
 
     return (

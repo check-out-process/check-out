@@ -63,6 +63,7 @@ export default function HorizontalLinearStepper() {
             createProcessInstance({
                 name: `${bed.name}/${room.name}/${department.name}`, //what it should be
                 description: properties.description ?? "",
+                isIsolation: properties.isIsolation ?? false,
                 processType: 1, //take from enum 
                 orderedSectors: processSectors,
                 creatorId: getUser().id,
