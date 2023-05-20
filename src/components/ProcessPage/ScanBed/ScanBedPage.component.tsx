@@ -3,7 +3,7 @@ import ScanData from '../ScanBarcode/ScanData.component';
 import { useNavigate } from 'react-router-dom';
 import { getProcessStatusByBedId } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
-import EditSectorStatus from './EditSectorStatus.component';
+import EditSectorStatusScan from './EditSectorStatusScan.component';
 import { CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles } from "@material-ui/core";
 
@@ -46,7 +46,7 @@ const ScanBedPage: React.FC = () => {
         <>
             {isLoading ? <CircularProgress /> :
                 <div className={classes.scanBedPageContainer}>
-                    {processInstanceStatusRes ? <EditSectorStatus processInstanceStatusRes={processInstanceStatusRes} bedId={bedId} /> :
+                    {processInstanceStatusRes ? <EditSectorStatusScan processInstanceStatusRes={processInstanceStatusRes} bedId={bedId} /> :
                         <ScanData setIsScanMode={setIsScanMode} setData={setBedId} />}
                 </div>
             }
