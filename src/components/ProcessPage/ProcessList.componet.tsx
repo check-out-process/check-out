@@ -1,17 +1,17 @@
 import React, { memo, useEffect, useState } from 'react';
 import ProcessCard from './ProcessCard.component';
-import { getProcesses } from '../../services/Process.service';
-import { Process } from '../../services/models/Process';
 import { CircularProgress, Typography } from '@material-ui/core';
 import ProcessListHeader from './Headers/ProcessListHeader.component';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { useStyles } from './ProcessList.component.styles';
+import { getUserProcessInstance } from '../../services/ProcessInstance.service';
+import { ProcessInstance } from '@checkout/types';
 
 const ProcessList = () => {
-    const [processes, setProcesses] = useState<Process[]>([])
-    const [currentProcesses, setCurrentProcesses] = useState<Process[]>([])
+    const [processes, setProcesses] = useState<ProcessInstance[]>([])
+    const [currentProcesses, setCurrentProcesses] = useState<ProcessInstance[]>([])
     const [pages, setPages] = useState<number>(0)
-    const [pageProcessMap, setPageProcessMap] = useState<Process[][]>([])
+    const [pageProcessMap, setPageProcessMap] = useState<ProcessInstance[][]>([])
     const processPerPage: number = 3;
     const [loading, setLoading] = useState<boolean>(false);
     const classes = useStyles()
@@ -22,7 +22,7 @@ const ProcessList = () => {
 
     const fetchProcesses = () => {
         setLoading(true)
-        getProcesses('dfdfd').then(((processes: Process[]) => {
+        getUserProcessInstance().then(((processes: ProcessInstance[]) => {
             setProcesses(processes)
             setCurrentProcesses(processes)
             // initFirstPage(processes)
@@ -31,7 +31,7 @@ const ProcessList = () => {
         }))
     }
 
-    const splitProcessesIntoChunks = (processes: Process[]) => {
+    const splitProcessesIntoChunks = (processes: ProcessInstance[]) => {
         const res = [];
         for (let i = 0; i < processes.length; i += processPerPage) {
             const chunk = processes.slice(i, i + processPerPage);
@@ -44,14 +44,14 @@ const ProcessList = () => {
         setCurrentProcesses(pageProcessMap[selectedPage - 1])
     };
 
-    const calculatePagesNumber = (processes: Process[]) => {
+    const calculatePagesNumber = (processes: ProcessInstance[]) => {
         const pagesNumber = (processes.length / processPerPage)
         const isNaturalNumber: boolean = (pagesNumber % 1 === 0)
         const totalPageNumber = (isNaturalNumber) ? pagesNumber : Math.floor(pagesNumber) + 1;
         setPages(totalPageNumber)
     }
 
-    const initFirstPage = (processes: Process[]) => {
+    const initFirstPage = (processes: ProcessInstance[]) => {
         calculatePagesNumber(processes)
         const pages = splitProcessesIntoChunks(processes)
         setPageProcessMap(pages)

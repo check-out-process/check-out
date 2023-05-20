@@ -63,7 +63,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
     }
 
     const getStatusKeyPair = () => {
-        const data: DropdownKeyPair[] = (Object.keys(Status) as Array<keyof typeof Status>).map((status) =>
+        const data: DropdownKeyPair[] = (Object.values(Status)).map((status) =>
             ({ value: status, displayName: status }));
         setSectorStatusOptions(data);
     }
@@ -126,7 +126,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
         if (isSaveMode === true) {
             const body: UpdateSectorInstanceParams = {
                 commitingWorkerId: resposibleUser?.id,
-                responsiblePersonId: resposibleTeamUser?.id,
+               responsiblePersonId: resposibleTeamUser?.id,
                 status: sectorStatus
             }
 

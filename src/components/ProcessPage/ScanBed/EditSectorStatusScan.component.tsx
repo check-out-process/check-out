@@ -36,7 +36,7 @@ const useStyles = makeStyles(() =>
     }),
 );
 
-const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ processInstanceStatusRes, bedId }: IEditSectorStatusProps) => {
+const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanceStatusRes, bedId }: IEditSectorStatusProps) => {
     const navigate = useNavigate();
     const [isAnotherSectorEdit, setIsAnotherSectorEdit] = useState<boolean>(false);
     const [currentSectorInstance, setCurrentSectorInstance] = useState<SectorInstance>(processInstanceStatusRes.currentSectorInstance);
@@ -99,4 +99,4 @@ const EditSectorStatus: React.FC<IEditSectorStatusProps> = ({ processInstanceSta
     )
 }
 
-export default EditSectorStatus
+export default EditSectorStatusScan

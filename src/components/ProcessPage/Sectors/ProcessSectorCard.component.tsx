@@ -1,11 +1,11 @@
 import React from 'react';
-import { SectorInstane } from "../../../services/models/ProcessSector";
 import BaseSectorCard from "../../Common/Sector/BaseSectorCard.component";
+import { SectorInstance } from '@checkout/types';
 import {
     useNavigate
 } from "react-router-dom";
 interface IProcessSectorCardProps {
-    sector: SectorInstane,
+    sector: SectorInstance,
     processId: string
 }
 
