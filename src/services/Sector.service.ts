@@ -1,12 +1,11 @@
 import { Sector } from "./models/Sector";
-import { v4 as uuidv4 } from 'uuid';
-import { Role } from "./models/User";
 import { Config } from "../config";
 import instance from "./Api.service";
+import { ProcessTemplate } from "./models/ProcessTemplate";
 
-export function getDefaultSectors(processId: string): Promise<Sector[]> {
+export function getDefaultSectors(processId: string): Promise<ProcessTemplate> {
     const url = `${Config.serverUrl}/process-templates/${processId}`;
-    return instance.get(url).then(res => res.data.relatedSectors);
+    return instance.get(url).then(res => res.data);
 }
 
 export function getNotDefaultSectors(processTypeId: string): Promise<Sector[]> {
