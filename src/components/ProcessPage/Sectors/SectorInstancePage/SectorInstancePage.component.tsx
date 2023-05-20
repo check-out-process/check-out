@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { useLocation } from 'react-router-dom';
 import PageHeader from '../../Header/header.component';
 import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
+import { SectorInstance } from '@checkout/types';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -21,7 +21,7 @@ const SectorInstancePage: React.FC = () => {
     const [isViewMode, setIsViewMode] = useState<boolean>();
     const [isSaveMode, setIsSaveMode] = useState<boolean>(false);
 
-    const sectorInstance: SectorInstane = location.state.sector;
+    const sectorInstance: SectorInstance = location.state.sector;
     const processId: string = location.state.processId;
     const buttonText = isViewMode ? 'עריכה' : 'שמירה';
 

@@ -1,21 +1,20 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
 import { Role, User } from '../../../../services/models/User';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
-import { Status } from '../../../../services/models/Status';
+import { Status } from "../../../../services/models/Status";
 import EditResponsibleUser from './DropDownOptions/EditResponsibleUser.component';
 import EditSectorStatus from './DropDownOptions/EditSectorStatus.component';
 import { CircularProgress } from '@material-ui/core';
 import { updateSectorInstance } from '../../../../services/SectorInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { UpdateSectorInstanceParams } from '@checkout/types';
+import { UpdateSectorInstanceParams, SectorInstance } from '@checkout/types';
 import { Sector } from '../../../../services/models/Sector';
 
 interface ISectorInstancePageBodyProps {
-    sectorInstance: SectorInstane,
+    sectorInstance: SectorInstance,
     processId: string,
     isViewMode: boolean,
     isSaveMode: boolean
@@ -47,7 +46,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             ({ value: user, displayName: user.fullname }));
 
         setResposibleTeamUserOptions(data);
-        setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.resposibleTeamUserId))
+        setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.responsiblePerson.id));
         setLoadingTeamUser(false);
 
     }
@@ -57,7 +56,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             ({ value: user, displayName: user.fullname }));
 
         setResposibleUserOptions(data);
-        setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.resposibleUserId))
+        setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.commitingWorker.id));
         setLoadingUser(false);
 
     }

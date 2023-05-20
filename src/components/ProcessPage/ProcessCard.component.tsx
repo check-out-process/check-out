@@ -9,9 +9,9 @@ import {
     useNavigate
 } from "react-router-dom";
 import { Divider } from '@material-ui/core';
-import { Status } from "../../services/models/Status";
 import { formatDistance } from 'date-fns'
 import { he } from 'date-fns/locale';
+import { getColorByStatus } from '../Common/helpers/helper';
 
 export type ProcessCardProps = {
     process: ProcessInstance
@@ -21,16 +21,6 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    //change by status and fix to string when fix status bug
-    const getColor = () => {
-        switch (process.status.toString()) {
-            case Status.In_Progress:
-                return '#87CEFA'
-            case Status.Done:
-                return '#90EE90'
-        }
-    }
-
     const navigateTo = () => navigate(`/processes/${process.instanceId}/sectors`, {
         state: {
             processId: process.instanceId,
@@ -39,7 +29,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
 
     return (
         <div className={classes.root}>
-            <Card className={classes.card} style={{ backgroundColor: getColor() }} onClick={navigateTo} >
+            <Card className={classes.card} style={{ backgroundColor: getColorByStatus(process.status) }} onClick={navigateTo} >
                 <CardContent className={classes.cardContent}>
                     <div className={classes.rightDescription}>
                         <Typography align='right' variant="subtitle1" component="div">

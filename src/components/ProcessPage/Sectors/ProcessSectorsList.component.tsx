@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import PageHeader from "../Header/header.component";
-import { Status } from "../../../services/models/Status";
+import { Status } from "../../../services/models/Status"
 import { getProcessSectorInstances } from "../../../services/ProcessInstance.service";
 import { SectorInstance } from '@checkout/types';
 
@@ -32,10 +32,12 @@ const ProcessSectorsList: React.FC = () => {
         <div>
             <PageHeader name='רשימת סקטורים' isFirstPage={false}/>
             {loading ? <CircularProgress disableShrink /> : null}
-            {processSectors?.length > 0 && <List style={{
+            {processSectors?.length > 0 && 
+            <List style={{
                 width: '100%',
+                counterReset: 'gradient-counter',
             }}>
-                {processSectors.map((sector: SectorInstance) => (
+                {processSectors.map((sector: SectorInstance, index: number) => (
                     <ProcessSectorCard key={sector.instanceId} sector={sector} processId={processId}/>
                 ))}
             </List>}

@@ -21,7 +21,7 @@ const SectorsList: React.FC = () => {
                         width: '100%', counterReset: 'gradient-counter',
                     }}>
                         {processSectors.map((sector: Sector, index: number) => (
-                            <SectorCard key={sector.id} sector={sector} index={index} />
+                            <SectorCard key={index} sector={sector} index={index} />
                         ))}
                     </List>
                     {provided.placeholder}

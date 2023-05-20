@@ -17,9 +17,10 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, index }: ISectorCardPr
         setOffsetTop(window.pageYOffset + ref.current.getBoundingClientRect().top)
         setOpen(true);
     }
+    const sectorIdIndexUinq = `${sector.id}${index}`
 
     return (
-        <Draggable key={sector.id} draggableId={sector.id} index={index}>
+        <Draggable key={sectorIdIndexUinq} draggableId={sectorIdIndexUinq} index={index}>
             {(provided, snapshot) => (
                 <div  {...provided.draggableProps}
                     {...provided.dragHandleProps}
