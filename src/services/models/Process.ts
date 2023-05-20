@@ -8,13 +8,3 @@ export type ProcssPropertiesSchema = {
     required: boolean;
     value: any;
 }
-
-export type Process = {
-    uuid: string;
-    createdBy: string,
-    createdAt: string;
-    departmentName: string;
-    roomName: string;
-    bedName: string;
-    status: string;
-}

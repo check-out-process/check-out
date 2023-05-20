@@ -47,7 +47,7 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
 
     const fetchBeds = () => {
             setIsLoading(true);
-            getBeds(room.departmentId,room.id).then((beds: Bed[]) => {
+            getBeds(room.id).then((beds: Bed[]) => {
                 setBeds(beds)
                 const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
                 setBedsDropdownData(data);

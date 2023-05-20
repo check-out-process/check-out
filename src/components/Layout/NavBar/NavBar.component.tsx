@@ -6,7 +6,11 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SideBarDrawer from './SideBarDrawer.component';
 import { createStyles, makeStyles } from '@material-ui/core';
+import { User } from '../../../services/models/User';
 
+export interface INavBarLayoutProps {
+  user: User
+}
 const useStyles = makeStyles(() =>
   createStyles({
     height: {
@@ -15,7 +19,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export default function NavBarLayout() {
+  export const NavBarLayout: React.FC<INavBarLayoutProps> = ({user }) => {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -28,12 +32,14 @@ export default function NavBarLayout() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <main className={classes.height}>
+      <main>
         <div className={classes.height}>
           <Outlet />
         </div>
       </main>
-      <SideBarDrawer open={open} setOpen={setOpen} />
+      <SideBarDrawer open={open} setOpen={setOpen} user={user}/>
     </div>
   );
 }
+
+export default NavBarLayout; 

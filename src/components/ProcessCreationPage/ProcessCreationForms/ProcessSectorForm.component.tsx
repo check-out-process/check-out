@@ -1,5 +1,5 @@
-import { Button, IconButton } from "@material-ui/core";
-import React, { useEffect, useContext } from 'react';
+import { IconButton, CircularProgress } from "@material-ui/core";
+import React, { useEffect, useContext, useState } from 'react';
 import { Sector } from "../../../services/models/Sector";
 import { getDefaultSectors, getNotDefaultSectors } from "../../../services/Sector.service";
 import AddSectorDrawer from "../../Sector/AddSector/AddSectorDrawer.component";
@@ -8,10 +8,27 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import SectorsList from "../../Sector/SectorsList.component";
 import './ProcessSectorForm.component.css';
 import { ProcessSectorsContext } from "../../../context/ProcessSectorsContext";
+import { createStyles, makeStyles } from '@material-ui/core';
+import { Config } from "../../../config";
+import { ProcessCreationDetailsContext } from "../../../context/ProcessCreationContext";
+import { ProcessTemplate } from "../../../services/models/ProcessTemplate";
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    processSectorContainer: {
+      height: '100%',
+    },
+    drawerIcon: {
+      color: '#54546b'
+    }
+  }),
+);
 const ProcessSectorForm = () => {
-  const { processSectors, setProcessSectors, setNotDefaultSectors } = useContext(ProcessSectorsContext);
-  const [open, setOpen] = React.useState(false);
+  const { properties } = useContext(ProcessCreationDetailsContext);
+  const { processSectors, setProcessSectors, setDrawerSectors } = useContext(ProcessSectorsContext);
+  const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const classes = useStyles();
 
   useEffect(() => {
     fetchDefaultSectors();
@@ -19,15 +36,30 @@ const ProcessSectorForm = () => {
   }, [])
 
   const fetchDefaultSectors = () => {
-    getDefaultSectors().then((sectors: Sector[]) => {
+    setIsLoading(true);
+    const processId = properties.isIsolation ? Config.processTemplateRegularBedIsolationId : Config.processTemplateRegularBedNonIsolationId;
+
+    getDefaultSectors(processId).then((processTemplate: ProcessTemplate) => {
+      const sectors: Sector[] = [];
+
+      processTemplate.relatedSectorsOrder.forEach(sectorId => {
+        const sector = processTemplate?.relatedSectors?.find(sector => sector.id === sectorId);
+       
+        if (sector) {
+          sectors.push(sector)
+        }
+      });
+
       setProcessSectors(sectors)
+      setIsLoading(false);
     })
   }
 
   const fetchNotDefaultSectors = () => {
-    //change to get all sectors
-    getNotDefaultSectors().then((sectors: Sector[]) => {
-      setNotDefaultSectors(sectors)
+    getNotDefaultSectors(Config.processTypeRegularBedId).then((sectors: Sector[]) => {
+      const defaultSectorsIds = processSectors.map(sector => sector.id);
+
+      setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
     })
   }
 
@@ -40,11 +72,6 @@ const ProcessSectorForm = () => {
   };
 
   const handleCancel = () => {
-  };
-
-  const saveProcessSector = () => {
-    console.log(processSectors);
-    // send api request to save and move to open process page
   };
 
   const buttonsStyle = () => ({
@@ -70,21 +97,19 @@ const ProcessSectorForm = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{ height: '100%' }}>
-        <div className="processSectorForm sectorsList" style={{ display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
-          <div>
-            <SectorsList />
-            <IconButton onClick={handleDrawerOpen} style={{ color: '#54546b' }}>
-              <AddCircleOutlineIcon />
-            </IconButton>
-          </div>
-          {/* <div style={{ display: 'flex' }}>
-            <Button variant="outlined" onClick={handleCancel} style={buttonsStyle()} >ביטול</Button>
-            <Button variant="outlined" onClick={saveProcessSector} style={buttonsStyle()}>אישור</Button>
-          </div> */}
-        </div >
-        <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} />
-      </div>
+      {isLoading ? <CircularProgress /> :
+        <div className={classes.processSectorContainer}>
+          <div className="processSectorForm sectorsList" >
+            <div>
+              <SectorsList />
+              <IconButton onClick={handleDrawerOpen} className={classes.drawerIcon}>
+                <AddCircleOutlineIcon />
+              </IconButton>
+            </div>
+          </div >
+          <AddSectorDrawer open={open} handleDrawerClose={handleDrawerClose} />
+        </div>
+      }
     </DragDropContext>
   )
 }

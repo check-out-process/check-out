@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import CheckOutLogo from '../../style/images/checkOutLogo.png';
 import { createStyles, makeStyles } from '@material-ui/core';
+import { UserContext } from '../../context/UserContext';
 
 
 const useStyles = makeStyles(() =>
@@ -25,6 +26,8 @@ const useStyles = makeStyles(() =>
 );
 
 const HomePage: React.FC = () => {
+    const { user } = useContext(UserContext);
+    console.log(user)
     const classes = useStyles();
 
     return (

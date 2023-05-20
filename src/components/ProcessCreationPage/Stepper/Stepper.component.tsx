@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -13,6 +12,10 @@ import './Stepper.component.css';
 import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
 import BaseModal from '../../Common/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
+import { createProcessInstance } from '../../../services/ProcessInstance.service';
+import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
+import { getUser } from '../../../services/Token.service';
+import { HttpStatusCode } from 'axios';
 
 export type StepperType = {
     title: string,
@@ -38,7 +41,8 @@ export default function HorizontalLinearStepper() {
     const [open, setOpen] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
-    const { isCurrentStepValid } = useContext(ProcessCreationDetailsContext);
+    const { isCurrentStepValid, department, room, bed, properties } = useContext(ProcessCreationDetailsContext);
+    const { processSectors } = useContext(ProcessSectorsContext);
 
     const isLastStep = (): boolean => activeStep === steps.length - 1;
     const handleNext = () => {
@@ -56,16 +60,36 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
-            enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
-            navigate('/home', { replace: true });
+            createProcessInstance({
+                name: `${bed.name}/${room.name}/${department.name}`, //what it should be
+                description: properties.description ?? "",
+                isIsolation: properties.isIsolation ?? false,
+                processType: 1, //take from enum 
+                orderedSectors: processSectors,
+                creatorId: getUser().id,
+                departmentId: department.id,
+                roomId: room.id,
+                bedId: bed.id
+            }).then(() => {
+                enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
+                navigate('/', { replace: true });
+            }).catch((err) => {
+                if (err.response?.status === HttpStatusCode.Conflict && err.response?.data?.message?.includes("bed")) {
+                    enqueueSnackbar('קיים תהליך פתוח למיטה שנבחרה', { variant: 'error' })
+                } else {
+                    enqueueSnackbar('כישלון בנסיון יצירת התהליך', { variant: 'error' })
+                }
+                navigate('/', { replace: true });
+            })
         } else {
             setOpen(false)
         }
     }
 
+
     const onCancel = (confirm: boolean) => {
         if (confirm) {
-            navigate('/home', { replace: true });
+            navigate('/', { replace: true });
         } else {
             setCancelModalOpen(false)
         }

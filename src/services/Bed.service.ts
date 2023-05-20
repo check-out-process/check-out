@@ -1,33 +1,28 @@
 import { Config } from "../config";
 import { Bed } from "./models/Bed";
-import axios from 'axios'
+import instance from './Api.service'
 
 
 
-const delay = (ms: any) => new Promise(
-    resolve => setTimeout(resolve, ms)
-  );
+export function getBeds(roomId: string): Promise<Bed[]> {
+    return instance.get(`${Config.serverUrl}/beds/room/${roomId}`).then(res => res.data)
 
-
-export function getBeds(departmentId: string,roomUuid: string): Promise<Bed[]> {
-    // return axios.get(`${Config.serverUrl}/${departmentId}/rooms/${roomUuid}/beds`).then(res => res.data)
-
-    return new Promise(async (resolve) => {
-        await delay(2000);
-        resolve(
-            [{
+    // return new Promise(async (resolve) => {
+    //     await delay(2000);
+    //     resolve(
+    //         [{
                 
-                id: "dfdsfdsfsdds",
-                name: 'מיטה מספר 1',
-                roomId: 'ssds'
-            },
-            {
+    //             id: "dfdsfdsfsdds",
+    //             name: 'מיטה מספר 1',
+    //             roomId: 'ssds'
+    //         },
+    //         {
                 
-                id: "dsfdsgdgfgfdhgfhghgf",
-                name: 'מיטה מספר 2',
-                roomId: 'ssds'
-            }
-        ]
-        )
-    })
+    //             id: "dsfdsgdgfgfdhgfhghgf",
+    //             name: 'מיטה מספר 2',
+    //             roomId: 'ssds'
+    //         }
+    //     ]
+    //     )
+    // })
 }

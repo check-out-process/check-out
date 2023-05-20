@@ -1,10 +1,8 @@
-import { Card, CardContent, Typography, IconButton } from "@material-ui/core";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import React, { useState, useRef } from 'react';
 import { Sector } from "../../services/models/Sector";
-import './SectorCard.component.css';
 import SectorOptionsModal from "./SectorOptionsModal.component";
 import { Draggable } from "react-beautiful-dnd";
+import BaseSectorCard from "../Common/Sector/BaseSectorCard.component";
 
 interface ISectorCardProps {
     sector: Sector,
@@ -15,8 +13,6 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, index }: ISectorCardPr
     const [offsetTop, setOffsetTop] = useState(0);
     const ref = useRef(null)
 
-    const ownerTitle =""// `אחראי: ${sector.defaultResposibleUserName}`;need to get it
-
     const handleOpen = () => {
         setOffsetTop(window.pageYOffset + ref.current.getBoundingClientRect().top)
         setOpen(true);
@@ -25,25 +21,15 @@ const SectorCard: React.FC<ISectorCardProps> = ({ sector, index }: ISectorCardPr
     return (
         <Draggable key={sector.id} draggableId={sector.id} index={index}>
             {(provided, snapshot) => (
-                    <div  {...provided.draggableProps}
+                <div  {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                     className={`sector ${snapshot.isDragging ? "drag" : ""}`}>
-                        <Card ref={ref} className="cardSector" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', margin: '10px 20px 15px 10px' }}>
-                            <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', padding: '0px' }}>
-                                <Typography component="div" variant="h5" style={{ fontSize: '16px', marginRight: '15px' }}>
-                                    {sector.name}
-                                </Typography>
-                                <Typography variant="subtitle1" color="textSecondary" component="div" style={{ fontSize: '12px', marginRight: '15px' }}>
-                                    {ownerTitle}
-                                </Typography>
-                            </CardContent>
-                            <IconButton className="iconButton" aria-label="previous" style={{ marginRight: 'auto' }} onClick={handleOpen}>
-                                <MoreHorizIcon />
-                            </IconButton>
-                        </Card>
-                        <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} sector={sector} />
+                    <div ref={ref}>
+                        <BaseSectorCard sector={sector} withModal={true} handleOpen={handleOpen} />
                     </div>
+                    <SectorOptionsModal open={open} setOpen={setOpen} refOffsetTop={offsetTop} sector={sector} />
+                </div>
             )}
         </Draggable>
     )

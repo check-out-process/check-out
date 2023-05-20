@@ -8,27 +8,37 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
-import ListIcon from '@mui/icons-material/List';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
+import ListIcon from '@mui/icons-material/List';
+
+
 import Collapse from "@material-ui/core/Collapse";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SideBarOption from './SideBarOption.component';
 
+import { logout } from '../../../services/Auth.service';
+import { User } from '../../../services/models/User';
+import { Role } from '../../../services/models/User';
 
 export type SizeBarDrawerProps = {
     open: boolean,
-    setOpen: (open: boolean) => void
+    setOpen: (open: boolean) => void,
+    user: User
 }
+
 
 export type MenuOptionType = {
     title: string;
     route?: string;
     icon: any;
-    items: MenuOptionType[]
+    items: MenuOptionType[],
+    onClick?: () => void, 
+    premmitedUserRole?: string[]
 }
 
 
@@ -65,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const menuOptions: MenuOptionType[] = [
     {
         title: 'עמוד ראשי',
-        route: '/home',
+        route: '/',
         icon: <HomeIcon />,
         items: []
 
@@ -74,19 +84,13 @@ const menuOptions: MenuOptionType[] = [
         title: 'יצירת תהליך',
         route: '/processcreation',
         icon: <AccountTreeIcon />,
-        items: []
-
-
-    },
-    {
-        title: 'תהליכים',
-        route: '/processes',
-        icon: <ListIcon />,
-        items: []
+        items: [],
+        premmitedUserRole: [Role.Admin, Role.Process_Executer]
     },
     {
         title: 'עמוד מנהלים',
         icon: <AdminPanelSettingsIcon />,
+        premmitedUserRole: [Role.Admin],
         items: [
             {
                 title: 'הוספת מחלקה',
@@ -110,7 +114,7 @@ const menuOptions: MenuOptionType[] = [
     }
 ]
 
-const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
+const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
@@ -138,11 +142,19 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen }) => {
                     {menuOptions.map((option: MenuOptionType, index: number) => (
                         <SideBarOption key={index} option={option} setOpen={setOpen}/>
                     ))}
+{/* 
+{menuOptions.map((option: MenuOptionType) => (
+                        !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
+                            < ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => { option.onClick() }} >
+                                <ListItemText className={classes.title} primary={option.title} />
+                                <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
+                            </ListItem> : <></>
+                    ))} */}
 
                 </List>
                 <Divider />
-            </Drawer>
-        </div>
+            </Drawer >
+        </div >
     );
 }
 

@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Process } from "../../../services/models/Process";
+import { ProcessInstance } from "@checkout/types";
 import { Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, OutlinedInput, TextField, Theme, Typography, createStyles, makeStyles } from "@material-ui/core";
-
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {useStyles} from "./ProcessFilters.component.styles";
 
 
 export type ProcessFiltersProps = {
-    processes: Process[];
-    setProcesses: (processes: Process[]) => void,
+    processes: ProcessInstance[];
+    setProcesses: (processes: ProcessInstance[]) => void,
     open?: boolean,
     setOpen?: (open: boolean) => void
 } 
@@ -25,22 +24,22 @@ const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses
     const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
 
     const filterProcesses = () => {
-        let processesFounds: Process[] = processes;
+        let processesFounds: ProcessInstance[] = processes;
         let hasChange = false
         if (department) {
-            processesFounds = processesFounds.filter((process: Process) => process.departmentName.includes(department))
+            processesFounds = processesFounds.filter((process: ProcessInstance) => process.department.name.includes(department))
             hasChange = true
         }
         if (room) {
-            processesFounds = processesFounds.filter((process: Process) => process.roomName.includes(room))
+            processesFounds = processesFounds.filter((process: ProcessInstance) => process.room.name.includes(room))
             hasChange = true
         }
         if (bed) {
-            processesFounds = processesFounds.filter((process: Process) => process.bedName.includes(bed))
+            processesFounds = processesFounds.filter((process: ProcessInstance) => process.bed.name.includes(bed))
             hasChange = true
         }
         if (selectedStatuses.length > 0) {
-            processesFounds = processesFounds.filter((process: Process) => selectedStatuses.includes(process.status))
+            processesFounds = processesFounds.filter((process: ProcessInstance) => selectedStatuses.includes(process.status))
             hasChange = true
         }
         
