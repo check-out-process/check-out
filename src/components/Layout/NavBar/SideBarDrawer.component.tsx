@@ -22,7 +22,7 @@ export type SizeBarDrawerProps = {
     setOpen: (open: boolean) => void,
     user: User
 }
-type MenuOptionType = { title: string, route?: string, icon: any, onClick?: () => void, premmitedUserRole?: string[] }
+type MenuOptionType = { title: string, route?: string, icon: any, isLogOut?: boolean, premmitedUserRole?: string[] }
 
 
 const drawerWidth = 240;
@@ -78,9 +78,8 @@ const menuOptions: MenuOptionType[] = [
     },
     {
         title: 'התנתקות',
-        onClick: () => {
-            logout();
-        },
+        route: '/',
+        isLogOut: true,
         icon: <LogoutIcon />
 
     }
@@ -93,6 +92,11 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) =>
     const onOptionClick = (route: string) => {
         navigate(route);
         setOpen(false)
+    }
+
+    const onLogOut = (route: string) => {
+        logout()
+        onOptionClick(route);
     }
 
     return (
@@ -113,7 +117,10 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) =>
                 <List>
                     {menuOptions.map((option: MenuOptionType) => (
                         !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
-                            < ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => { option.onClick() }} >
+                            < ListItem button key={option.title} 
+                            onClick={ option.isLogOut ? 
+                            () => { onLogOut(option.route) } : 
+                            () => { onOptionClick(option.route) }} >
                                 <ListItemText className={classes.title} primary={option.title} />
                                 <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
                             </ListItem> : <></>
