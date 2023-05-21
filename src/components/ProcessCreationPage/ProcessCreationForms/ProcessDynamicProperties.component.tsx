@@ -53,10 +53,8 @@ const useStyles = makeStyles((theme: Theme) =>
 const ProcessBasicDetailsForm = () => {
     const classes = useStyles();
     const { properties, setProperty } = useContext(ProcessCreationDetailsContext);
-    const [checked, setChecked] = React.useState(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
         setProperty('isIsolation', event.target.checked)
     };
 
@@ -73,7 +71,7 @@ const ProcessBasicDetailsForm = () => {
                     className={classes.checkBoxBedIsolation}
                     size="medium"
                     color='primary'
-                    checked={checked}
+                    checked={properties['isIsolation']}
                     onChange={handleChange}
                     inputProps={{ 'aria-label': 'controlled' }}
                 />
