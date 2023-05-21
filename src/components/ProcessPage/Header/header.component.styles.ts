@@ -12,7 +12,7 @@ createStyles({
     },
     headerIcon: {
         padding: '0px',
-        marginLeft: '12px'
+        marginRight: '12px'
     }
 }),
 );

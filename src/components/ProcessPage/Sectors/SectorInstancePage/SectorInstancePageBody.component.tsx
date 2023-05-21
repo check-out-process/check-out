@@ -1,21 +1,20 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
 import { Role, User } from '../../../../services/models/User';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
-import { Status } from '../../../../services/models/Status';
+import { Status } from "../../../../services/models/Status";
 import EditResponsibleUser from './DropDownOptions/EditResponsibleUser.component';
 import EditSectorStatus from './DropDownOptions/EditSectorStatus.component';
 import { CircularProgress } from '@material-ui/core';
 import { updateSectorInstance } from '../../../../services/SectorInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { UpdateSectorInstanceParams } from '@checkout/types';
+import { UpdateSectorInstanceParams, SectorInstance } from '@checkout/types';
 import { Sector } from '../../../../services/models/Sector';
 
 interface ISectorInstancePageBodyProps {
-    sectorInstance: SectorInstane,
+    sectorInstance: SectorInstance,
     processId: string,
     isViewMode: boolean,
     isSaveMode: boolean
@@ -47,7 +46,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             ({ value: user, displayName: user.fullname }));
 
         setResposibleTeamUserOptions(data);
-        setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.resposibleTeamUserId))
+        setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.responsiblePerson?.id));
         setLoadingTeamUser(false);
 
     }
@@ -57,7 +56,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             ({ value: user, displayName: user.fullname }));
 
         setResposibleUserOptions(data);
-        setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.resposibleUserId))
+        setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.commitingWorker?.id));
         setLoadingUser(false);
 
     }
@@ -68,13 +67,18 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
         setSectorStatusOptions(data);
     }
 
+    const getEditUserComponent = (): ReactNode => {
+        return resposibleUser ?
+            <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUser} disabled={isViewMode} />
+            : resposibleTeamUserOptions && <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode} />
+    }
+
     const editSectorInstanceByRole = {
         [Role.Process_Executer]: {
             components: (): ReactNode => {
                 return (
                     <div>
-                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode} />
-                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUser} disabled={isViewMode} />
+                        {getEditUserComponent()}
                         <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode} />
                     </div>
 
@@ -89,8 +93,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             components: (): ReactNode => {
                 return (
                     <div>
-                        <EditResponsibleTeamUser resposibleTeamUserOptions={resposibleTeamUserOptions} resposibleTeamUser={resposibleTeamUser} setResposibleTeamUser={setResposibleTeamUser} disabled={isViewMode} />
-                        <EditResponsibleUser resposibleUserOptions={resposibleUserOptions} resposibleUser={resposibleUser} setResposibleUser={setResposibleUser} disabled={isViewMode} />
+                        {getEditUserComponent()}
                         <EditSectorStatus sectorStatusOptions={sectorStatusOptions} sectorStatus={sectorStatus} setSectorStatus={setSectorStatus} disabled={isViewMode} />
                     </div>
 
@@ -109,15 +112,15 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
                     </div>
                 )
             },
-            fetchData: (sectorId: string) => {
+            fetchData: () => {
                 getStatusKeyPair();
             },
         }
     }
 
     useEffect(() => {
-        setLoadingTeamUser(false);
-        setLoadingUser(false);
+        setLoadingTeamUser(true);
+        setLoadingUser(true);
         editSectorInstanceByRole[Role.Process_Executer].fetchData(sectorInstance.sectorId); //get from user context
 
     }, [])
@@ -126,14 +129,14 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
         if (isSaveMode === true) {
             const body: UpdateSectorInstanceParams = {
                 commitingWorkerId: resposibleUser?.id,
-               responsiblePersonId: resposibleTeamUser?.id,
+                responsiblePersonId: resposibleTeamUser?.id,
                 status: sectorStatus
             }
 
             updateSectorInstance(processId, sectorInstance.instanceId, body).then(() => {
                 enqueueSnackbar('הסקטור עודכן בהצלחה', { variant: 'success' })
                 navigate(-1);
-            }).catch(err => {
+            }).catch(() => {
                 enqueueSnackbar('כישלון בעדכון הסקטור', { variant: 'error' })
                 navigate(-1);
             })
@@ -143,7 +146,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
     return (
         <>
             {loadingTeamUser && loadingUser ?
-                <CircularProgress disableShrink /> :
+                <CircularProgress /> :
                 editSectorInstanceByRole[Role.Process_Executer].components()
             }
         </>

@@ -18,7 +18,7 @@ export interface StyleProps {
     width: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>(theme =>
+const useStyles = makeStyles<Theme, StyleProps>(() =>
     createStyles({
         sectorModal: {
             position: 'absolute' as 'absolute',

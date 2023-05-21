@@ -10,6 +10,8 @@ export type ProcessSectorsContextType = {
     addProcessSectors?: (sectors: Sector[]) => void,
     removeProcessSector?: (sector: Sector) => void,
     changeSectorOwner?: (sectorId: string, user: User) => void,
+    changeSectorCommittingUser?: (sectorId: string, user: User) => void,
+    isCreateProcessValid?: () => boolean
 }
 const ProcessSectorsContext = createContext<ProcessSectorsContextType>({});
 
@@ -20,6 +22,16 @@ type ButtonProps = {
 function ProcessSectorsProvider({ children }: ButtonProps) {
     const [processSectors, setProcessSectors] = useState<Sector[]>([]);
     const [drawerSectors, setDrawerSectors] = useState<Sector[]>([]);
+
+    const isCreateProcessValid = (): boolean => {
+        let isValid = true;
+        processSectors.forEach(sector => {
+            if (!sector.defaultCommittingUser && !sector.defaultResponsibleUser) {
+                isValid = false
+            }
+        });
+        return isValid;
+    }
 
     const addProcessSectors = (sectors: Sector[]) => {
         setProcessSectors(current => [...current, ...sectors]);
@@ -49,6 +61,18 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
             ));
     };
 
+    const changeSectorCommittingUser = (sectorId: string, user: User) => {
+        setProcessSectors((current) =>
+            current.map(currentSector => {
+                if (currentSector.id === sectorId) {
+                    currentSector.defaultCommittingUser = user;
+                }
+
+                return currentSector;
+            }
+            ));
+    };
+
     return (
         <ProcessSectorsContext.Provider value={{
             processSectors: processSectors,
@@ -57,7 +81,9 @@ function ProcessSectorsProvider({ children }: ButtonProps) {
             setDrawerSectors: setDrawerSectors,
             addProcessSectors: addProcessSectors,
             removeProcessSector: removeProcessSector,
-            changeSectorOwner: changeSectorOwner
+            changeSectorOwner: changeSectorOwner,
+            changeSectorCommittingUser: changeSectorCommittingUser,
+            isCreateProcessValid: isCreateProcessValid,
         }}>
             {children}
         </ProcessSectorsContext.Provider>
