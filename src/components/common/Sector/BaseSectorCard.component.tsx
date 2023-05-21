@@ -20,13 +20,15 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
         cardContainer: {
             display: 'flex',
             justifyContent: 'space-between',
-            width: '100%'
+            alignItems: 'center',
+            width: '100%',
+            height: '48px'
         },
         CardContent: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            padding: '4px'
+            padding: '4px',
         },
         sectorName: {
             fontSize: '16px',
@@ -45,7 +47,6 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
             backgroundColor: ({ status }) => getColorByStatus(status),
             height: '25px',
             borderRadius: '3px',
-            marginTop: '5px',
             marginLeft: '5px',
             display: 'flex',
             alignItems: 'center'
@@ -59,7 +60,8 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
 );
 
 const BaseSectorCard: React.FC<IBaseSectorCardProps> = ({ sector, withModal, handleOpen }: IBaseSectorCardProps) => {
-    const ownerTitle = "אחראי: אפק לב"//need to get it
+    const userTitle = 'responsiblePerson' in sector ? sector.responsiblePerson ?
+        `אחראי: ${sector.responsiblePerson.fullname}` : `מטפל: ${sector.commitingWorker.fullname}` : ''
     const sectorstatus = 'status' in sector ? sector.status : '';
     const classes = useStyles({ status: sectorstatus });
 
@@ -71,7 +73,7 @@ const BaseSectorCard: React.FC<IBaseSectorCardProps> = ({ sector, withModal, han
                         {sector.name}
                     </Typography>
                     <Typography variant="subtitle1" color="textSecondary" component="div" className={classes.ownerTitle}>
-                        {ownerTitle}
+                        {userTitle}
                     </Typography>
                 </CardContent>
                 {withModal &&

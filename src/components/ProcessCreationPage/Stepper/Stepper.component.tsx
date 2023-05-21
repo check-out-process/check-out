@@ -14,7 +14,7 @@ import BaseModal from '../../Common/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 import { createProcessInstance } from '../../../services/ProcessInstance.service';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
-import { getUser } from '../../../services/Token.service';
+import { buildProcessInstanceBody } from '../../Common/helpers/processInstance.helper';
 import { HttpStatusCode } from 'axios';
 
 export type StepperType = {
@@ -42,7 +42,7 @@ export default function HorizontalLinearStepper() {
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
     const { isCurrentStepValid, department, room, bed, properties } = useContext(ProcessCreationDetailsContext);
-    const { processSectors } = useContext(ProcessSectorsContext);
+    const { isCreateProcessValid, processSectors } = useContext(ProcessSectorsContext);
 
     const isLastStep = (): boolean => activeStep === steps.length - 1;
     const handleNext = () => {
@@ -60,17 +60,7 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
-            createProcessInstance({
-                name: `${bed.name}/${room.name}/${department.name}`, //what it should be
-                description: properties.description ?? "",
-                isIsolation: properties.isIsolation ?? false,
-                processType: 1, //take from enum 
-                orderedSectors: processSectors,
-                creatorId: getUser().id,
-                departmentId: department.id,
-                roomId: room.id,
-                bedId: bed.id
-            }).then(() => {
+            createProcessInstance(buildProcessInstanceBody(bed, room, department, properties, processSectors)).then(() => {
                 enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
                 navigate('/', { replace: true });
             }).catch((err) => {
@@ -85,7 +75,6 @@ export default function HorizontalLinearStepper() {
             setOpen(false)
         }
     }
-
 
     const onCancel = (confirm: boolean) => {
         if (confirm) {
@@ -123,7 +112,7 @@ export default function HorizontalLinearStepper() {
                         >ביטול</Button> :
                         null}
 
-                    <Button variant="contained" color="primary" disabled={!isCurrentStepValid()} onClick={handleNext} className={classes.continueButton}
+                    <Button variant="contained" color="primary" disabled={!isCurrentStepValid() || !isCreateProcessValid()} onClick={handleNext} className={classes.continueButton}
                     >
                         {isLastStep() ? 'סיום' : 'המשך'}
                     </Button>

@@ -5,6 +5,7 @@ import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { SectorInstance } from '@checkout/types';
+import { Status } from '../../../../services/models/Status';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -37,11 +38,15 @@ const SectorInstancePage: React.FC = () => {
         }
     }
 
+    const isDisabled = () => {
+       return  sectorInstance.status === Status.Done;
+    }
+
     return (
         <div>
             <PageHeader name={sectorInstance.name} isFirstPage={false} />
             <SectorInstancePageBody sectorInstance={sectorInstance} processId={processId} isViewMode={isViewMode} isSaveMode={isSaveMode}/>
-            <Button className={classes.button} variant="contained" color="primary" onClick={() => { onClick() }}>{buttonText}</Button>
+            <Button disabled={isDisabled()} className={classes.button} variant="contained" color="primary" onClick={() => { onClick() }}>{buttonText}</Button>
         </div>
     )
 }

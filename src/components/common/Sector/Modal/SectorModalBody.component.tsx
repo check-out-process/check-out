@@ -29,45 +29,70 @@ const useStyles = makeStyles(() =>
 
 const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose }: ISectorModalBodyProps) => {
     const classes = useStyles();
-
-    const { changeSectorOwner } = useContext(ProcessSectorsContext);
-
+    const { changeSectorOwner, changeSectorCommittingUser } = useContext(ProcessSectorsContext);
     const [sectorOwnerOptions, setSectorOwnerOptions] = useState<DropdownKeyPair[]>([]);
     const [sectorOwner, setSectorOwner] = useState<User>(sector.defaultResponsibleUser);
 
+    const [sectorCommitingUserOptions, SetSectorCommitingUserOptions] = useState<DropdownKeyPair[]>([]);
+    const [sectorCommitingUser, setSectorCommitingUser] = useState<User>(sector.defaultCommittingUser);
+
     useEffect(() => {
-        fetchSectorOwnerOptions();
+        fetchSectorUsersOptions();
     }, [])
 
-    function onChange(event: onChangeEvent): void {
+    function onChangeOwner(event: onChangeEvent): void {
         const user = event.target.value as User;
 
         setSectorOwner(user);
     }
 
-    const fetchSectorOwnerOptions = () => {
-        const data: DropdownKeyPair[] = sector.responsibleUsers.map((user: User) =>
+    function onChangeCommitingUser(event: onChangeEvent): void {
+        const user = event.target.value as User;
+
+        setSectorCommitingUser(user);
+    }
+
+    const fetchSectorUsersOptions = () => {
+        const responsibleUsers: DropdownKeyPair[] = sector.responsibleUsers?.map((user: User) =>
             ({ value: user, displayName: user.fullname }));
-        setSectorOwnerOptions(data);
+        setSectorOwnerOptions(responsibleUsers);
         setSectorOwner(sector.defaultResponsibleUser);
+
+        const committingUsers: DropdownKeyPair[] = sector.committingUsers.map((user: User) =>
+            ({ value: user, displayName: user.fullname }));
+        SetSectorCommitingUserOptions(committingUsers);
+        setSectorCommitingUser(sector.defaultCommittingUser);
     }
 
     const onSave = () => {
-        changeSectorOwner(sector.id, sectorOwner);
+        sector.defaultResponsibleUser ? changeSectorOwner(sector.id, sectorOwner) :
+            changeSectorCommittingUser(sector.id, sectorCommitingUser);
         handleClose();
     }
 
+    const isDisabled = () => {
+        return sectorOwner || sectorCommitingUser ? false : true;
+    }
 
     return (
         <div>
-            <Dropdown
-                defaultValue={sectorOwner}
-                title='בחירת אחראי'
-                data={sectorOwnerOptions}
-                disabled={false}
-                onChange={onChange} />
+            {
+                sector.defaultResponsibleUser ?
+                    <Dropdown
+                        defaultValue={sectorOwner}
+                        title='בחירת אחראי'
+                        data={sectorOwnerOptions}
+                        disabled={false}
+                        onChange={onChangeOwner} /> :
+                    <Dropdown
+                        defaultValue={sectorCommitingUser}
+                        title='בחירת מטפל'
+                        data={sectorCommitingUserOptions}
+                        disabled={false}
+                        onChange={onChangeCommitingUser} />
+            }
             <div className={classes.saveButtonDiv}>
-                <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }}>שמור</Button>
+                <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
             </div>
 
         </div>
