@@ -14,7 +14,13 @@ import SectorInstancePage from '../ProcessPage/Sectors/SectorInstancePage/Sector
 import { getUser } from '../../services/Token.service';
 import { UserContext } from '../../context/UserContext';
 import ScanBedPage from '../ProcessPage/ScanBed/ScanBedPage.component';
-import { ProtectedRoute, userPremmitedRolesToProcessCreation } from './ProtectedRoutes';
+import { ProtectedRoute, userAdminRole, userPremmitedRolesToProcessCreation } from './ProtectedRoutes';
+import AddUserPage from '../User/AddUserPage.component';
+import UserPage from '../User/UserPage.component';
+import DepartmentCreationPage from '../UserManagmentPage/DepartmentCreationPage.component';
+import RoomCreationPage from '../UserManagmentPage/RoomCreationPage.component';
+import UserManagmentPage from '../UserManagmentPage/UserManagmentPage.component';
+import EditUserPage from '../User/EditUserPage.component';
 
 const Router = () => {
   const { user, setUser } = useContext(UserContext);
@@ -27,7 +33,7 @@ const Router = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       user ?
-        <Route path="/" element={<NavBarLayout user={user}/>}>
+        <Route path="/" element={<NavBarLayout user={user} />}>
           <Route path="/" element={<ProcessList />} />
           <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
@@ -37,8 +43,44 @@ const Router = () => {
               <ProtectedRoute user={user} userPremmitedRoles={userPremmitedRolesToProcessCreation}>
                 <ProcessCreation />
               </ProtectedRoute>
+
             }
           />
+          <Route path="/managment/department-creation"
+            element={
+              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+                <DepartmentCreationPage />
+              </ProtectedRoute>
+
+            }
+          />
+          <Route path="/managment/room-creation"
+            element={
+              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+                <RoomCreationPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/managment/users" element={
+            <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+              <UserManagmentPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/managment/users/:userId"
+            element={
+              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+                <UserPage />
+              </ProtectedRoute>} />
+          <Route path="/managment/users/create-user"
+            element={
+              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+                <AddUserPage />
+              </ProtectedRoute>} />
+          <Route path="/managment/users/:userId/edit"
+            element={
+              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+                <EditUserPage />
+              </ProtectedRoute>} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Route> :
         <Route >
@@ -46,6 +88,7 @@ const Router = () => {
             <LogInPage />
           } />
         </Route>
+
     )
   )
 

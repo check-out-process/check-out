@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SideBarDrawer from './SideBarDrawer.component';
 import { createStyles, makeStyles } from '@material-ui/core';
-import { User } from '../../../services/models/User';
+import { User } from '@checkout/types';
 
 export interface INavBarLayoutProps {
   user: User

@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '../../../../../services/models/User';
+import { User, UserCreationParams } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../../../../Common/Select/Dropdown.component';
 
 interface IEditResponsibleTeamUserProps {

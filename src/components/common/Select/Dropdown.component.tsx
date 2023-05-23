@@ -14,7 +14,7 @@ export type DropdownProps = {
   title: string,
   data: DropdownKeyPair[],
   disabled: boolean;
-  defaultValue: any;
+  defaultValue?: any;
   onChange: (event: onChangeEvent) => void
 }
 
@@ -68,6 +68,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defau
       <Typography className={classes.title} align="right" variant="h6" component="span">{title}</Typography>
 
       <FormControl fullWidth variant="filled">
+        
         <Select
           disabled={disabled}
           value={defaultValue ? defaultValue : undefined}

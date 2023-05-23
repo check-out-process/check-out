@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
-import { Role, User } from "../../services/models/User";
+import { Role } from "../../services/models/User";
+import { User } from '@checkout/types';
+
 import React from "react";
 
 interface IProtectedRouteProps {
@@ -15,3 +17,4 @@ export const ProtectedRoute = ({ user, userPremmitedRoles, children }: IProtecte
 };
 
 export const userPremmitedRolesToProcessCreation = [Role.Admin, Role.Process_Executer]
+export const userAdminRole = [Role.Admin]

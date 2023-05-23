@@ -1,6 +1,7 @@
 import { Config } from "../config";
 import instance from "./Api.service";
 import { Room } from "./models/Room";
+import axios from 'axios'
 
 
 const delay = (ms: any) => new Promise(
@@ -27,3 +28,10 @@ export async function getRooms(departmentUuid: string): Promise<Room[]>{
         
     
  }
+
+ export function addRoom(departmentId: string, roomName: string): Promise<Room> {
+    const data = {
+        roomName: roomName
+    }
+    return instance.post(`${Config.serverUrl}/${departmentId}/rooms`,data,{headers:{'Content-Type':'application/json'}}).then(res => res.data)
+}
