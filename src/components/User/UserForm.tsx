@@ -109,8 +109,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
     }, [])
 
     useEffect(() => {
-        console.log(job)
-        console.log(role)
         if (user) {
             setId(user.id)
             setFullName(user.fullname)
@@ -118,10 +116,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
             setJob(user.job)
             setRole(user.role)
         }
-        console.log(job)
-        console.log(role)
-        console.log(jobs)
-        console.log(roles)
     }, [user])
 
 
