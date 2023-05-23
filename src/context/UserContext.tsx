@@ -1,5 +1,5 @@
 import React, { useState, createContext, ReactNode } from 'react';
-import { User } from '../services/models/User';
+import { User } from '@checkout/types';
 
 export type UserContextContextType = {
     user?: User,

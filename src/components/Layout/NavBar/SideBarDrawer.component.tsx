@@ -13,8 +13,16 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
+import ListIcon from '@mui/icons-material/List';
+
+
+import Collapse from "@material-ui/core/Collapse";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import SideBarOption from './SideBarOption.component';
+
 import { logout } from '../../../services/Auth.service';
-import { User } from '../../../services/models/User';
+import { User } from '@checkout/types';
 import { Role } from '../../../services/models/User';
 
 export type SizeBarDrawerProps = {
@@ -22,7 +30,16 @@ export type SizeBarDrawerProps = {
     setOpen: (open: boolean) => void,
     user: User
 }
-type MenuOptionType = { title: string, route?: string, icon: any, onClick?: () => void, premmitedUserRole?: string[] }
+
+
+export type MenuOptionType = {
+    title: string;
+    route?: string;
+    icon: any;
+    items: MenuOptionType[],
+    onClick?: () => void,
+    premmitedUserRole?: string[]
+}
 
 
 const drawerWidth = 240;
@@ -60,28 +77,48 @@ const menuOptions: MenuOptionType[] = [
         title: 'עמוד ראשי',
         route: '/',
         icon: <HomeIcon />,
+        items: []
 
     },
     {
         title: 'יצירת תהליך',
         route: '/processcreation',
         icon: <AccountTreeIcon />,
+        items: [],
         premmitedUserRole: [Role.Admin, Role.Process_Executer]
-
     },
     {
         title: 'עמוד מנהלים',
-        route: '/managment',
         icon: <AdminPanelSettingsIcon />,
-        premmitedUserRole: [Role.Admin]
-
+        premmitedUserRole: [Role.Admin],
+        items: [
+            {
+                title: 'הוספת מחלקה',
+                route: '/managment/department-creation',
+                icon: <ListIcon />,
+                items: []
+            },
+            {
+                title: 'הוספת חדר',
+                route: '/managment/room-creation',
+                icon: <ListIcon />,
+                items: []
+            },
+            {
+                title: 'ניהול יוזרים',
+                route: '/managment/users',
+                icon: <ListIcon />,
+                items: []
+            }
+        ]
     },
     {
         title: 'התנתקות',
         onClick: () => {
             logout();
         },
-        icon: <LogoutIcon />
+        icon: <LogoutIcon />,
+        items: []
 
     }
 ]
@@ -111,13 +148,11 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) =>
                 </div>
                 <Divider />
                 <List>
-                    {menuOptions.map((option: MenuOptionType) => (
+                    {menuOptions.map((option: MenuOptionType, index: number) => (
                         !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
-                            < ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => { option.onClick() }} >
-                                <ListItemText className={classes.title} primary={option.title} />
-                                <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
-                            </ListItem> : <></>
+                        <SideBarOption key={index} option={option} setOpen={setOpen} /> : <></>
                     ))}
+
                 </List>
                 <Divider />
             </Drawer >

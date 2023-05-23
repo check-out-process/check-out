@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ProcessSectorsContext } from "../../../../context/ProcessSectorsContext";
-import { Role, User } from "../../../../services/models/User";
+import { Role } from "../../../../services/models/User";
+import { User } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
 import { Sector } from "../../../../services/models/Sector";
 import { Button } from '@material-ui/core';
