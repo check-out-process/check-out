@@ -1,7 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { SectorInstane } from "../../../../services/models/ProcessSector";
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
-import { Role, User } from '../../../../services/models/User';
+import { Role } from '../../../../services/models/User';
+import { User } from '@checkout/types';
+
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from '../../../../services/models/Status';

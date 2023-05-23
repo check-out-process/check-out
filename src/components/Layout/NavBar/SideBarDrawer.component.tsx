@@ -22,7 +22,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SideBarOption from './SideBarOption.component';
 
 import { logout } from '../../../services/Auth.service';
-import { User } from '../../../services/models/User';
+import { User } from '@checkout/types';
 import { Role } from '../../../services/models/User';
 
 export type SizeBarDrawerProps = {
@@ -37,7 +37,7 @@ export type MenuOptionType = {
     route?: string;
     icon: any;
     items: MenuOptionType[],
-    onClick?: () => void, 
+    onClick?: () => void,
     premmitedUserRole?: string[]
 }
 
@@ -111,6 +111,15 @@ const menuOptions: MenuOptionType[] = [
                 items: []
             }
         ]
+    },
+    {
+        title: 'התנתקות',
+        onClick: () => {
+            logout();
+        },
+        icon: <LogoutIcon />,
+        items: []
+
     }
 ]
 
@@ -140,16 +149,9 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) =>
                 <Divider />
                 <List>
                     {menuOptions.map((option: MenuOptionType, index: number) => (
-                        <SideBarOption key={index} option={option} setOpen={setOpen}/>
-                    ))}
-{/* 
-{menuOptions.map((option: MenuOptionType) => (
                         !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
-                            < ListItem button key={option.title} onClick={option.route ? () => { onOptionClick(option.route) } : () => { option.onClick() }} >
-                                <ListItemText className={classes.title} primary={option.title} />
-                                <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
-                            </ListItem> : <></>
-                    ))} */}
+                        <SideBarOption key={index} option={option} setOpen={setOpen} /> : <></>
+                    ))}
 
                 </List>
                 <Divider />

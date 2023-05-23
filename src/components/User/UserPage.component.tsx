@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Divider, IconButton, OutlinedInput, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { User } from '../../services/models/User';
 import { deleteUser, getUser } from '../../services/user.service';
 import { useNavigate, useParams } from 'react-router-dom';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserLogo from '../../style/images/userLogo.png';
 import Paper from '@material-ui/core/Paper';
 import BaseModal from '../Common/Modal/BaseModal.component';
+import { User } from '@checkout/types';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,7 +64,7 @@ const UserPage: React.FC<UserPageProps> = ({ }) => {
 
 
     const onEditClick = () => {
-        
+        navigate(`/managment/users/${user.id}/edit`);
     }
 
 
@@ -74,13 +74,6 @@ const UserPage: React.FC<UserPageProps> = ({ }) => {
         })
     }, [])
 
-    const getJobName = () => {
-        return 'מנקה'
-    }
-
-    const getUserRole = () => {
-        return 'אדמין'
-    }
 
     return (
         <div>
@@ -96,18 +89,18 @@ const UserPage: React.FC<UserPageProps> = ({ }) => {
                 <Paper elevation={3} style={{ width: '95%', borderRadius: '20px' }}>
                     <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">שם מלא: {user?.fullname}</Typography>
                     <Divider variant="middle" style={{ marginTop: marginTop }} />
-                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">שם משתמש: {user?.username}</Typography>
+                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">תעודת זהות: {user?.id}</Typography>
                     <Divider variant="middle" style={{ marginTop: marginTop }} />
-                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">תפקיד: {getJobName()}</Typography>
+                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">מספר פלאפון: {user?.phoneNumber}</Typography>
                     <Divider variant="middle" style={{ marginTop: marginTop }} />
-                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">מספר פלאפון: {getJobName()}</Typography>
+                    <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">תפקיד: {user?.job?.name}</Typography>
                     <Divider variant="middle" style={{ marginTop: marginTop }} />
-                    <Typography style={{ marginRight: '15px', marginTop: marginTop, height: '40px' }} align='right' variant="subtitle1" component="div">סוג הרשאה: {getUserRole()}</Typography>
+                    <Typography style={{ marginRight: '15px', marginTop: marginTop, height: '40px' }} align='right' variant="subtitle1" component="div">סוג הרשאה: {user?.role?.name}</Typography>
                 </Paper>
 
             </div>
             <div className={classes.buttonRoot}>
-                <Button className={classes.cancelButton} variant="contained" color="primary">עדכון</Button>
+                <Button className={classes.cancelButton} onClick={onEditClick} variant="contained" color="primary">עדכון</Button>
                 <Button className={classes.continueButton} onClick={onDeleteClick} variant="contained" color="secondary">מחיקה</Button>
             </div>
             {openDeleteConfirmiation ? <BaseModal open={openDeleteConfirmiation} setOpen={onDeleteSave} title="? האם ברצונך למחוק משתמש זה" /> : null}

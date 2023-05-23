@@ -4,7 +4,7 @@ import { Sector } from "../../services/models/Sector";
 import CloseIcon from '@material-ui/icons/Close';
 import './SectorOptionsModal.component.css';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common/Select/Dropdown.component";
-import { User } from "../../services/models/User";
+import { User } from '@checkout/types';
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 import BaseSectorModal from "../Common/Sector/Modal/BaseSectorModal.component";
 

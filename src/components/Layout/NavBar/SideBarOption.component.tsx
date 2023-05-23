@@ -53,6 +53,10 @@ const SideBarOption: React.FC<SideBarOptionProps> = ({ option , setOpen}) => {
     const onOptionClick = (option: MenuOptionType) => {
         if (option.route) {
             navigate(option.route);
+        }else{
+            if (option.onClick){
+                option.onClick();
+            }
         }
         if (option.items.length > 0) {
             setCollapseOpen((prev) => !prev);
@@ -63,12 +67,12 @@ const SideBarOption: React.FC<SideBarOptionProps> = ({ option , setOpen}) => {
 
     return (
         <div>
-            <ListItem button key={option.title} onClick={() => {onOptionClick(option)}}>
+            {<ListItem button key={option.title} onClick={() => {onOptionClick(option)}}>
                 <ListItemText className={classes.title} primary={option.title} />
                 <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
                 {option.items.length > 0 ?
                     collapseOpen ? <ExpandLessIcon /> : <ExpandMoreIcon /> : null}
-            </ListItem>
+            </ListItem>}
 
             {option.items.map((children) => {
                 return (

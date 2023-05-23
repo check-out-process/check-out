@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { Button, CircularProgress, Fab, OutlinedInput, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { User } from '../../services/models/User';
+import { User } from '@checkout/types';
 import { getUsers } from '../../services/user.service';
 import { enqueueSnackbar, useSnackbar } from 'notistack';
 import UserCard from './UserCard.component';
