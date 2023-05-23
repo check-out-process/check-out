@@ -4,9 +4,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -14,14 +11,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
 import ListIcon from '@mui/icons-material/List';
-
-
-import Collapse from "@material-ui/core/Collapse";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SideBarOption from './SideBarOption.component';
-
-import { logout } from '../../../services/Auth.service';
 import { User } from '@checkout/types';
 import { Role } from '../../../services/models/User';
 
@@ -122,17 +112,6 @@ const menuOptions: MenuOptionType[] = [
 
 const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) => {
     const classes = useStyles();
-    const navigate = useNavigate();
-
-    const onOptionClick = (route: string) => {
-        navigate(route);
-        setOpen(false)
-    }
-
-    const onLogOut = (route: string) => {
-        logout()
-        onOptionClick(route);
-    }
 
     return (
         <div>

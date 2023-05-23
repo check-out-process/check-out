@@ -8,6 +8,7 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { MenuOptionType } from './SideBarDrawer.component';
+import { logout } from '../../../services/Auth.service';
 
 const drawerWidth = 240;
 
@@ -54,8 +55,9 @@ const SideBarOption: React.FC<SideBarOptionProps> = ({ option , setOpen}) => {
         if (option.route) {
             navigate(option.route);
         }else{
-            if (option.onClick){
-                option.onClick();
+            if (option.isLogOut){
+                logout();
+                navigate(option.route);
             }
         }
         if (option.items.length > 0) {
