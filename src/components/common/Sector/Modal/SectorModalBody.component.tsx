@@ -4,8 +4,9 @@ import { Role } from "../../../../services/models/User";
 import { User } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
 import { Sector } from "../../../../services/models/Sector";
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import EditResponsibleUser from '../../../ProcessPage/Sectors/SectorInstancePage/DropDownOptions/EditResponsibleUser.component';
 
 
 interface ISectorModalBodyProps {
@@ -35,9 +36,11 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
     const [sectorOwner, setSectorOwner] = useState<User>(sector.defaultResponsibleUser);
 
     const [sectorCommitingUserOptions, SetSectorCommitingUserOptions] = useState<DropdownKeyPair[]>([]);
-    const [sectorCommitingUser, setSectorCommitingUser] = useState<User>(sector.defaultCommittingUser);
+    const [sectorCommitingUser, setSectorCommitingUser] = useState<User>(null);
+    const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
     useEffect(() => {
+        setLoadingUser(true);
         fetchSectorUsersOptions();
     }, [])
 
@@ -62,7 +65,9 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
         const committingUsers: DropdownKeyPair[] = sector.committingUsers.map((user: User) =>
             ({ value: user, displayName: user.fullname }));
         SetSectorCommitingUserOptions(committingUsers);
-        setSectorCommitingUser(sector.defaultCommittingUser);
+        const user = sector.committingUsers?.find(user => user.id === sector.defaultCommittingUser.id)
+        setSectorCommitingUser(user);
+        setLoadingUser(false)
     }
 
     const onSave = () => {
@@ -76,27 +81,26 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
     }
 
     return (
-        <div>
-            {
-                sector.defaultResponsibleUser ?
-                    <Dropdown
-                        defaultValue={sectorOwner}
-                        title='בחירת אחראי'
-                        data={sectorOwnerOptions}
-                        disabled={false}
-                        onChange={onChangeOwner} /> :
-                    <Dropdown
-                        defaultValue={sectorCommitingUser}
-                        title='בחירת מטפל'
-                        data={sectorCommitingUserOptions}
-                        disabled={false}
-                        onChange={onChangeCommitingUser} />
-            }
-            <div className={classes.saveButtonDiv}>
-                <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
-            </div>
+        <>
+            {loadingUser ? <CircularProgress /> :
+                <div>
+                    {sector.defaultResponsibleUser ?
+                        <Dropdown
+                            defaultValue={sectorOwner}
+                            title='בחירת אחראי'
+                            data={sectorOwnerOptions}
+                            disabled={false}
+                            onChange={onChangeOwner} /> :
+                        <EditResponsibleUser resposibleUserOptions={sectorCommitingUserOptions} resposibleUser={sectorCommitingUser} setResposibleUser={setSectorCommitingUser} disabled={false} />}
+                    <div className={classes.saveButtonDiv}>
+                        <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
+                    </div>
 
-        </div>
+                </div>
+
+            }
+        </>
+
     )
 }
 

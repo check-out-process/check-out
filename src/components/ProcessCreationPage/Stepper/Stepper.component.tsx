@@ -39,6 +39,7 @@ export default function HorizontalLinearStepper() {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const [open, setOpen] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const [cancelModalOpen, setCancelModalOpen] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
     const { isCurrentStepValid, department, room, bed, properties } = useContext(ProcessCreationDetailsContext);
@@ -60,10 +61,13 @@ export default function HorizontalLinearStepper() {
 
     const onSave = (confirm: boolean) => {
         if (confirm) {
+            setLoading(true)
             createProcessInstance(buildProcessInstanceBody(bed, room, department, properties, processSectors)).then(() => {
+                setLoading(false)
                 enqueueSnackbar('התהליך נוצר בהצלחה', { variant: 'success' })
                 navigate('/', { replace: true });
             }).catch((err) => {
+                setLoading(false)
                 if (err.response?.status === HttpStatusCode.Conflict && err.response?.data?.message?.includes("bed")) {
                     enqueueSnackbar('קיים תהליך פתוח למיטה שנבחרה', { variant: 'error' })
                 } else {
@@ -116,7 +120,7 @@ export default function HorizontalLinearStepper() {
                     >
                         {isLastStep() ? 'סיום' : 'המשך'}
                     </Button>
-                    {open ? <BaseModal open={open} setOpen={onSave} title="? האם ברצונך לשמור את התהליך" /> : null}
+                    {open ? <BaseModal open={open} setOpen={onSave} title="? האם ברצונך לשמור את התהליך" loading={loading}/> : null}
                     {cancelModalOpen ? <BaseModal open={cancelModalOpen} setOpen={onCancel} title="? האם ברצונך לבטל את יצירת התהליך" /> : null}
                 </div>
             </div>
