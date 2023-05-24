@@ -1,28 +1,7 @@
 import { Config } from "../config";
-import { Bed } from "./models/Bed";
+import { BedDTO } from '@checkout/types';
 import instance from './Api.service'
 
-
-
-export function getBeds(roomId: string): Promise<Bed[]> {
+export function getBeds(roomId: string): Promise<BedDTO[]> {
     return instance.get(`${Config.serverUrl}/beds/room/${roomId}`).then(res => res.data)
-
-    // return new Promise(async (resolve) => {
-    //     await delay(2000);
-    //     resolve(
-    //         [{
-                
-    //             id: "dfdsfdsfsdds",
-    //             name: 'מיטה מספר 1',
-    //             roomId: 'ssds'
-    //         },
-    //         {
-                
-    //             id: "dsfdsgdgfgfdhgfhghgf",
-    //             name: 'מיטה מספר 2',
-    //             roomId: 'ssds'
-    //         }
-    //     ]
-    //     )
-    // })
 }

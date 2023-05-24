@@ -1,11 +1,10 @@
 import React from "react";
-import { ProcssPropertiesSchema } from "../../../services/models/Process";
 import CheckBoxProperty from "./CheckBoxProperty";
 import InputTextProperty from "./InputTextProperty.component";
 
 
 export type DynamicPropertyType = {
-  property: ProcssPropertiesSchema,
+  property: any,
   error?: boolean
   onChange: (key: any, value: any) => void
 }

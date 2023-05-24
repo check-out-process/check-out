@@ -1,16 +1,16 @@
 import { createStyles, LinearProgress, makeStyles, Snackbar, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { getDepartments } from '../../services/Department.service';
-import { Department } from '../../services/models/Department';
+import { DepartmentDTO } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import { useSnackbar } from 'notistack';
 
 
 export type DepartmentListProps = {
-    department: Department,
-    setDepartment: (department: Department) => void,
-    departments: Department[],
-    setDepartments: (departments: Department[]) => void,
+    department: DepartmentDTO,
+    setDepartment: (department: DepartmentDTO) => void,
+    departments: DepartmentDTO[],
+    setDepartments: (departments: DepartmentDTO[]) => void,
 
 }
 
@@ -38,7 +38,7 @@ const DepartmentList: React.FC<DepartmentListProps> = ({ department, setDepartme
         if (departments.length == 0) {
             fetchDepartments()
         } else {
-            const data: DropdownKeyPair[] = departments.map((department: Department) =>
+            const data: DropdownKeyPair[] = departments.map((department: DepartmentDTO) =>
                 ({ value: department, displayName: department.name }));
             setDepartmentsDropdownData(data)
         }
@@ -46,9 +46,9 @@ const DepartmentList: React.FC<DepartmentListProps> = ({ department, setDepartme
 
     const fetchDepartments = () => {
         setIsLoading(true)
-        getDepartments().then((departments: Department[]) => {
+        getDepartments().then((departments: DepartmentDTO[]) => {
             setDepartments(departments)
-            const data: DropdownKeyPair[] = departments.map((department: Department) =>
+            const data: DropdownKeyPair[] = departments.map((department: DepartmentDTO) =>
                 ({ value: department, displayName: department.name }));
             setDepartmentsDropdownData(data)
             setIsLoading(false)
@@ -59,7 +59,7 @@ const DepartmentList: React.FC<DepartmentListProps> = ({ department, setDepartme
     }
 
     function onChange(event: onChangeEvent): void {
-        setDepartment(event.target.value as Department);
+        setDepartment(event.target.value as DepartmentDTO);
     }
 
 

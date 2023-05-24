@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Room } from '../../services/models/Room';
 import { getRooms } from '../../services/Room.service';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
-import { Department } from '../../services/models/Department';
+import { DepartmentDTO, RoomDTO } from '@checkout/types';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 
 
 export type RoomListType = {
-    department: Department,
-    room: Room,
-    setRoom: (room: Room) => void,
-    rooms: Room[],
-    setRooms: (rooms: Room[]) => void
+    department: DepartmentDTO,
+    room: RoomDTO,
+    setRoom: (room: RoomDTO) => void,
+    rooms: RoomDTO[],
+    setRooms: (rooms: RoomDTO[]) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,16 +38,16 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
             fetchRooms()
         }
         else if (department !== undefined && room !== undefined){
-            const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
+            const data: DropdownKeyPair[] = rooms.map((room: RoomDTO) => ({ value: room, displayName: room.name }));
             setRoomsDropdownData(data);
         }
     }, [department])
 
     const fetchRooms = () => {
             setIsLoading(true);
-            getRooms(department.id).then((rooms: Room[]) => {
+            getRooms(department.id).then((rooms: RoomDTO[]) => {
                 setRooms(rooms)
-                const data: DropdownKeyPair[] = rooms.map((room: Room) => ({ value: room, displayName: room.name }));
+                const data: DropdownKeyPair[] = rooms.map((room: RoomDTO) => ({ value: room, displayName: room.name }));
                 setRoomsDropdownData(data);
                 setIsLoading(false);
             }).
@@ -60,7 +59,7 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
     }
 
     function onChange(event: onChangeEvent): void {
-        setRoom(event.target.value as Room)
+        setRoom(event.target.value as RoomDTO)
     }
 
 

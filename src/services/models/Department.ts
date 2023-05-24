@@ -1,4 +1,4 @@
-export type Department = {
-    id: string;
-    name: string
-}
+// export type Department = {
+//     id: string;
+//     name: string
+// }
