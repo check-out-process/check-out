@@ -103,7 +103,7 @@ const menuOptions: MenuOptionType[] = [
     },
     {
         title: 'התנתקות',
-        route: '/',
+        route: '/login',
         isLogOut: true,
          items: [],
         icon: <LogoutIcon />
@@ -130,7 +130,7 @@ const SideBarDrawer: React.FC<SizeBarDrawerProps> = ({ open, setOpen, user }) =>
                 <Divider />
                 <List>
                     {menuOptions.map((option: MenuOptionType, index: number) => (
-                        !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user.role.name) ?
+                        !option.premmitedUserRole || option.premmitedUserRole && option.premmitedUserRole.includes(user?.role.name) ?
                         <SideBarOption key={index} option={option} setOpen={setOpen} /> : <></>
                     ))}
 
