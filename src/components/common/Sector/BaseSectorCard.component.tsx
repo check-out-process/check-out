@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, IconButton, Typography, createStyles, makeStyles, Theme } from "@material-ui/core";
-import { SectorInstance } from '@checkout/types';
-import { Sector } from "../../../services/models/Sector";
+import { SectorInstance, Sector } from '@checkout/types';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './BaseSectorCard.component.css';
 import { getColorByStatus } from '../../Common/helpers/helper';

@@ -1,8 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
 import { Role } from '../../../../services/models/User';
-import { User } from '@checkout/types';
-
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from "../../../../services/models/Status";
@@ -12,8 +10,7 @@ import { CircularProgress } from '@material-ui/core';
 import { updateSectorInstance } from '../../../../services/SectorInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { UpdateSectorInstanceParams, SectorInstance } from '@checkout/types';
-import { Sector } from '../../../../services/models/Sector';
+import { UpdateSectorInstanceParams, SectorInstance, User, Sector } from '@checkout/types';
 
 interface ISectorInstancePageBodyProps {
     sectorInstance: SectorInstance,

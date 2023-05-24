@@ -1,8 +1,6 @@
 import { getUser } from "../../../services/Token.service"
-import { NewSectorInstanceData } from '@checkout/types';
 import { Config } from "../../../config";
-import { BedDTO, RoomDTO, DepartmentDTO } from '@checkout/types';
-import { Sector } from '../../../services/models/Sector';
+import { BedDTO, RoomDTO, DepartmentDTO, NewSectorInstanceData, Sector } from '@checkout/types';
 
 export const buildProcessInstanceBody = (bed: BedDTO, room: RoomDTO, department: DepartmentDTO, properties: any, processSectors: Sector[]) => {
     const newSectors: NewSectorInstanceData[] = processSectors.map(sector => {

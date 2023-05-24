@@ -3,7 +3,7 @@ import { Drawer, List, Divider, Typography, IconButton, Button, styled } from '@
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import './AddSectorDrawer.component.css';
 import AddSectorCard from './AddSectorCard.component';
-import { Sector } from '../../../services/models/Sector';
+import { Sector } from '@checkout/types';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
 
 interface IAddSectorDrawerProps {

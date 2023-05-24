@@ -1,7 +1,7 @@
 import { Config } from "../config";
 import instance from "./Api.service";
-import { ProcessInstance, SectorInstance, UpdateSectorStatusParams } from '@checkout/types';
-import { CreateProcessInstanceFromDataParams } from '@checkout/types';
+import { ProcessInstance, SectorInstance, UpdateSectorStatusParams, CreateProcessInstanceFromDataParams } from '@checkout/types';
+import {  } from '@checkout/types';
 
 export function getUserProcessInstance() : Promise<ProcessInstance[]>{
     const url = `${Config.serverUrl}/process-instances`;

@@ -1,4 +1,4 @@
-import { Sector } from "./Sector";
+import { Sector } from "@checkout/types";
 
 export class ProcessType {
     uuid: string;

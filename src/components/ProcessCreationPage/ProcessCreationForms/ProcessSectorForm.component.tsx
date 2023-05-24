@@ -1,6 +1,6 @@
 import { IconButton, CircularProgress } from "@material-ui/core";
 import React, { useEffect, useContext, useState } from 'react';
-import { Sector } from "../../../services/models/Sector";
+import { Sector } from "@checkout/types";
 import { getDefaultSectors, getNotDefaultSectors } from "../../../services/Sector.service";
 import AddSectorDrawer from "../../Sector/AddSector/AddSectorDrawer.component";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';

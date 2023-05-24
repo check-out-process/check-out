@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import SectorModalBody from "./SectorModalBody.component";
-import { Sector } from "../../../../services/models/Sector";
+import { Sector } from "@checkout/types";
 
 interface IEditSectorModalProps {
     openModal: boolean,

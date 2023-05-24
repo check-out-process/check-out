@@ -1,4 +1,4 @@
-import { Sector } from "./models/Sector";
+import { Sector } from "@checkout/types";
 import { Config } from "../config";
 import instance from "./Api.service";
 import { ProcessTemplate } from "./models/ProcessTemplate";
