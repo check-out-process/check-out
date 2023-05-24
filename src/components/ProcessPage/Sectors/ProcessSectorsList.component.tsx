@@ -4,14 +4,8 @@ import { useLocation } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import PageHeader from "../Header/header.component";
 import { Status } from "../../../services/models/Status"
-import { getProcessSectorInstances, getUserProcessInstance } from "../../../services/ProcessInstance.service";
+import { getProcessSectorInstances } from "../../../services/ProcessInstance.service";
 import { SectorInstance } from '@checkout/types';
-import { Divider, IconButton, Paper, Theme, makeStyles } from '@material-ui/core';
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import { ProcessInstance } from '@checkout/types';
-import { useNavigate, useParams } from 'react-router-dom';
-import UserLogo from '../../style/images/hospital-bed.png';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 
 const ProcessSectorsList: React.FC = () => {
