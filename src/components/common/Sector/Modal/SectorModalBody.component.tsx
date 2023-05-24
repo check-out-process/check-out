@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ProcessSectorsContext } from "../../../../context/ProcessSectorsContext";
-import { Role } from "../../../../services/models/User";
 import { User } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
 import { Sector } from "../../../../services/models/Sector";
 import { Button, CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import EditResponsibleUser from '../../../ProcessPage/Sectors/SectorInstancePage/DropDownOptions/EditResponsibleUser.component';
-
 
 interface ISectorModalBodyProps {
     sector: Sector,
@@ -65,7 +62,7 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
         const committingUsers: DropdownKeyPair[] = sector.committingUsers.map((user: User) =>
             ({ value: user, displayName: user.fullname }));
         SetSectorCommitingUserOptions(committingUsers);
-        const user = sector.committingUsers?.find(user => user.id === sector.defaultCommittingUser.id)
+        const user = sector.committingUsers?.find(user => user.id === sector.defaultCommittingUser?.id)
         setSectorCommitingUser(user);
         setLoadingUser(false)
     }
@@ -91,11 +88,16 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
                             data={sectorOwnerOptions}
                             disabled={false}
                             onChange={onChangeOwner} /> :
-                        <EditResponsibleUser resposibleUserOptions={sectorCommitingUserOptions} resposibleUser={sectorCommitingUser} setResposibleUser={setSectorCommitingUser} disabled={false} />}
+                        <Dropdown
+                            defaultValue={sectorCommitingUser}
+                            title='בחירת מטפל'
+                            data={sectorCommitingUserOptions}
+                            disabled={false}
+                            onChange={onChangeCommitingUser} />
+                    }
                     <div className={classes.saveButtonDiv}>
                         <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
                     </div>
-
                 </div>
 
             }
