@@ -21,9 +21,11 @@ import DepartmentCreationPage from '../UserManagmentPage/DepartmentCreationPage.
 import RoomCreationPage from '../UserManagmentPage/RoomCreationPage.component';
 import UserManagmentPage from '../UserManagmentPage/UserManagmentPage.component';
 import EditUserPage from '../User/EditUserPage.component';
+import ProcessPage from '../ProcessPage/ProcessPage.component';
 
 const Router = () => {
   const { user, setUser } = useContext(UserContext);
+  
 
   useEffect(() => {
     const user = getUser();
@@ -37,6 +39,7 @@ const Router = () => {
           <Route path="/" element={<ProcessList />} />
           <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
+          <Route path="/processes/:processId" element={<ProcessPage />} />
           <Route path="/scanBed" element={<ScanBedPage />} />
           <Route path="/processcreation"
             element={

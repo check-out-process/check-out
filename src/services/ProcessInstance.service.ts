@@ -3,8 +3,13 @@ import instance from "./Api.service";
 import { ProcessInstance, SectorInstance, UpdateSectorStatusParams } from '@checkout/types';
 import { CreateProcessInstanceFromDataParams } from '@checkout/types';
 
-export function getUserProcessInstance() : Promise<ProcessInstance[]>{
+export function getUserProcessInstances() : Promise<ProcessInstance[]>{
     const url = `${Config.serverUrl}/process-instances`;
+    return instance.get(url).then(res => res.data);
+}
+
+export function getUserProcessInstance(processInstanceId: string) : Promise<ProcessInstance>{
+    const url = `${Config.serverUrl}/process-instances/${processInstanceId}`;
     return instance.get(url).then(res => res.data);
 }
 

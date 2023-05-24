@@ -4,7 +4,7 @@ import { CircularProgress, Typography } from '@material-ui/core';
 import ProcessListHeader from './Headers/ProcessListHeader.component';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { useStyles } from './ProcessList.component.styles';
-import { getUserProcessInstance } from '../../services/ProcessInstance.service';
+import { getUserProcessInstances } from '../../services/ProcessInstance.service';
 import { ProcessInstance } from '@checkout/types';
 
 const ProcessList = () => {
@@ -22,7 +22,7 @@ const ProcessList = () => {
 
     const fetchProcesses = () => {
         setLoading(true)
-        getUserProcessInstance().then(((processes: ProcessInstance[]) => {
+        getUserProcessInstances().then(((processes: ProcessInstance[]) => {
             setProcesses(processes)
             setCurrentProcesses(processes)
             // initFirstPage(processes)
