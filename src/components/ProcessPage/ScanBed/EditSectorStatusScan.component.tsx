@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PageHeader from '../Header/header.component';
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button, CircularProgress, IconButton } from '@material-ui/core';
 import { ProcessInstanceStatusReturnedParamsUI, SectorInstance } from '@checkout/types';
 //import { UpdateSectorStatusParams, Status } from '@checkout/types';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ import { enqueueSnackbar } from 'notistack';
 import { Status } from '../../../services/models/Status';
 import BaseModal from '../../Common/Modal/BaseModal.component';
 import { createStyles, makeStyles } from "@material-ui/core";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 interface IEditSectorStatusProps {
     processInstanceStatusRes: ProcessInstanceStatusReturnedParamsUI,
@@ -27,11 +28,30 @@ const useStyles = makeStyles(() =>
             alignItems: 'center'
         },
         endSectorButton: {
-            width: '40%', 
+            width: '40%',
             height: '52px'
         },
         editSectorStatusContainer: {
             height: '100%'
+        },
+        noSectorsTextContainer: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            flexDirection: 'column'
+        },
+        noSectorsIcon: {
+            padding: '0',
+        },
+        noSectorsTitle: {
+            fontSize: '22px',
+            margin: '0'
+        },
+        noSectorsSubTitle: {
+            margin: '0',
+            marginTop: '5px'
+
         }
     }),
 );
@@ -78,8 +98,9 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
 
     return (
         <>
-            {isLoading ? <CircularProgress className={classes.circularProgress}/> :
-                <div className={classes.editSectorStatusContainer}>
+            {isLoading ? <CircularProgress className={classes.circularProgress} /> :
+
+                currentSectorInstance ? <div className={classes.editSectorStatusContainer}>
                     <PageHeader name={currentSectorInstance.name} isFirstPage={false} />
                     <div className={classes.endSectorButtonContainer}>
                         <Button
@@ -93,7 +114,21 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
                         </Button>
                     </div>
                     {isAnotherSectorEdit ? <BaseModal open={isAnotherSectorEdit} setOpen={onAnswerAnotherSectorEdit} title='יש עוד סקטור בתהליך באחריותך האם תרצה לסמן סיום גם עליו?' /> : null}
-                </div>
+                </div> :
+                    <div className={classes.noSectorsTextContainer}>
+                        <IconButton className={classes.noSectorsIcon}>
+                            <ListAltIcon style={{
+                                height: '100px',
+                                width: '100px'
+                            }} />
+                        </IconButton>
+                        <p className={classes.noSectorsTitle}>
+                            אין סקטורים להצגה
+                        </p>
+                        <p className={classes.noSectorsSubTitle}>
+                            אין באחריותך סקטורים לטיפול או שכל הסקטורים טופלו
+                        </p>
+                    </div>
             }
         </>
     )

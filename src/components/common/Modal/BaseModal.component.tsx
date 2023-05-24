@@ -7,7 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Modal } from '@material-ui/core';
+import { CircularProgress, Modal } from '@material-ui/core';
 
 const useStyles = makeStyles({
     modal: {
@@ -16,29 +16,30 @@ const useStyles = makeStyles({
         alignItems: "center",
     },
     content: {
-        '@media (min-width: 350px)':{
+        '@media (min-width: 350px)': {
             width: '400px'
         },
-        '@media (max-width: 350px)':{
+        '@media (max-width: 350px)': {
             width: '70%'
         },
     },
     buttons: {
-        width:'50%'
+        width: '50%'
     },
     buttonsContainer: {
-        display:'flex',
-        justifyContent:'center'
+        display: 'flex',
+        justifyContent: 'center'
     }
 });
 
 export type BaseModalProps = {
     open: boolean;
     setOpen: (open: boolean) => void,
-    title: string
+    title: string,
+    loading?: boolean
 }
 
-const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen, title }) => {
+const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen, title, loading }) => {
     const classes = useStyles();
 
     const handleConfirm = () => {
@@ -56,7 +57,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen, title }) => {
                 className={classes.modal}
                 onClose={handleClose}
             >
-                <Card className={classes.content}>
+                {loading ? <CircularProgress /> : <Card className={classes.content}>
 
                     <CardContent>
                         <Typography align="center" variant="body2" color="textSecondary" component="p">
@@ -72,7 +73,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ open, setOpen, title }) => {
                             לא
                         </Button>
                     </CardActions>
-                </Card>
+                </Card>}
             </Modal>
         </div>
     );
