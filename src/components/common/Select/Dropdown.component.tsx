@@ -1,6 +1,6 @@
 import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import Select from "@mui/material/Select";
 import Typography from '@material-ui/core/Typography/Typography';
 import MenuItem from "@material-ui/core/MenuItem";
 import { createStyles, makeStyles, OutlinedInput, Theme } from '@material-ui/core';
@@ -15,7 +15,7 @@ export type DropdownProps = {
   data: DropdownKeyPair[],
   disabled: boolean;
   defaultValue?: any;
-  onChange: (event: onChangeEvent) => void
+  onChange: (event: any) => void
 }
 
 export type onChangeEvent = React.ChangeEvent<{ name?: string; value: unknown }>
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defaultValue, onChange }) => {
   const classes = useStyles();
 
-  const handleChange = (event: onChangeEvent) => {
+  const handleChange = (event: any) => {
     onChange(event)
   };
 
@@ -68,7 +68,6 @@ const Dropdown: React.FC<DropdownProps> = ({ title, data, disabled = true, defau
       <Typography className={classes.title} align="right" variant="h6" component="span">{title}</Typography>
 
       <FormControl fullWidth variant="filled">
-        
         <Select
           disabled={disabled}
           value={defaultValue ? defaultValue : undefined}
