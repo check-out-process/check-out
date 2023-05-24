@@ -5,7 +5,7 @@ import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { useNavigate } from 'react-router-dom';
 import { SectorInstance } from '@checkout/types';
-import { Status } from '../../../../services/models/Status';
+import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 
 const useStyles = makeStyles(() =>
     createStyles({

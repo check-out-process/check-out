@@ -8,12 +8,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
 import { List } from '@material-ui/core';
 import ListIcon from '@mui/icons-material/List';
 import SideBarOption from './SideBarOption.component';
 import { User } from '@checkout/types';
-import { Role } from '../../../services/models/User';
+import { Role } from '@checkout/types/dist/lib/enums/Role.enum';
 
 export type SizeBarDrawerProps = {
     open: boolean,
@@ -54,7 +53,6 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             padding: theme.spacing(0, 1),
-            // necessary for content to be below app bar
             ...theme.mixins.toolbar,
             justifyContent: 'flex-start',
         }

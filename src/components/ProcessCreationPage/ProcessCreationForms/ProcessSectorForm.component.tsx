@@ -1,6 +1,6 @@
 import { IconButton, CircularProgress } from "@material-ui/core";
 import React, { useEffect, useContext, useState } from 'react';
-import { Sector } from "@checkout/types";
+import { Sector, ProcessTemplate } from "@checkout/types";
 import { getDefaultSectors, getNotDefaultSectors } from "../../../services/Sector.service";
 import AddSectorDrawer from "../../Sector/AddSector/AddSectorDrawer.component";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -11,7 +11,6 @@ import { ProcessSectorsContext } from "../../../context/ProcessSectorsContext";
 import { createStyles, makeStyles } from '@material-ui/core';
 import { Config } from "../../../config";
 import { ProcessCreationDetailsContext } from "../../../context/ProcessCreationContext";
-import { ProcessTemplate } from "../../../services/models/ProcessTemplate";
 
 const useStyles = makeStyles(() =>
   createStyles({

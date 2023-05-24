@@ -1,4 +1,4 @@
-import { Status } from "../../../services/models/Status"
+import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 
 export const getColorByStatus = (status: string) => {
     switch (status) {

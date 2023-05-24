@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
-import { Role } from '../../../../services/models/User';
+import { Role } from '@checkout/types/dist/lib/enums/Role.enum';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
-import { Status } from "../../../../services/models/Status";
+import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 import EditResponsibleUser from './DropDownOptions/EditResponsibleUser.component';
 import EditSectorStatus from './DropDownOptions/EditSectorStatus.component';
 import { CircularProgress } from '@material-ui/core';
