@@ -34,9 +34,10 @@ const Router = () => {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      user ?
+      <Route >
         <Route path="/" element={<NavBarLayout user={user} />}>
           <Route path="/" element={<ProcessList />} />
+          <Route path="/processes" element={<ProcessList />} />
           <Route path="/processes/:processId/sectors" element={<ProcessSectorsList />} />
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
           <Route path="/processes/:processId" element={<ProcessPage />} />
@@ -85,13 +86,13 @@ const Router = () => {
                 <EditUserPage />
               </ProtectedRoute>} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
-        </Route> :
+        </Route> 
         <Route >
-          <Route path="/" element={
+          <Route path="/login" element={
             <LogInPage />
           } />
         </Route>
-
+        </Route>
     )
   )
 

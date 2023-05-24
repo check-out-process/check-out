@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ProcessSectorsContext } from "../../../../context/ProcessSectorsContext";
-import { User } from '@checkout/types';
+import { User, Sector } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
-import { Sector } from "../../../../services/models/Sector";
 import { Button, CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 

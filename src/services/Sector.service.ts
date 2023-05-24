@@ -1,7 +1,6 @@
-import { Sector } from "./models/Sector";
+import { Sector, ProcessTemplate } from "@checkout/types";
 import { Config } from "../config";
 import instance from "./Api.service";
-import { ProcessTemplate } from "./models/ProcessTemplate";
 
 export function getDefaultSectors(processId: string): Promise<ProcessTemplate> {
     const url = `${Config.serverUrl}/process-templates/${processId}`;

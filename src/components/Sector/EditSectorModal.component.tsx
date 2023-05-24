@@ -1,10 +1,9 @@
 import { Modal, IconButton } from "@material-ui/core";
 import React, { Dispatch, SetStateAction, useState, useEffect, useContext } from 'react';
-import { Sector } from "../../services/models/Sector";
 import CloseIcon from '@material-ui/icons/Close';
 import './SectorOptionsModal.component.css';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common/Select/Dropdown.component";
-import { User } from '@checkout/types';
+import { User, Sector } from '@checkout/types';
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
 import BaseSectorModal from "../Common/Sector/Modal/BaseSectorModal.component";
 

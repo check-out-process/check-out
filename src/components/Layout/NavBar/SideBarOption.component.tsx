@@ -46,30 +46,30 @@ export type SideBarOptionProps = {
 }
 
 
-const SideBarOption: React.FC<SideBarOptionProps> = ({ option , setOpen}) => {
+const SideBarOption: React.FC<SideBarOptionProps> = ({ option, setOpen }) => {
     const classes = useStyles();
     const navigate = useNavigate();
     const [collapseOpen, setCollapseOpen] = useState(false);
 
-    const onOptionClick = (option: MenuOptionType) => {
-        if (option.route) {
+    const onOptionClick = async (option: MenuOptionType) => {
+        if (option.isLogOut) {
+            await logout();
             navigate(option.route);
-        }else{
-            if (option.isLogOut){
-                logout();
+        } else {
+            if (option.route) {
                 navigate(option.route);
             }
         }
         if (option.items.length > 0) {
             setCollapseOpen((prev) => !prev);
-        }else{
+        } else {
             setOpen(false)
         }
     }
 
     return (
         <div>
-            {<ListItem button key={option.title} onClick={() => {onOptionClick(option)}}>
+            {<ListItem button key={option.title} onClick={() => { onOptionClick(option) }}>
                 <ListItemText className={classes.title} primary={option.title} />
                 <ListItemIcon className={classes.iconTitle}>{option.icon}</ListItemIcon>
                 {option.items.length > 0 ?
@@ -80,7 +80,7 @@ const SideBarOption: React.FC<SideBarOptionProps> = ({ option , setOpen}) => {
                 return (
                     <div>
                         <Collapse in={collapseOpen} timeout="auto" unmountOnExit>
-                            <ListItem button key={children.title} onClick={() => {onOptionClick(children)}}>
+                            <ListItem button key={children.title} onClick={() => { onOptionClick(children) }}>
                                 <ListItemText className={classes.title} primary={children.title} />
                                 <ListItemIcon className={classes.iconTitle}>{children.icon}</ListItemIcon>
                             </ListItem>

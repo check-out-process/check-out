@@ -31,7 +31,7 @@ export function logout() {
   axios.delete(`${Config.serverUrl}/${baseUrl}/logout`, { headers: { 'x-access-token': token } })
     .finally(() => {
       removeUser();
-      window.location.reload();
+      // window.location.reload();
     });
 }
 

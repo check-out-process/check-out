@@ -1,13 +1,13 @@
 import { Config } from "../config";
 import instance from "./Api.service";
-import { Department } from "./models/Department";
+import { DepartmentDTO } from '@checkout/types';
 
 
-export function getDepartments(): Promise<Department[]> {
+export function getDepartments(): Promise<DepartmentDTO[]> {
     return instance.get(`${Config.serverUrl}/departments`).then(res => res.data)
 }
 
-export function addDepartment(departmentName: string): Promise<Department[]> {
+export function addDepartment(departmentName: string): Promise<DepartmentDTO[]> {
     const data = {
         Name: departmentName
     }

@@ -1,7 +1,7 @@
 import { Button, Modal, } from "@material-ui/core";
 import React, { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
-import { Sector } from "../../services/models/Sector";
+import { Sector } from "@checkout/types";
 import EditSectorModal from "./EditSectorModal.component";
 import './SectorOptionsModal.component.css';
 

@@ -1,6 +1,5 @@
 import React, { useState, createContext, ReactNode } from 'react';
-import { Sector } from '../services/models/Sector';
-import { User } from '@checkout/types';
+import { User, Sector } from '@checkout/types';
 
 export type ProcessSectorsContextType = {
     processSectors?: Sector[],

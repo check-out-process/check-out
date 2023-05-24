@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, OutlinedInput, Typography } from "@material-ui/core";
-import { addDepartment } from '../../services/Department.service';
 import { enqueueSnackbar } from 'notistack';
-import { Department } from '../../services/models/Department';
+import { DepartmentDTO } from '@checkout/types';
 import DepartmentList from '../Department/DepartmentList';
 import { addRoom } from '../../services/Room.service';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
@@ -26,9 +25,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const RoomCreationPage: React.FC<{}> = ({ }) => {
-    const [department, setDepartment] = useState<Department>();
+    const [department, setDepartment] = useState<DepartmentDTO>();
     const [room, setRoom] = useState<string>('');
-    const [departments, setDepartments] = useState<Department[]>([]);
+    const [departments, setDepartments] = useState<DepartmentDTO[]>([]);
     const classes = useStyles()
 
 
