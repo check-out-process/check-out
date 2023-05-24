@@ -38,7 +38,7 @@ const ProcessSectorsList: React.FC = () => {
 
     return (
         <div>
-            <PageHeader name='עמוד תהליך' isFirstPage={false} />
+            <PageHeader name='רשימת סקטורים' isFirstPage={false} />
             {loading ? <CircularProgress /> : null}
             {processSectors?.length > 0 &&
                 <List style={{
