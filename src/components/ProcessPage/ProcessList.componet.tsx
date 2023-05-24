@@ -6,6 +6,7 @@ import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { useStyles } from './ProcessList.component.styles';
 import { getUserProcessInstances } from '../../services/ProcessInstance.service';
 import { ProcessInstance } from '@checkout/types';
+import { Status } from '@checkout/types/dist/lib/enums/status.enum';
 
 const ProcessList = () => {
     const [processes, setProcesses] = useState<ProcessInstance[]>([])
@@ -23,12 +24,39 @@ const ProcessList = () => {
     const fetchProcesses = () => {
         setLoading(true)
         getUserProcessInstances().then(((processes: ProcessInstance[]) => {
-            setProcesses(processes)
-            setCurrentProcesses(processes)
+            const sortedProcesses: ProcessInstance[] = sortProcesses(processes)
+            setProcesses(sortedProcesses)
+            setCurrentProcesses(sortedProcesses)
             // initFirstPage(processes)
             setLoading(false)
 
         }))
+    }
+
+    const sortProcesses = (processes: ProcessInstance[]) => {
+        return processes.sort((x: ProcessInstance, y: ProcessInstance) => {
+            const xDate = new Date(x.createdAt)
+            const yDate = new Date(y.createdAt)
+            if (xDate > yDate) {
+                return -1;
+              } else if (xDate < yDate) {
+                return 1;
+              } else {
+                return 0;
+              }
+        }).sort((x: ProcessInstance, y: ProcessInstance) => {
+            if ((x.status === Status.In_Progress) && (y.status === Status.Done)) {
+                return -1
+            }
+
+            if ((x.status === Status.Done) && (y.status === Status.In_Progress)) {
+                return 1
+            }
+
+            if (x.status === y.status) {
+                return 0
+            }
+        })
     }
 
     const splitProcessesIntoChunks = (processes: ProcessInstance[]) => {
