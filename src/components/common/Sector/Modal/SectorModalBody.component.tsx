@@ -6,7 +6,7 @@ import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.
 import { Sector } from "../../../../services/models/Sector";
 import { Button, CircularProgress } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import EditResponsibleUser from 'src/components/ProcessPage/Sectors/SectorInstancePage/DropDownOptions/EditResponsibleUser.component';
+import EditResponsibleUser from '../../../ProcessPage/Sectors/SectorInstancePage/DropDownOptions/EditResponsibleUser.component';
 
 
 interface ISectorModalBodyProps {
