@@ -8,8 +8,8 @@ export function getUserProcessInstances() : Promise<ProcessInstance[]>{
     return instance.get(url).then(res => res.data);
 }
 
-export function getUserProcessInstance(processInstanceId: string) : Promise<ProcessInstance[]>{
-    const url = `${Config.serverUrl}/process-instances${processInstanceId}`;
+export function getUserProcessInstance(processInstanceId: string) : Promise<ProcessInstance>{
+    const url = `${Config.serverUrl}/process-instances/${processInstanceId}`;
     return instance.get(url).then(res => res.data);
 }
 

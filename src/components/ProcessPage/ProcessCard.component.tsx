@@ -21,11 +21,7 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
-    const navigateTo = () => navigate(`/processes/${process.instanceId}/sectors`, {
-        state: {
-            processId: process.instanceId,
-        }
-    });
+    const navigateTo = () => navigate(`/processes/${process.instanceId}`);
 
     return (
         <div className={classes.root}>
