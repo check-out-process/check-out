@@ -32,9 +32,6 @@ const ProcessSectorsList: React.FC = () => {
             setLoading(false);
         })
     }
-    const marginTop: string = '2px'
-
-
 
     return (
         <div>
