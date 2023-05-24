@@ -27,20 +27,19 @@ const ProcessSectorsList: React.FC = () => {
         })
     }
 
-
     return (
         <div>
-            <PageHeader name='רשימת סקטורים' isFirstPage={false}/>
+            <PageHeader name='רשימת סקטורים' isFirstPage={false} />
             {loading ? <CircularProgress /> : null}
-            {processSectors?.length > 0 && 
-            <List style={{
-                width: '100%',
-                counterReset: 'gradient-counter',
-            }}>
-                {processSectors.map((sector: SectorInstance, index: number) => (
-                    <ProcessSectorCard key={sector.instanceId} sector={sector} processId={processId}/>
-                ))}
-            </List>}
+            {processSectors?.length > 0 &&
+                <List style={{
+                    width: '100%',
+                    counterReset: 'gradient-counter',
+                }}>
+                    {processSectors.map((sector: SectorInstance, index: number) => (
+                        <ProcessSectorCard key={sector.instanceId} sector={sector} processId={processId} />
+                    ))}
+                </List>}
             {processSectors?.length == 0 && !loading ?
                 <Typography align='center' variant="h5" component="h2">לא נמצאו סקטורים</Typography> : null}
 
