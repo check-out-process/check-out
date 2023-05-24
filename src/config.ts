@@ -1,7 +1,7 @@
 
 export const Config = {
     serverUrl : 'http://localhost:8080',
-    processTemplateRegularBedIsolationId: 'ba0b36d2-53b9-461a-9831-fe0d0aa2fdea',
-    processTemplateRegularBedNonIsolationId: 'd9b81701-626b-4707-8317-0b9da06bd1ad',
-    processTypeRegularBedId: '3371846f-e462-4a2e-87ca-e5e59bfed280'
+    processTemplateRegularBedIsolationId: 'fd296568-6317-4fdb-8875-b9aa0f203e63',
+    processTemplateRegularBedNonIsolationId: '0cb69677-d39e-43bc-9d60-13179e2a02d4',
+    processTypeRegularBedId: 'fd672828-545e-4f5e-a12e-d16118da4c7c'
 }

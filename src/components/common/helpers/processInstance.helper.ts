@@ -1,4 +1,4 @@
-import { getUser } from "src/services/Token.service"
+import { getUser } from "../../../services/Token.service"
 import { NewSectorInstanceData } from '@checkout/types';
 import { Config } from "../../../config";
 import { Bed } from '../../../services/models/Bed';
