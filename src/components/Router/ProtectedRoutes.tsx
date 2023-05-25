@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { Role } from '@checkout/types/dist/lib/enums/Role.enum';
+import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { User } from '@checkout/types';
 
 import React from "react";

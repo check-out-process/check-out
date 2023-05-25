@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import ProcessSectorCard from "./ProcessSectorCard.component";
 import PageHeader from "../Header/header.component";
-import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 import { getProcessSectorInstances } from "../../../services/ProcessInstance.service";
 import { SectorInstance } from '@checkout/types';
 
@@ -30,7 +29,7 @@ const ProcessSectorsList: React.FC = () => {
     return (
         <div>
             <PageHeader name='רשימת סקטורים' isFirstPage={false} />
-            {loading ? <CircularProgress /> : null}
+            {loading ? <CircularProgress style={{ position: 'fixed',top: '50%', left: '50%'}}/> : null}
             {processSectors?.length > 0 &&
                 <List style={{
                     width: '100%',

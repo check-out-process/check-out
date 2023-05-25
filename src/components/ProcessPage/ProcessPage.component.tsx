@@ -1,13 +1,10 @@
-import React, { memo, useEffect, useState } from 'react';
-import ProcessCard from './ProcessCard.component';
+import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, Divider, IconButton, Paper, Theme, Typography, createStyles, makeStyles } from '@material-ui/core';
-import ProcessListHeader from './Headers/ProcessListHeader.component';
-import { FixedSizeList, ListChildComponentProps } from 'react-window';
-import { getUserProcessInstance, getUserProcessInstances } from '../../services/ProcessInstance.service';
+import { getUserProcessInstance } from '../../services/ProcessInstance.service';
 import { ProcessInstance } from '@checkout/types';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserLogo from '../../style/images/hospital-bed.png';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +35,7 @@ const ProcessPage = () => {
     }, [])
 
     const onBackClick = () => {
-        navigate('/');
+        navigate(-1)
     }
 
     const onSectorsPageClick = () => navigate(`/processes/${process.instanceId}/sectors`, {
@@ -50,11 +47,11 @@ const ProcessPage = () => {
     return (
         <div>
             {isLoading ?
-                <CircularProgress style={{marginTop:'50%'}} disableShrink /> :
+                <CircularProgress style={{ marginTop: '50%' }} disableShrink /> :
                 <div>
                     <div style={{ display: 'flex', flexDirection: 'row' }}>
                         <IconButton onClick={onBackClick}>
-                            <ChevronRightIcon />
+                            <ArrowForwardIcon />
                         </IconButton>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

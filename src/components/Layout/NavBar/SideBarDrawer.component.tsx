@@ -12,7 +12,7 @@ import { List } from '@material-ui/core';
 import ListIcon from '@mui/icons-material/List';
 import SideBarOption from './SideBarOption.component';
 import { User } from '@checkout/types';
-import { Role } from '@checkout/types/dist/lib/enums/Role.enum';
+import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 
 export type SizeBarDrawerProps = {
     open: boolean,

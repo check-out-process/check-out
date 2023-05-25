@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Config } from "../config";
-import { Job, RoleDTO, User, UserCreationParams } from '@checkout/types';
+import { RoleDTO } from '@checkout/types';
 import instance from "./Api.service";
 
 

@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { create } from "jss";
 import rtl from "jss-rtl";
-import { Button, Card, CardContent, Divider, Fab, IconButton, InputLabel, OutlinedInput, Paper, TextField, Typography } from "@material-ui/core"
+import { Button, Divider, IconButton, OutlinedInput, Paper, TextField } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { Job, RoleDTO, User, UserCreationParams } from '@checkout/types';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { useNavigate } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
 import UserLogo from '../../style/images/userLogo.png';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {
@@ -16,11 +14,9 @@ import {
     createTheme
 } from "@material-ui/core/styles";
 import BaseModal from '../Common/Modal/BaseModal.component';
-import { createUser } from '../../services/user.service';
 import { enqueueSnackbar } from 'notistack';
 import { getJobs } from '../../services/Job.service';
 import { getRoles } from '../../services/Role.service';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
