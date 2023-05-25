@@ -5,6 +5,8 @@ import { ProcessInstance } from '@checkout/types';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserLogo from '../../style/images/hospital-bed.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { he } from 'date-fns/locale';
+import { formatDistance } from 'date-fns'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -71,6 +73,14 @@ const ProcessPage = () => {
 
                             <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">
                                 מיטה: {process?.bed.name}
+                            </Typography>
+                            <Divider variant="middle" style={{ marginTop: marginTop }} />
+                            <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">
+                                מצב: {process?.status}
+                            </Typography>
+                            <Divider variant="middle" style={{ marginTop: marginTop }} />
+                            <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">
+                                נוצר על ידי: {process?.creator.fullname}
                             </Typography>
                             <Divider variant="middle" style={{ marginTop: marginTop }} />
                             <Typography style={{ marginRight: '15px', marginTop: marginTop }} align='right' variant="subtitle1" component="div">
