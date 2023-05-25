@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
-import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
@@ -11,6 +10,7 @@ import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { UpdateSectorInstanceParams, SectorInstance, User, Sector } from '@checkout/types';
 import { CircularProgress } from '@material-ui/core';
+import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 
 interface ISectorInstancePageBodyProps {
     sectorInstance: SectorInstance,

@@ -4,6 +4,7 @@ import { ProcessInstance } from "@checkout/types";
 import { Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, OutlinedInput, TextField, Theme, Typography, createStyles, makeStyles } from "@material-ui/core";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {useStyles} from "./ProcessFilters.component.styles";
+import { Status } from "@checkout/types/dist/lib/enums/status.enum";
 
 
 export type ProcessFiltersProps = {
@@ -16,7 +17,7 @@ export type ProcessFiltersProps = {
 
 const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses, open, setOpen }) => {
     const classes = useStyles();
-    const [statues, setStatues] = useState<string[]>(['סיום', 'בתהליך']);
+    const [statues, setStatues] = useState<string[]>([Status.Done, Status.In_Progress]);
 
     const [department, setDepartment] = useState<string>('');
     const [room, setRoom] = useState<string>('');
