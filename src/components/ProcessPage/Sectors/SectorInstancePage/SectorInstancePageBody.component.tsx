@@ -155,7 +155,7 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
     return (
         <>
             {iLoading ?
-                <CircularProgress /> :
+                <CircularProgress style={{ position: 'fixed',top: '50%', left: '50%'}}/> :
                 editSectorInstanceByRole[Role.Process_Executer].components()
             }
         </>

@@ -29,7 +29,7 @@ const ProcessSectorsList: React.FC = () => {
     return (
         <div>
             <PageHeader name='רשימת סקטורים' isFirstPage={false} />
-            {loading ? <CircularProgress /> : null}
+            {loading ? <CircularProgress style={{ position: 'fixed',top: '50%', left: '50%'}}/> : null}
             {processSectors?.length > 0 &&
                 <List style={{
                     width: '100%',
