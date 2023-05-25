@@ -1,6 +1,6 @@
 import React, { ReactNode, useEffect, useState } from 'react';
 import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
-import { Role } from '@checkout/types/dist/lib/enums/Role.enum';
+import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"

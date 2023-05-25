@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { create } from "jss";
 import rtl from "jss-rtl";
-import { Button, Card, CardContent, Divider, Fab, IconButton, InputLabel, OutlinedInput, Paper, TextField, Typography } from "@material-ui/core"
+import { Button, Divider, IconButton, OutlinedInput, Paper, TextField } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
-import { Job, Role, User, UserCreationParams } from '@checkout/types';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { Job, RoleDTO, User, UserCreationParams } from '@checkout/types';
 import { useNavigate } from 'react-router-dom';
-import AddIcon from '@material-ui/icons/Add';
 import UserLogo from '../../style/images/userLogo.png';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {
@@ -16,11 +14,9 @@ import {
     createTheme
 } from "@material-ui/core/styles";
 import BaseModal from '../Common/Modal/BaseModal.component';
-import { createUser } from '../../services/user.service';
 import { enqueueSnackbar } from 'notistack';
 import { getJobs } from '../../services/Job.service';
 import { getRoles } from '../../services/Role.service';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
@@ -94,16 +90,16 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
     const [phoneNumber, setPhoneNumber] = useState<string>()
     const [password, setPassword] = useState<string>()
     const [jobs, setJobs] = useState<Job[]>([])
-    const [roles, setRoles] = useState<Role[]>([])
+    const [roles, setRoles] = useState<RoleDTO[]>([])
     const [job, setJob] = useState<Job>()
-    const [role, setRole] = useState<Role>()
+    const [role, setRole] = useState<RoleDTO>()
 
 
     useEffect(() => {
         getJobs().then((jobs: Job[]) => {
             setJobs(jobs)
         })
-        getRoles().then((roles: Role[]) => {
+        getRoles().then((roles: RoleDTO[]) => {
             setRoles(roles)
         })
     }, [])
@@ -250,7 +246,7 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                         <MenuItem className={classes.option} key={-1} value='None'>
                                             <div className={classes.optionDisplay}>בחירת סוג השראה</div>
                                         </MenuItem>
-                                        {roles.map((role: Role, index: number) => {
+                                        {roles.map((role: RoleDTO, index: number) => {
                                             return (
                                                 <MenuItem className={classes.option} key={index} value={role as any}>
                                                     <div className={classes.optionDisplay}>{role.name}</div>

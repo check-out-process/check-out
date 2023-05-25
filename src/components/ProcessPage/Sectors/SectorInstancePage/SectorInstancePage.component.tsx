@@ -5,7 +5,6 @@ import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { SectorInstance } from '@checkout/types';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
-import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
     createStyles({
