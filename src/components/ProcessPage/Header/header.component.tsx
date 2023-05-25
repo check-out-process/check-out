@@ -15,7 +15,7 @@ const PageHeader: React.FC<IPageHeaderProps> = ({ name, isFirstPage }: IPageHead
 
     return (
         <div className={classes.headerContainer}>
-              {!isFirstPage && <IconButton edge="start" onClick={() => navigate(-1)} color="inherit" className={classes.headerIcon}>
+              {!isFirstPage && <IconButton edge="start" onClick={() => navigate(-1)} className={classes.headerIcon}>
                 <ArrowForwardIcon />
             </IconButton>}
             <Typography align='center' variant="h5" component="h2" className={classes.headerText}>{name}</Typography>
