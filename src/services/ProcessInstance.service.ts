@@ -1,7 +1,6 @@
 import { Config } from "../config";
 import instance from "./Api.service";
-import { ProcessInstance, SectorInstance, UpdateSectorStatusParams } from '@checkout/types';
-import { CreateProcessInstanceFromDataParams } from '@checkout/types';
+import { ProcessInstance, SectorInstance, UpdateSectorStatusParams, CreateProcessInstanceFromDataParams } from '@checkout/types';
 
 export function getUserProcessInstances() : Promise<ProcessInstance[]>{
     const url = `${Config.serverUrl}/process-instances`;
@@ -24,7 +23,7 @@ export function getProcessStatusByBedId(bedId: string) {
 }
 
 
-export function updateProcessStatus(bedId: string, body:any ) {
+export function updateProcessStatus(bedId: string, body: UpdateSectorStatusParams) {
     const url = `${Config.serverUrl}/process-instances/${bedId}/update-status`;
     return instance.patch(url, body).then(res => res.data);
 }

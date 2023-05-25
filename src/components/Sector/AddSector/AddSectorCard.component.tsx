@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
-import { Sector } from "../../../services/models/Sector";
+import { Sector } from "@checkout/types";
 
 
 interface IAddSectorCardProps {

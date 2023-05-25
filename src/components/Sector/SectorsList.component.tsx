@@ -1,6 +1,6 @@
 import { List } from "@material-ui/core";
 import React, { useContext } from 'react';
-import { Sector } from "../../services/models/Sector";
+import { Sector } from "@checkout/types";
 import SectorCard from "./SectorCard.component";
 import { Droppable, } from "react-beautiful-dnd";
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";

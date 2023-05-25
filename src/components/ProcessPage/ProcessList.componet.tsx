@@ -6,9 +6,12 @@ import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import { useStyles } from './ProcessList.component.styles';
 import { getUserProcessInstances } from '../../services/ProcessInstance.service';
 import { ProcessInstance } from '@checkout/types';
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../services/Token.service';
 import { Status } from '@checkout/types/dist/lib/enums/status.enum';
 
 const ProcessList = () => {
+    const [isLogIn, setIsLogIn] = useState<boolean>(true);
     const [processes, setProcesses] = useState<ProcessInstance[]>([])
     const [currentProcesses, setCurrentProcesses] = useState<ProcessInstance[]>([])
     const [pages, setPages] = useState<number>(0)
@@ -16,9 +19,16 @@ const ProcessList = () => {
     const processPerPage: number = 3;
     const [loading, setLoading] = useState<boolean>(false);
     const classes = useStyles()
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetchProcesses()
+        const user = getUser();
+        if (!user) {
+            navigate('/login')
+        } else {
+            setIsLogIn(false)
+            fetchProcesses()
+        }
     }, [])
 
     const fetchProcesses = () => {
@@ -68,10 +78,6 @@ const ProcessList = () => {
         return res;
     }
 
-    const onPageNumberClick = (event: React.ChangeEvent<unknown>, selectedPage: number) => {
-        setCurrentProcesses(pageProcessMap[selectedPage - 1])
-    };
-
     const calculatePagesNumber = (processes: ProcessInstance[]) => {
         const pagesNumber = (processes.length / processPerPage)
         const isNaturalNumber: boolean = (pagesNumber % 1 === 0)
@@ -83,56 +89,33 @@ const ProcessList = () => {
         calculatePagesNumber(processes)
         const pages = splitProcessesIntoChunks(processes)
         setPageProcessMap(pages)
-        // setCurrentProcesses(pages[0])
         setCurrentProcesses(processes)
     }
 
     return (
         <div>
-            <div className={classes.headers}>
-                <ProcessListHeader processes={processes} setProcesses={initFirstPage} />
-            </div>
+            {isLogIn ? <></>: <div>
+                <div className={classes.headers} >
+                    <ProcessListHeader processes={processes} setProcesses={initFirstPage} />
+                </div >
+                {loading ? <CircularProgress disableShrink /> : null}
+                <div className={classes.processesList}>
+                    {currentProcesses?.length > 0 ?
+                        <FixedSizeList direction='rtl' height={450} width='98%' itemSize={128} itemCount={currentProcesses.length}>
+                            {memo((props: ListChildComponentProps) => {
+                                const { index, style } = props;
+                                return (
+                                    <div key={index} className={classes.processCard} style={{ ...style }}>
+                                        <ProcessCard key={index} process={currentProcesses[index]} />
+                                    </div>
+                                );
+                            })}
+                        </FixedSizeList> : null}
 
-            {loading ? <CircularProgress disableShrink /> : null}
-
-
-            <div className={classes.processesList}>
-
-                {/* {currentProcesses?.length > 0 ?
-
-                    currentProcesses.map((process: Process, index: number) => {
-                        return (
-                            <div style={{ marginTop: '15px', width: '94%', boxShadow: '0px 0px 8px 1px #888888' }}>
-                                <ProcessCard key={index} process={process} />
-                            </div>
-                        )
-                    })
-
-                    :
-                    <Typography style={{ marginBottom: '10px' }} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography>
-                } */}
-                {currentProcesses?.length > 0 ?
-                    <FixedSizeList direction='rtl' height={450} width='98%' itemSize={128} itemCount={currentProcesses.length}>
-                        {memo((props: ListChildComponentProps) => {
-                            const { index, style } = props;
-                            return (
-                                <div key={index} className={classes.processCard} style={{ ...style }}>
-                                    <ProcessCard key={index} process={currentProcesses[index]} />
-                                </div>
-                            );
-                        })}
-                    </FixedSizeList> : null}
-
-                {currentProcesses?.length == 0 && !loading ?
-                    <Typography className={classes.noResultTitle} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography> : null}
-
-
-            </div>
-            {/* <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                {currentProcesses?.length > 0 ?
-                    <Pagination style={{ direction: 'ltr', marginTop: '10px' }} count={pages} color="primary" size='large' variant="outlined" shape="rounded" onChange={onPageNumberClick} />
-                    : null}
-            </div> */}
+                    {currentProcesses?.length == 0 && !loading ?
+                        <Typography className={classes.noResultTitle} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography> : null}
+                </div>
+            </div>}
         </div>
     );
 

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import PageHeader from '../Header/header.component';
 import { Button, CircularProgress, IconButton } from '@material-ui/core';
-import { ProcessInstanceStatusReturnedParamsUI, SectorInstance } from '@checkout/types';
-//import { UpdateSectorStatusParams, Status } from '@checkout/types';
+import { ProcessInstanceStatusReturnedParamsUI, SectorInstance, UpdateSectorStatusParams } from '@checkout/types';
 import { useNavigate } from 'react-router-dom';
 import { updateProcessStatus } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
-import { Status } from '../../../services/models/Status';
+import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 import BaseModal from '../../Common/Modal/BaseModal.component';
 import { createStyles, makeStyles } from "@material-ui/core";
 import ListAltIcon from '@mui/icons-material/ListAlt';
@@ -64,10 +63,10 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
     const classes = useStyles();
 
     const onEndSector = () => {
-        const body = {
+        const body: UpdateSectorStatusParams = {
             processInstanceId: processInstanceStatusRes.processInstanceId,
             sectorInstanceId: currentSectorInstance.instanceId,
-            status: 'done'
+            status: Status.Done
         };
         setIsLoading(true);
         updateProcessStatus(bedId, body).then(() => {

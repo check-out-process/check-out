@@ -1,22 +1,20 @@
 import React, { useState, createContext, ReactNode } from 'react';
-import { Bed } from '../services/models/Bed';
-import { Department } from '../services/models/Department';
-import { Room } from '../services/models/Room';
+import { BedDTO, DepartmentDTO, RoomDTO } from '@checkout/types';
 
 
 export type ProcessCreationContextType = {
-    departments?: Department[],
-    setDepartments?: (departments: Department[]) => void,
-    department?: Department,
-    setDepartment?: (department: Department) => void,
-    rooms?: Room[],
-    setRooms?: (rooms: Room[]) => void,
-    room?: Room,
-    setRoom?: (room: Room) => void,
-    bed?: Bed,
-    setBed?: (bed: Bed) => void,
-    beds?: Bed[],
-    setBeds?: (beds: Bed[]) => void,
+    departments?: DepartmentDTO[],
+    setDepartments?: (departments: DepartmentDTO[]) => void,
+    department?: DepartmentDTO,
+    setDepartment?: (department: DepartmentDTO) => void,
+    rooms?: RoomDTO[],
+    setRooms?: (rooms: RoomDTO[]) => void,
+    room?: RoomDTO,
+    setRoom?: (room: RoomDTO) => void,
+    bed?: BedDTO,
+    setBed?: (bed: BedDTO) => void,
+    beds?: BedDTO[],
+    setBeds?: (beds: BedDTO[]) => void,
     isCurrentStepValid?: () => boolean,
     properties?: { [key: string]: any },
     setProperty?: (key: string, value: any) => void
@@ -24,23 +22,23 @@ export type ProcessCreationContextType = {
 const ProcessCreationDetailsContext = createContext<ProcessCreationContextType>({});
 
 function ProcessCreationProvider({ children }: { children: ReactNode }) {
-    const [departments, setDepartments] = useState<Department[]>([])
-    const [rooms, setRooms] = useState<Room[]>([])
-    const [beds, setBeds] = useState<Bed[]>([])
+    const [departments, setDepartments] = useState<DepartmentDTO[]>([])
+    const [rooms, setRooms] = useState<RoomDTO[]>([])
+    const [beds, setBeds] = useState<BedDTO[]>([])
 
-    const [department, setDepartment] = useState<Department>()
-    const [room, setRoom] = useState<Room>()
-    const [bed, setBed] = useState<Bed>()
+    const [department, setDepartment] = useState<DepartmentDTO>()
+    const [room, setRoom] = useState<RoomDTO>()
+    const [bed, setBed] = useState<BedDTO>()
 
     const [properties, setProperties] = useState<{[key: string]: any}>({})
 
-    const onDepartmentChange = (department: Department) => {
+    const onDepartmentChange = (department: DepartmentDTO) => {
         setDepartment(department)
         setRoom(undefined)
         setBed(undefined)
     }
 
-    const onRoomChange = (room: Room) => {
+    const onRoomChange = (room: RoomDTO) => {
         setRoom(room)
         setBed(undefined)
     }

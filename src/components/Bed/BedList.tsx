@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { getBeds } from '../../services/Bed.service';
-import { Bed } from '../../services/models/Bed';
+import { BedDTO, RoomDTO } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
-import { Room } from '../../services/models/Room';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 
 export type RoomListProps = {
-    room: Room,
-    bed: Bed,
-    setBed: (bed: Bed) => void,
-    beds?: Bed[],
-    setBeds?: (beds: Bed[]) => void
+    room: RoomDTO,
+    bed: BedDTO,
+    setBed: (bed: BedDTO) => void,
+    beds?: BedDTO[],
+    setBeds?: (beds: BedDTO[]) => void
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,7 +36,7 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
             fetchBeds()
         }
         else if (room !== undefined && bed !== undefined){
-            const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
+            const data: DropdownKeyPair[] = beds.map((bed: BedDTO) => ({ value: bed, displayName: bed.name }))
             setBedsDropdownData(data);
         }
         if (room == undefined && bed === undefined){
@@ -47,9 +46,9 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
 
     const fetchBeds = () => {
             setIsLoading(true);
-            getBeds(room.id).then((beds: Bed[]) => {
+            getBeds(room.id).then((beds: BedDTO[]) => {
                 setBeds(beds)
-                const data: DropdownKeyPair[] = beds.map((bed: Bed) => ({ value: bed, displayName: bed.name }))
+                const data: DropdownKeyPair[] = beds.map((bed: BedDTO) => ({ value: bed, displayName: bed.name }))
                 setBedsDropdownData(data);
                 setIsLoading(false);
             }).catch(err => {
@@ -61,7 +60,7 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
     }
 
     function onChange(event: onChangeEvent): void {
-        setBed(event.target.value as Bed)
+        setBed(event.target.value as BedDTO)
     }
 
     return (
