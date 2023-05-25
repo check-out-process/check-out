@@ -29,7 +29,6 @@ instance.interceptors.response.use(
     const originalConfig = err.config;
 
     if (err.response) {
-      // Access Token was expired
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
 
@@ -39,7 +38,9 @@ instance.interceptors.response.use(
           });
 
           const { accessToken, refreshToken } = rs.data;
-          updateLocalTokens(accessToken, refreshToken);
+          if (accessToken && refreshToken) {
+            updateLocalTokens(accessToken, refreshToken);
+          }
 
           return instance(originalConfig);
         } catch (_error) {
