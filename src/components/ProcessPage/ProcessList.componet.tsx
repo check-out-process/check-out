@@ -37,9 +37,7 @@ const ProcessList = () => {
             const sortedProcesses: ProcessInstance[] = sortProcesses(processes)
             setProcesses(sortedProcesses)
             setCurrentProcesses(sortedProcesses)
-            // initFirstPage(processes)
             setLoading(false)
-
         }))
     }
 
@@ -89,7 +87,7 @@ const ProcessList = () => {
         calculatePagesNumber(processes)
         const pages = splitProcessesIntoChunks(processes)
         setPageProcessMap(pages)
-        setCurrentProcesses(processes)
+        setCurrentProcesses(sortProcesses(processes))
     }
 
     return (
