@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 import PageHeader from '../../Header/header.component';
 import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
-import { useNavigate } from 'react-router-dom';
 import { SectorInstance } from '@checkout/types';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
+import { CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -18,9 +18,9 @@ const useStyles = makeStyles(() =>
 const SectorInstancePage: React.FC = () => {
     const classes = useStyles();
     const location = useLocation();
-    const navigate = useNavigate();
     const [isViewMode, setIsViewMode] = useState<boolean>();
     const [isSaveMode, setIsSaveMode] = useState<boolean>(false);
+    const [iLoading, setIsLoading] = useState<boolean>(true);
 
     const sectorInstance: SectorInstance = location.state.sector;
     const processId: string = location.state.processId;
@@ -39,15 +39,17 @@ const SectorInstancePage: React.FC = () => {
     }
 
     const isDisabled = () => {
-       return  sectorInstance.status === Status.Done;
+        return sectorInstance.status === Status.Done;
     }
 
     return (
-        <div>
+        <>
             <PageHeader name={sectorInstance.name} isFirstPage={false} />
-            <SectorInstancePageBody sectorInstance={sectorInstance} processId={processId} isViewMode={isViewMode} isSaveMode={isSaveMode}/>
-            <Button disabled={isDisabled()} className={classes.button} variant="contained" color="primary" onClick={() => { onClick() }}>{buttonText}</Button>
-        </div>
+            <SectorInstancePageBody sectorInstance={sectorInstance} processId={processId} isViewMode={isViewMode} isSaveMode={isSaveMode} iLoading={iLoading} setIsLoading={setIsLoading} />
+            {!iLoading &&
+                <Button disabled={isDisabled()} className={classes.button} variant="contained" color="primary" onClick={() => { onClick() }}>{buttonText}</Button>
+            }
+        </>
     )
 }
 

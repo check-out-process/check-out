@@ -6,27 +6,28 @@ import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.c
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 import EditResponsibleUser from './DropDownOptions/EditResponsibleUser.component';
 import EditSectorStatus from './DropDownOptions/EditSectorStatus.component';
-import { CircularProgress } from '@material-ui/core';
 import { updateSectorInstance } from '../../../../services/SectorInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
 import { UpdateSectorInstanceParams, SectorInstance, User, Sector } from '@checkout/types';
+import { CircularProgress } from '@material-ui/core';
 
 interface ISectorInstancePageBodyProps {
     sectorInstance: SectorInstance,
     processId: string,
     isViewMode: boolean,
-    isSaveMode: boolean
+    isSaveMode: boolean,
+    iLoading: boolean,
+    setIsLoading: (isLoading: boolean) => void
 }
 
-const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sectorInstance, processId, isViewMode, isSaveMode }: ISectorInstancePageBodyProps) => {
+const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sectorInstance, processId, isViewMode, isSaveMode, iLoading, setIsLoading }: ISectorInstancePageBodyProps) => {
     const [resposibleTeamUserOptions, setResposibleTeamUserOptions] = useState<DropdownKeyPair[]>([]);
     const [resposibleTeamUser, setResposibleTeamUser] = useState<User>();
     const [resposibleUserOptions, setResposibleUserOptions] = useState<DropdownKeyPair[]>([]);
     const [resposibleUser, setResposibleUser] = useState<User>(null);
     const [sectorStatusOptions, setSectorStatusOptions] = useState<DropdownKeyPair[]>([]);
     const [sectorStatus, setSectorStatus] = useState<Status>(sectorInstance.status);
-
     const [loadingTeamUser, setLoadingTeamUser] = useState<boolean>(true);
     const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
@@ -47,7 +48,6 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
         setResposibleTeamUserOptions(data);
         setResposibleTeamUser(responsibleTeamUsers.find(user => user.id === sectorInstance.responsiblePerson?.id));
         setLoadingTeamUser(false);
-
     }
 
     const changeResposibleUserKeyPair = (responsibleUsers: User[]) => {
@@ -57,7 +57,6 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
         setResposibleUserOptions(data);
         setResposibleUser(responsibleUsers.find(user => user.id === sectorInstance.commitingWorker?.id));
         setLoadingUser(false);
-
     }
 
     const getStatusKeyPair = () => {
@@ -126,6 +125,8 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
 
     useEffect(() => {
         if (isSaveMode === true) {
+            setIsLoading(true);
+
             const body: UpdateSectorInstanceParams = {
                 commitingWorkerId: resposibleUser?.id,
                 responsiblePersonId: resposibleTeamUser?.id,
@@ -133,18 +134,27 @@ const SectorInstancePageBody: React.FC<ISectorInstancePageBodyProps> = ({ sector
             }
 
             updateSectorInstance(processId, sectorInstance.instanceId, body).then(() => {
+                setIsLoading(false);
                 enqueueSnackbar('הסקטור עודכן בהצלחה', { variant: 'success' })
                 navigate(-1);
             }).catch(() => {
+                setIsLoading(false);
                 enqueueSnackbar('כישלון בעדכון הסקטור', { variant: 'error' })
                 navigate(-1);
             })
         }
     }, [isSaveMode])
 
+    useEffect(() => {
+        if (!loadingUser && !loadingTeamUser) {
+            setIsLoading(false)
+        }
+    }, [loadingUser, loadingTeamUser])
+
+
     return (
         <>
-            {loadingTeamUser && loadingUser ?
+            {iLoading ?
                 <CircularProgress /> :
                 editSectorInstanceByRole[Role.Process_Executer].components()
             }
