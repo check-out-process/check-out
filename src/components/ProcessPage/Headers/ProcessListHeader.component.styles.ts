@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex', width: '94%'
     },
     button: {
-      height: '34px', width: '114px', marginLeft: '10px'
+      height: '34px', width: '120px', marginLeft: '10px'
     }
   }),
 );

@@ -42,6 +42,8 @@ const Router = () => {
           <Route path="/processes/:processId/sectors/:sectorId" element={<SectorInstancePage />} />
           <Route path="/processes/:processId" element={<ProcessPage />} />
           <Route path="/scanBed" element={<ScanBedPage />} />
+          <Route path="/managment/users/:userId"
+            element={<UserPage />} />
           <Route path="/scanBed/:bedId" element={<ScanBedPage />} />
           <Route path="/processcreation"
             element={
@@ -71,11 +73,6 @@ const Router = () => {
               <UserManagmentPage />
             </ProtectedRoute>
           } />
-          <Route path="/managment/users/:userId"
-            element={
-              <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
-                <UserPage />
-              </ProtectedRoute>} />
           <Route path="/managment/users/create-user"
             element={
               <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>

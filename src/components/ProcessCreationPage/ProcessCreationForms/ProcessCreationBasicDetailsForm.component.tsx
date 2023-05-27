@@ -42,7 +42,7 @@ const ProcessCreationBasicDetailsForm = () => {
 
     <div style={{ display: "flex", justifyContent: "center", flexDirection: 'column' }}>
       <div className={classes.root}>
-        <div className={classes.select}>
+        <div style={{marginTop:'-20px'}}>
           <DepartmentList department={department} setDepartment={setDepartment} departments={departments} setDepartments={setDepartments} />
         </div>
 

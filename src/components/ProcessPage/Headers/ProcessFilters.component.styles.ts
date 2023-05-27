@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: 'flex-start',
         },
         filters: {
-            marginTop: '5px' 
+            marginTop: '5px',
+            marginRight: '4px' 
         }
     }),
 );

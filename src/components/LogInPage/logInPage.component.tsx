@@ -102,11 +102,6 @@ const LogInPage: React.FC = () => {
                         autoComplete="current-password"
                         onChange={onChangePassword}
                     />
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                            שכחת את הסיסמה?
-                        </Link>
-                    </Grid>
                     <Button
                         fullWidth
                         variant="contained"
