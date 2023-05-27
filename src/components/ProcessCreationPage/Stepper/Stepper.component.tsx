@@ -88,6 +88,10 @@ export default function HorizontalLinearStepper() {
         }
     }
 
+    const isDisabled = (): boolean => {
+        return isLastStep() ? !isCreateProcessValid() : !isCurrentStepValid();
+    }
+
     return (
         <div className={classes.root}>
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -116,11 +120,11 @@ export default function HorizontalLinearStepper() {
                         >ביטול</Button> :
                         null}
 
-                    <Button variant="contained" color="primary" disabled={!isCurrentStepValid() || !isCreateProcessValid()} onClick={handleNext} className={classes.continueButton}
+                    <Button variant="contained" color="primary" disabled={isDisabled()} onClick={handleNext} className={classes.continueButton}
                     >
                         {isLastStep() ? 'סיום' : 'המשך'}
                     </Button>
-                    {open ? <BaseModal open={open} setOpen={onSave} title="? האם ברצונך לשמור את התהליך" loading={loading}/> : null}
+                    {open ? <BaseModal open={open} setOpen={onSave} title="? האם ברצונך לשמור את התהליך" loading={loading} /> : null}
                     {cancelModalOpen ? <BaseModal open={cancelModalOpen} setOpen={onCancel} title="? האם ברצונך לבטל את יצירת התהליך" /> : null}
                 </div>
             </div>
