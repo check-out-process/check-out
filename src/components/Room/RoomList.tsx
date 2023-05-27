@@ -47,7 +47,20 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
             setIsLoading(true);
             getRooms(department.id).then((rooms: RoomDTO[]) => {
                 setRooms(rooms)
-                const data: DropdownKeyPair[] = rooms.map((room: RoomDTO) => ({ value: room, displayName: room.name }));
+                
+                const sorrtedRoom= rooms.sort((n1,n2) => {
+                    if (n1.name> n2.name) {
+                        return 1;
+                    }
+                
+                    if (n1.name < n2.name) {
+                        return -1;
+                    }
+                
+                    return 0;
+                });
+                const data: DropdownKeyPair[] = sorrtedRoom.map((room: RoomDTO) => ({ value: room, displayName: room.name }));
+                
                 setRoomsDropdownData(data);
                 setIsLoading(false);
             }).
