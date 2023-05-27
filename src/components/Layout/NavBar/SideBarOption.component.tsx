@@ -88,8 +88,6 @@ const SideBarOption: React.FC<SideBarOptionProps> = ({ option, setOpen }) => {
                     </div>
                 )
             })}
-
-
         </div>
     );
 }

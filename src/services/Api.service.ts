@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getLocalAccessToken, getLocalRefreshToken, updateLocalTokens } from "./Token.service";
+import { getLocalAccessToken, getLocalRefreshToken, updateLocalTokens, removeUser } from "./Token.service";
 
 const instance = axios.create({
   baseURL: "http://localhost:8080",
@@ -40,6 +40,9 @@ instance.interceptors.response.use(
           const { accessToken, refreshToken } = rs.data;
           if (accessToken && refreshToken) {
             updateLocalTokens(accessToken, refreshToken);
+          } else {
+            removeUser();
+            window.location.replace('/login')
           }
 
           return instance(originalConfig);
