@@ -44,6 +44,7 @@ const Router = () => {
           <Route path="/scanBed" element={<ScanBedPage />} />
           <Route path="/managment/users/:userId"
             element={<UserPage />} />
+          <Route path="/scanBed/:bedId" element={<ScanBedPage />} />
           <Route path="/processcreation"
             element={
               <ProtectedRoute user={user} userPremmitedRoles={userPremmitedRolesToProcessCreation}>
