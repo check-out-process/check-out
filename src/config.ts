@@ -1,9 +1,9 @@
 
 export const Config = {
-    serverUrl : 'http://localhost:8080',
-    processTemplateRegularBedIsolationId: 'fd296568-6317-4fdb-8875-b9aa0f203e63',
-    processTemplateRegularBedNonIsolationId: '0cb69677-d39e-43bc-9d60-13179e2a02d4',
-    processTypeRegularBedId: 'fd672828-545e-4f5e-a12e-d16118da4c7c',
+    serverUrl : 'http://192.168.1.205:8080',
+    processTemplateRegularBedIsolationId: 'e757a376-ab1c-465b-86c0-116a0b5388ba',
+    processTemplateRegularBedNonIsolationId: '431e3fcf-fdde-4870-8dce-49da28624e9c',
+    processTypeRegularBedId: 'a79d196e-c643-4d08-b50c-66a3cb1367f7',
     baseUrls:{
         auth: 'auth'
     }

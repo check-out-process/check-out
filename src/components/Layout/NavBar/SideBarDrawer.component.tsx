@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const menuOptions: MenuOptionType[] = [
     {
-        title: 'עמוד ראשי',
+        title: 'תהליכים',
         route: '/',
         icon: <HomeIcon />,
         items: []
@@ -79,18 +79,18 @@ const menuOptions: MenuOptionType[] = [
         icon: <AdminPanelSettingsIcon />,
         premmitedUserRole: [Role.Admin],
         items: [
-            {
-                title: 'הוספת מחלקה',
-                route: '/managment/department-creation',
-                icon: <ListIcon />,
-                items: []
-            },
-            {
-                title: 'הוספת חדר',
-                route: '/managment/room-creation',
-                icon: <ListIcon />,
-                items: []
-            },
+            // {
+            //     title: 'הוספת מחלקה',
+            //     route: '/managment/department-creation',
+            //     icon: <ListIcon />,
+            //     items: []
+            // },
+            // {
+            //     title: 'הוספת חדר',
+            //     route: '/managment/room-creation',
+            //     icon: <ListIcon />,
+            //     items: []
+            // },
             {
                 title: 'ניהול יוזרים',
                 route: '/managment/users',
