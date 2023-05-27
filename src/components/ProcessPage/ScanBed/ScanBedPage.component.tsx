@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ScanData from '../ScanBarcode/ScanData.component';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getProcessStatusByBedId } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import EditSectorStatusScan from './EditSectorStatusScan.component';
@@ -22,6 +22,7 @@ const ScanBedPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const navigate = useNavigate();
     const classes = useStyles();
+    const { bedId: bedIdParam } = useParams();
 
     useEffect(() => {
         if (isScanMode === false) {
@@ -30,14 +31,16 @@ const ScanBedPage: React.FC = () => {
     }, [isScanMode]);
 
     useEffect(() => {
-        if (bedId !== '') {
+        if (bedId !== '' || bedIdParam) {
+            const sendBedId = bedId !== '' ? bedId : bedIdParam;
             setIsLoading(true)
-            getProcessStatusByBedId(bedId).then(async (res) => {
+            getProcessStatusByBedId(sendBedId).then(async (res) => {
                 setIsLoading(false)
                 setProcessInstanceStatusRes(res);
                 setBedId(bedId);
             }).catch(() => {
                 enqueueSnackbar('סריקת המיטה נכשלה', { variant: 'error' })
+                navigate(-1)
             });
         }
     }, [bedId])
