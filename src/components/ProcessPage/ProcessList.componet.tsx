@@ -96,7 +96,7 @@ const ProcessList = () => {
                 <div className={classes.headers} >
                     <ProcessListHeader processes={processes} setProcesses={initFirstPage} />
                 </div >
-                {loading ? <CircularProgress disableShrink /> : null}
+                {loading ? <CircularProgress style={{ marginTop:'50%'}} disableShrink /> : null}
                 <div className={classes.processesList}>
                     {currentProcesses?.length > 0 ?
                         <FixedSizeList direction='rtl' height={450} width='98%' itemSize={128} itemCount={currentProcesses.length}>

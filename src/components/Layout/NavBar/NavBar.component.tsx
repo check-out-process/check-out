@@ -18,22 +18,9 @@ const useStyles = makeStyles(() =>
   createStyles({
     height: {
       height: '100%',
-    },
-    largeIcon: {
-      width: 60,
-      height: 60,
     }
   }),
 );
-
-const styles = {
-
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
-
-};
 
   export const NavBarLayout: React.FC<INavBarLayoutProps> = ({user }) => {
   const [open, setOpen] = React.useState(false);
@@ -55,12 +42,9 @@ const styles = {
             <MenuIcon style={{ fontSize: 35 }}/>
           </IconButton>
 
-
           <IconButton style={{marginLeft:'-15px'}} edge="end" onClick={onProfileClick} color="inherit">
             <PersonIcon style={{ fontSize: 35 }}/>
           </IconButton>
-
-          
         </Toolbar>
       </AppBar>
       <main>

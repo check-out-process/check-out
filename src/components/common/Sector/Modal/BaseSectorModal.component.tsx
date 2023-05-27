@@ -33,7 +33,8 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
             pt: 2,
             px: 4,
             pb: 3,
-            direction: 'rtl'
+            direction: 'rtl',
+            outline: 'none'
         },
         header: {
             display: 'flex',
