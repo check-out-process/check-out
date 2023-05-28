@@ -40,7 +40,7 @@ const ScanBedPage: React.FC = () => {
                 setBedId(sendBedId);
             }).catch(() => {
                 enqueueSnackbar('סריקת המיטה נכשלה', { variant: 'error' })
-                navigate(-1)
+                navigate('/')
             });
         }
     }, [bedId])
