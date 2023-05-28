@@ -60,7 +60,7 @@ const LogInPage: React.FC = () => {
             setUser(user);
             navigate('/', { replace: true });
         }).catch(err => {
-            if (err.response.status === 404 || 400) {
+            if (err?.response?.status === 404 || 400) {
                 enqueueSnackbar('פרטים לא נכונים', { variant: 'error' })
             } else {
                 enqueueSnackbar('הייתה בעיה בכניסה למערכת', { variant: 'error' })
