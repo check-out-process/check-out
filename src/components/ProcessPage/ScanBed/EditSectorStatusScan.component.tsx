@@ -73,6 +73,7 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
             if (processInstanceStatusRes.sectorInstances.length > 0) {
                 setIsAnotherSectorEdit(true);
             } else {
+                enqueueSnackbar('עדכון סיום הסקטור הצליח', { variant: 'success' })
                 navigate('/');
             }
             setIsLoading(false);
@@ -92,6 +93,7 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
             setCurrentSectorInstance(sectorInstance);
             setIsAnotherSectorEdit(false);
         } else {
+            enqueueSnackbar('עדכון סיום הסקטור הצליח', { variant: 'success' })
             navigate('/');
         }
     }
