@@ -37,7 +37,7 @@ const ScanBedPage: React.FC = () => {
             getProcessStatusByBedId(sendBedId).then(async (res) => {
                 setIsLoading(false)
                 setProcessInstanceStatusRes(res);
-                setBedId(bedId);
+                setBedId(sendBedId);
             }).catch(() => {
                 enqueueSnackbar('סריקת המיטה נכשלה', { variant: 'error' })
                 navigate(-1)
