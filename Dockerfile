@@ -10,8 +10,5 @@ COPY . .
 # # Install the dependencies
 RUN npm i --legacy-peer-deps --no-update-notifier
 
-# Expose the port on which your Node.js application listens
-EXPOSE 8080 8083
-
 # Start the Node.js application
 CMD [ "npm", "start" ]
