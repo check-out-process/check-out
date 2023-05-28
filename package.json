@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@checkout/types": "git+https://github.com/check-out-process/checkout-types.git#feature/update-dist",
+    "@checkout/types": "git+https://github.com/check-out-process/checkout-types.git#dev",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
