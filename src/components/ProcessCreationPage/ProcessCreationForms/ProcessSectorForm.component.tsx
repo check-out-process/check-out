@@ -9,8 +9,8 @@ import SectorsList from "../../Sector/SectorsList.component";
 import './ProcessSectorForm.component.css';
 import { ProcessSectorsContext } from "../../../context/ProcessSectorsContext";
 import { createStyles, makeStyles } from '@material-ui/core';
-import { Config } from "../../../config";
 import { ProcessCreationDetailsContext } from "../../../context/ProcessCreationContext";
+import { ProcessTemplateFactory } from "../ProcessTemplate.factory";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -23,20 +23,22 @@ const useStyles = makeStyles(() =>
   }),
 );
 const ProcessSectorForm = () => {
-  const { properties } = useContext(ProcessCreationDetailsContext);
+  const { properties, department } = useContext(ProcessCreationDetailsContext);
   const { processSectors, setProcessSectors, setDrawerSectors } = useContext(ProcessSectorsContext);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const classes = useStyles();
 
   useEffect(() => {
-    fetchDefaultSectors();
-    fetchNotDefaultSectors();
+    const a = ProcessTemplateFactory();
+    const {processTemplateIsolationId, processTemplateBedNonIsolationId, processTypeId } = (ProcessTemplateFactory() as any )[department.name];;
+    fetchDefaultSectors(processTemplateIsolationId, processTemplateBedNonIsolationId);
+    fetchNotDefaultSectors(processTypeId);
   }, [])
 
-  const fetchDefaultSectors = () => {
+  const fetchDefaultSectors = (processTemplateIsolationId: string, processTemplateBedNonIsolationId: string) => {
     setIsLoading(true);
-    const processId = properties.isIsolation ? Config.processTemplateRegularBedIsolationId : Config.processTemplateRegularBedNonIsolationId;
+    const processId = properties.isIsolation ? processTemplateIsolationId : processTemplateBedNonIsolationId;
 
     getDefaultSectors(processId).then((processTemplate: ProcessTemplate) => {
       const sectors: Sector[] = [];
@@ -54,8 +56,8 @@ const ProcessSectorForm = () => {
     })
   }
 
-  const fetchNotDefaultSectors = () => {
-    getNotDefaultSectors(Config.processTypeRegularBedId).then((sectors: Sector[]) => {
+  const fetchNotDefaultSectors = (processTypeId: string) => {
+    getNotDefaultSectors(processTypeId).then((sectors: Sector[]) => {
       const defaultSectorsIds = processSectors.map(sector => sector.id);
 
       setDrawerSectors(sectors.filter(sector => !defaultSectorsIds.includes(sector.id)));
