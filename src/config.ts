@@ -1,9 +1,9 @@
-
 export const Config = {
-    serverUrl : 'http://checkout.cs.colman.ac.il:8081',
-    processTemplateRegularBedIsolationId: 'e757a376-ab1c-465b-86c0-116a0b5388ba',
-    processTemplateRegularBedNonIsolationId: '431e3fcf-fdde-4870-8dce-49da28624e9c',
-    processTypeRegularBedId: 'a79d196e-c643-4d08-b50c-66a3cb1367f7',
+    serverUrl : 'http://localhost:8080',
+    processTemplateRegularBedIsolationId: 'a33c1b14-79af-483a-9339-1c26307e408e',
+    processTemplateRegularBedNonIsolationId: 'cebb0393-e06a-4bdd-902e-ae7d88ed8749',
+    processTemplateChildrenIcuId: '9d54922c-5544-4255-9c6d-a8b62406f84d',
+    processTypeRegularBedId: '21cec3bf-ac93-4daa-bae0-50b9d3262236',
     baseUrls:{
         auth: 'auth'
     }
