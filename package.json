@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@checkout/types": "git+https://github.com/check-out-process/checkout-types.git#dev",
+    "@checkout/types": "github:check-out-process/checkout-types#dev",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@material-ui/core": "^4.12.4",
@@ -24,6 +24,7 @@
     "notistack": "^3.0.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
+    "react-circular-progressbar": "^2.1.0",
     "react-dom": "^18.2.0",
     "react-qr-barcode-scanner": "^1.0.6",
     "react-router-dom": "^6.8.1",

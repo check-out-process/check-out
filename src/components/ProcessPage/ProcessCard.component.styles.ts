@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '50%', marginRight: '15px', marginTop: '-10px'
         },
         devider:{
-            marginTop: '1px'
+            marginTop: '5px'
         },
         cardActions:{
             justifyContent: 'space-between',  marginTop: '-4px', height: '15px'
