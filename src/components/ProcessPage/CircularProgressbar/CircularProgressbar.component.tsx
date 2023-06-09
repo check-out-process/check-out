@@ -12,7 +12,7 @@ interface ICircularProgressSectorsBarProps {
 const useStyles = makeStyles(() =>
     createStyles({
         sectorInstancesProcessLine: {
-            display: 'flex', flexDirection: 'row', justifyContent: 'center', direction: 'ltr', marginBottom: '10px', marginTop: '10px'
+            display: 'flex', flexDirection: 'row', justifyContent: 'center', direction: 'ltr', marginBottom: '5px', marginTop: '5px'
         },
         sectorInstancesProcessCircle: {
             width: 40, height: 40, marginRight: '10px'
