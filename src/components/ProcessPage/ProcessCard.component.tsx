@@ -12,6 +12,7 @@ import { Divider } from '@material-ui/core';
 import { formatDistance } from 'date-fns'
 import { he } from 'date-fns/locale';
 import { getColorByStatus } from '../Common/helpers/helper';
+import CircularProgressSectorsBar from './CircularProgressbar/CircularProgressbar.component';
 
 export type ProcessCardProps = {
     process: ProcessInstance
@@ -40,21 +41,14 @@ const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
                     </div>
                     <div className={classes.leftDescription}>
                         <Typography align='left' variant="subtitle1" component="div">
-                            מצב: {process.status}
+                            {formatDistance(new Date(process.createdAt), new Date(), { addSuffix: true, locale: he })}
                         </Typography>
                     </div>
                 </CardContent>
                 <div className={classes.devider}>
                     <Divider />
                 </div>
-                <CardActions className={classes.cardActions}>
-                    <Typography align='right' variant="subtitle1" component="div">
-                        נוצר על ידי: {process.creator.fullname}
-                    </Typography>
-                    <Typography align='right' variant="subtitle1" component="div">
-                        {formatDistance(new Date(process.createdAt), new Date(), { addSuffix: true, locale: he })}
-                    </Typography>
-                </CardActions>
+                <CircularProgressSectorsBar sectorInstances={process.sectorInstances} />
             </Card>
         </div>
     );
