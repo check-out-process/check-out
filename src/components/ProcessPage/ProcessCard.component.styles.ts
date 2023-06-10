@@ -6,28 +6,28 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            display:'flex', flexDirection:'column', alignItems:'center'
+            display: 'flex', flexDirection: 'column', alignItems: 'center'
         },
-        card:{
-            width:'95%', boxShadow: '0px 0px 8px 1px #888888'
+        card: {
+            width: '95%', borderRadius: '8px'
         },
-        cardContent:{
+        cardContent: {
             height: '56px', display: 'flex', justifyContent: 'space-between'
         },
-        rightDescription:{
+        rightDescription: {
             width: '50%', marginTop: '-10px'
         },
-        leftDescription:{
+        leftDescription: {
             width: '50%', marginRight: '15px', marginTop: '-10px'
         },
-        devider:{
+        devider: {
             marginTop: '5px'
         },
-        cardActions:{
-            justifyContent: 'space-between',  marginTop: '-4px', height: '15px'
+        cardActions: {
+            justifyContent: 'space-between', marginTop: '-4px', height: '15px'
         }
     }),
 );
 
-export {useStyles}
+export { useStyles }
 

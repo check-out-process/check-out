@@ -98,8 +98,8 @@ export default function HorizontalLinearStepper() {
                 <Stepper activeStep={activeStep} className={classes.stepper} connector={<ColorlibConnector />} >
                     {steps.map((step: StepperType, index) => {
                         return (
-                            <Step key={step.title}>
-                                <StepLabel>{step.title}</StepLabel>
+                            <Step key={step.title} >
+                                <StepLabel >{step.title}</StepLabel>
                             </Step>
                         );
                     })}
@@ -110,7 +110,7 @@ export default function HorizontalLinearStepper() {
 
                 <div className={classes.buttonRoot}>
                     {activeStep > 0 ?
-                        <Button variant="contained" color="primary" onClick={handleBack} className={classes.cancelButton}>
+                        <Button variant="contained" color="primary" onClick={handleBack} className={classes.continueButton}>
                             הקודם
                         </Button> :
                         null}

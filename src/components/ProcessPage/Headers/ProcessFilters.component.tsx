@@ -111,9 +111,7 @@ const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses
                         )
                     })}
                 </div>
-
-
-                <Button className={classes.filters} variant="contained" color="primary" onClick={onSearchClick}>חיפוש</Button>
+                <Button className={classes.buttonSearch} variant="contained" color="primary" onClick={onSearchClick}>חיפוש</Button>
             </Drawer>
         </div>
     );

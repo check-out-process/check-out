@@ -1,4 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core";
+import { Colors } from '../../../style/colors/color';
 
 const drawerWidth = 240;
 
@@ -25,7 +26,13 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         filters: {
             marginTop: '5px',
-            marginRight: '4px' 
+            marginRight: '4px',
+        },
+        buttonSearch: {
+            marginTop: '5px',
+            marginRight: '4px',
+            marginLeft: '5px',
+            backgroundColor: Colors.buttonPrimaryBackgroundColor
         }
     }),
 );

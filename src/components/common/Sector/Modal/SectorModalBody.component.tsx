@@ -16,6 +16,7 @@ const useStyles = makeStyles(() =>
             position: 'absolute',
             bottom: 0,
             marginBottom: '15px',
+            boxShadow: 'none'
         },
         saveButtonDiv: {
             display: 'flex',
@@ -95,7 +96,7 @@ const SectorModalBody: React.FC<ISectorModalBodyProps> = ({ sector, handleClose 
                             onChange={onChangeCommitingUser} />
                     }
                     <div className={classes.saveButtonDiv}>
-                        <Button className={classes.saveButton} variant="contained" color="primary" onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
+                        <Button className={classes.saveButton} variant="contained"  onClick={() => { onSave() }} disabled={isDisabled()}>שמור</Button>
                     </div>
                 </div>
 

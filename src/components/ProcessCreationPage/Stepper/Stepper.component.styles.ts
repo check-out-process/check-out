@@ -2,6 +2,7 @@
 import { makeStyles, Theme, createStyles, withStyles } from '@material-ui/core/styles';
 
 import { StepConnector } from '@material-ui/core';
+import { Colors } from '../../../style/colors/color';
 
 
 const ColorlibConnector = withStyles({
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
             marginRight: '1%',
             display: 'flex',
             marginTop: '3%',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
         cancelButton: {
             textAlign: 'center',
@@ -49,17 +50,20 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             '@media (max-width: 500px)': {
                 width: '50%',
-            }
+            },
+            backgroundColor: Colors.buttonPrimaryBackgroundColor
+
         },
         continueButton: {
-            marginRight: '1%',
+            marginLeft: '2%',
             textAlign: 'center',
             '@media (min-width: 500px)': {
                 width: '20%',
             },
             '@media (max-width: 500px)': {
                 width: '50%',
-            }
+            },
+            backgroundColor: Colors.buttonPrimaryBackgroundColor
         },
         instructions: {
             marginTop: theme.spacing(1),
@@ -75,4 +79,4 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export {useStyles,ColorlibConnector}
+export { useStyles, ColorlibConnector }

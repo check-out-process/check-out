@@ -5,8 +5,8 @@ export const getColorByStatus = (status: string) => {
         case Status.Waiting_Confirm:
             return 'lightgray'
         case Status.In_Progress:
-            return '#87CEFA'
+            return 'rgb(186 228 253)'
         case Status.Done:
-            return '#90EE90'
+            return 'rgb(164 245 164)'
     }
 }

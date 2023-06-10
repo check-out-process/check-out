@@ -36,7 +36,7 @@ const useStyles = makeStyles(() =>
 
   return (
     <div className={classes.height}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:'#222A63 '}}>
         <Toolbar style={{justifyContent:'space-between'}}>
           <IconButton style={{marginRight:'-15px'}} edge="start" onClick={() => { setOpen(true) }} color="inherit">
             <MenuIcon style={{ fontSize: 35 }}/>

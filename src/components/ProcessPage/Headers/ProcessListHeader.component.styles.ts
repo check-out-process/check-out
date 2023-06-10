@@ -1,4 +1,5 @@
 import { Theme, createStyles, makeStyles } from "@material-ui/core";
+import { Colors } from '../../../style/colors/color';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex', width: '94%'
     },
     button: {
-      height: '34px', width: '120px', marginLeft: '10px'
+      height: '34px', width: '120px', marginLeft: '10px', backgroundColor: Colors.buttonPrimaryBackgroundColor
     }
   }),
 );
