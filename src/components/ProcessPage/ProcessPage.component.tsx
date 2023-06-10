@@ -7,6 +7,7 @@ import UserLogo from '../../style/images/hospital-bed.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { he } from 'date-fns/locale';
 import { formatDistance } from 'date-fns'
+import { Colors } from '../../style/colors/color';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -91,7 +92,7 @@ const ProcessPage = () => {
                                 תיאור : {process?.description}
                             </Typography>
                         </Paper>
-                        <Button style={{ width: '93%', marginTop: '7px' }} onClick={onSectorsPageClick} variant="contained" color="primary">לעמוד הסקטורים</Button>
+                        <Button style={{ width: '93%', marginTop: '7px', backgroundColor: Colors.buttonPrimaryBackgroundColor }} onClick={onSectorsPageClick} variant="contained" color="primary">לעמוד הסקטורים</Button>
                     </div>
                 </div>}
 

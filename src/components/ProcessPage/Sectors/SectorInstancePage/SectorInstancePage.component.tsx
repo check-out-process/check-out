@@ -5,11 +5,13 @@ import SectorInstancePageBody from './SectorInstancePageBody.component';
 import { Button, createStyles, makeStyles } from '@material-ui/core';
 import { SectorInstance } from '@checkout/types';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
+import { Colors } from '../../../../style/colors/color';
 
 const useStyles = makeStyles(() =>
     createStyles({
         button: {
-            marginTop: '20px'
+            marginTop: '20px',
+            backgroundColor: Colors.buttonPrimaryBackgroundColor
         },
     }),
 );

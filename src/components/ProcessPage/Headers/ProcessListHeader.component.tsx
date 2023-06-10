@@ -4,7 +4,6 @@ import { Button } from "@material-ui/core";
 import ProcessFilters from "./ProcessFilters.component";
 import { useStyles } from "./ProcessListHeader.component.styles";
 import PageHeader from "../Header/header.component";
-import { useNavigate } from 'react-router-dom';
 
 export type ProcessListHeaderProps = {
   processes: ProcessInstance[];
@@ -14,12 +13,7 @@ export type ProcessListHeaderProps = {
 
 const ProcessListHeader: React.FC<ProcessListHeaderProps> = ({ processes, setProcesses }) => {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
   const classes = useStyles();
-
-  const isClickScanBed = () => {
-    navigate('/scanBed')
-  }
 
   return (
     <div>
@@ -27,7 +21,6 @@ const ProcessListHeader: React.FC<ProcessListHeaderProps> = ({ processes, setPro
       <div className={classes.optionRow}>
         <div className={classes.buttonDiv}>
           <Button variant="contained" color="primary" onClick={() => { setOpen(true) }} className={classes.button}>חיפוש מתקדם</Button>
-          <Button variant="contained" color="primary" onClick={() => { isClickScanBed() }} className={classes.button}>סריקת מיטה</Button>
         </div>
       </div>
 

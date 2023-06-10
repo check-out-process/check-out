@@ -28,13 +28,13 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
             width: ({ width }) => width,
             height: ({ height }) => height,
             backgroundColor: '#c6cbd7',
-            border: '2px solid #000',
             boxShadow: '24',
             pt: 2,
             px: 4,
             pb: 3,
             direction: 'rtl',
-            outline: 'none'
+            outline: 'none',
+            borderRadius: '5px'
         },
         header: {
             display: 'flex',

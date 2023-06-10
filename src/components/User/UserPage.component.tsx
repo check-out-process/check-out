@@ -8,9 +8,9 @@ import UserLogo from '../../style/images/userLogo.png';
 import Paper from '@material-ui/core/Paper';
 import BaseModal from '../Common/Modal/BaseModal.component';
 import { User } from '@checkout/types';
-
 import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { UserContext } from '../../context/UserContext';
+import { Colors } from '../../style/colors/color';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -28,11 +28,13 @@ const useStyles = makeStyles((theme: Theme) =>
         cancelButton: {
             textAlign: 'center',
             width: '45%',
+            backgroundColor: Colors.buttonPrimaryBackgroundColor
         },
         continueButton: {
             marginRight: '1%',
             textAlign: 'center',
             width: '45%',
+            backgroundColor: '#de4343'
         },
     }),
 );
