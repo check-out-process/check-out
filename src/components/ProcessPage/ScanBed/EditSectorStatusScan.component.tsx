@@ -9,6 +9,7 @@ import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 import BaseModal from '../../Common/Modal/BaseModal.component';
 import { createStyles, makeStyles } from "@material-ui/core";
 import ListAltIcon from '@mui/icons-material/ListAlt';
+import { Colors } from '../../../style/colors/color';
 
 interface IEditSectorStatusProps {
     processInstanceStatusRes: ProcessInstanceStatusReturnedParamsUI,
@@ -21,14 +22,16 @@ const useStyles = makeStyles(() =>
             height: '100%'
         },
         endSectorButtonContainer: {
-            height: '100%',
+            height: '90%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
         },
         endSectorButton: {
             width: '40%',
-            height: '52px'
+            height: '52px',
+            backgroundColor: Colors.buttonPrimaryBackgroundColor,
+            fontSize: '16px'
         },
         editSectorStatusContainer: {
             height: '100%'

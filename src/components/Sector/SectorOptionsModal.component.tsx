@@ -55,8 +55,8 @@ const SectorOptionsModal: React.FC<ISectorCardProps> = ({ open, setOpen, refOffs
 
                     <div className="sectorOptionsModal"
                         style={style(refOffsetTop) as React.CSSProperties} >
-                        <Button color="primary" onClick={handleEdit} >עריכה</Button>
-                        <Button color="primary" onClick={handleRemove}>הסרה</Button>
+                        <Button onClick={handleEdit} >עריכה</Button>
+                        <Button onClick={handleRemove}>הסרה</Button>
                     </div>
                 </Modal>
                 <EditSectorModal openEditModal={openEditModal} setOpenEditModal={setOpenEditModal} sector={sector}/>
