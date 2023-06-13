@@ -38,7 +38,7 @@ const ReciveSectorMessage: React.FC = () => {
         getUserProcessInstance(processId).then((process: ProcessInstance) => {
             setProcess(process)
         }).catch((err: any) => {
-            enqueueSnackbar('קיים תהליך פתוח למיטה שנבחרה', { variant: 'error' })
+            enqueueSnackbar('קרתת שגיאה במהלך שליפת התהליך', { variant: 'error' })
             setHasError(true)
             setIsLoading(false);
         })
@@ -49,7 +49,7 @@ const ReciveSectorMessage: React.FC = () => {
             const currentSector: SectorInstance = sectorInstances.find(sector => sector.instanceId === sectorId)
             setSector(currentSector)
         }).catch((err: any) => {
-            enqueueSnackbar('קיים תהליך פתוח למיטה שנבחרה', { variant: 'error' })
+            enqueueSnackbar('קרתה שגיאה במהלך שליפת הסקטור', { variant: 'error' })
             setHasError(true)
             setIsLoading(false);
         })
@@ -77,27 +77,28 @@ const ReciveSectorMessage: React.FC = () => {
                     {sector && <Typography style={{ marginTop: '10px' }} align='center' variant="h5" component="h2">סקטור {sector!.name}</Typography>}
                     {!isLoading && !hasError ?
                         <>
-                            {sector && process && <div style={{ marginTop: '8%' }}>
-                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                    <img className={classes.systemLogo} src={check} alt='' />
-                                    <div style={{ width:'80%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '6px' }}>
-                                    <div>
-                                        <Typography align='right' variant="h5" component="h2">הודעה התקבלה בהצלחה</Typography>
-                                        <Typography align='right' variant="h5" component="h2">מבצע: {sector.commitingWorker?.fullname}</Typography>
-                                        <Typography align='right' variant="h5" component="h2">מחלקה: {process.department.name}</Typography>
-                                        <Typography align='right' variant="h5" component="h2">חדר: {process.room.name}</Typography>
-                                        <Typography align='right' variant="h5" component="h2">מיטה: {process.bed.name}</Typography>
+                            {sector && process &&
+                                <div style={{ marginTop: '8%' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <img className={classes.systemLogo} src={check} alt='' />
+                                        <div style={{ width: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '6px' }}>
+                                            <div>
+                                                <Typography align='right' variant="h5" component="h2">הודעה התקבלה בהצלחה</Typography>
+                                                <Typography align='right' variant="h5" component="h2">מבצע: {sector.commitingWorker?.fullname}</Typography>
+                                                <Typography align='right' variant="h5" component="h2">מחלקה: {process.department.name}</Typography>
+                                                <Typography align='right' variant="h5" component="h2">חדר: {process.room.name}</Typography>
+                                                <Typography align='right' variant="h5" component="h2">מיטה: {process.bed.name}</Typography>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                </div>
-                                
-                            </div>}
+
+                                </div>}
                         </> :
-                        <div style={{ marginTop: '25%' }}>
+                        <div style={{ marginTop: '8%' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <img className={classes.systemLogo} src={uncheck} alt='' />
                             </div>
-                            <Typography align='center' variant="h5" component="h2">קרתה תקלה , אנא נסה שוב</Typography>
+                            <Typography align='center' variant="h5" component="h2">קרתה תקלה , אנא נסה שוב לרענן את העמוד</Typography>
                         </div>
                     }
                 </>}
