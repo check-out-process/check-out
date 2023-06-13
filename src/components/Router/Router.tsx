@@ -22,6 +22,7 @@ import RoomCreationPage from '../UserManagmentPage/RoomCreationPage.component';
 import UserManagmentPage from '../UserManagmentPage/UserManagmentPage.component';
 import EditUserPage from '../User/EditUserPage.component';
 import ProcessPage from '../ProcessPage/ProcessPage.component';
+import ReciveSectorMessage from '../ProcessPage/ReciveSectorMessage/ReciveSectorMessage.component';
 
 const Router = () => {
   const { user, setUser } = useContext(UserContext);
@@ -84,6 +85,9 @@ const Router = () => {
                 <EditUserPage />
               </ProtectedRoute>} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
+          <Route path="/processes/:processId/sectors/:sectorId/recive" element={
+            <ReciveSectorMessage />
+          } />
         </Route> 
         <Route >
           <Route path="/login" element={

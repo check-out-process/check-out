@@ -29,6 +29,7 @@
     "react-qr-barcode-scanner": "^1.0.6",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "react-window": "^1.8.8",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",

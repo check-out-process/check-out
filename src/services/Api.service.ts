@@ -1,8 +1,9 @@
 import axios from "axios";
 import { getLocalAccessToken, getLocalRefreshToken, updateLocalTokens, removeUser } from "./Token.service";
+import { Config } from "../config";
 
 const instance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: Config.serverUrl,
   headers: {
     "Content-Type": "application/json",
   },
