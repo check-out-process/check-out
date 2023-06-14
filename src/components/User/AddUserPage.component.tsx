@@ -13,7 +13,7 @@ export type UserCardProps = {
 const AddUserPage: React.FC<UserCardProps> = ({ }) => {
 
     const onSaveClick = async (user: UserCreationParams) => {
-        return createUser(user);
+        return createUser(user)
     }
 
     return (

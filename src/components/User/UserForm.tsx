@@ -20,6 +20,7 @@ import { getRoles } from '../../services/Role.service';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from "@material-ui/core/MenuItem";
+import { getUsers } from '../../services/user.service';
 
 
 
@@ -91,9 +92,8 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
     const [password, setPassword] = useState<string>()
     const [jobs, setJobs] = useState<Job[]>([])
     const [roles, setRoles] = useState<RoleDTO[]>([])
-    const [job, setJob] = useState<Job>()
-    const [role, setRole] = useState<RoleDTO>()
-
+    const [job, setJob] = useState<string>()
+    const [role, setRole] = useState<string>()
 
     useEffect(() => {
         getJobs().then((jobs: Job[]) => {
@@ -109,8 +109,8 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
             setId(user.id)
             setFullName(user.fullname)
             setPhoneNumber(user.phoneNumber)
-            setJob(user.job)
-            setRole(user.role)
+            setJob(user.job.id)
+            setRole(user.role.id)
         }
     }, [user])
 
@@ -121,27 +121,39 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
 
     const onSaveClick = (confirm: boolean) => {
         if (confirm) {
-            const user: UserCreationParams = {
-                id: id,
+            let userBody: any = {
                 fullname: fullName,
                 username: fullName,
                 password: password,
                 phoneNumber: phoneNumber,
-                roleId: role.id,
-                jobId: job.id
+                roleId: role,
+                jobId: job
             }
-            console.log(user)
-
-            onSave(user).then((user: User) => {
-                navigate(`/managment/users`, { replace: true });
-                enqueueSnackbar('משתמש נוצר בהצלחה', { variant: 'success' })
-            }).catch(err => {
-                enqueueSnackbar('קרתה שגיאה במהלך הכנסת יוזרת אנא נסה שוב', { variant: 'error' })
-            })
+            if (user){
+                userBody.id = user.id
+                sendUser(userBody)
+            }
+            else{
+                getUsers().then((users: User[]) => {
+                    const maxUserId: number =  Math.max(...users.map(user => user.id))
+                    userBody.id = maxUserId + 1
+                    sendUser(userBody)
+                })
+            }
+            
 
         } else {
             setOpenConfirmiation(false)
         }
+    }
+
+    const sendUser = (user: any) => {
+        onSave(user).then((user: User) => {
+            navigate(`/managment/users`);
+            enqueueSnackbar('משתמש נוצר בהצלחה', { variant: 'success' })
+        }).catch(err => {
+            enqueueSnackbar('קרתה שגיאה במהלך הכנסת יוזרת אנא נסה שוב', { variant: 'error' })
+        })
     }
 
 
@@ -170,28 +182,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                     size='small' placeholder="הכנס שם מלא" />
                             </div>
                             <Divider variant="middle" style={{ marginTop: marginTop }} />
-                            {!user &&  <div style={{ flexDirection: 'row', justifyContent: 'flex-start', display: 'flex' }}>
-                                <TextField
-                                    value={password || ''}
-                                    size='small'
-                                    onChange={(event: any) => { setPassword(event.target.value) }}
-                                    variant="outlined"
-                                    label="סיסמא"
-                                    style={{ marginRight: '10px', marginTop: '10px', width: '95%' }}
-                                    placeholder="הכנס סיסמא" />
-                            </div>}
-                            {!user && <Divider variant="middle" style={{ marginTop: marginTop }} />}
-                            <div style={{ flexDirection: 'row', justifyContent: 'flex-start', display: 'flex' }}>
-                                <TextField
-                                    value={id || ''}
-                                    size='small'
-                                    onChange={(event: any) => { setId(parseInt(event.target.value)) }}
-                                    variant="outlined"
-                                    label="תעודת זהות"
-                                    style={{ marginRight: '10px', marginTop: '10px', width: '95%' }}
-                                    placeholder="הכנס תעודת זהות" />
-                            </div>
-                            <Divider variant="middle" style={{ marginTop: marginTop }} />
                             <div style={{ flexDirection: 'row', justifyContent: 'flex-start', display: 'flex', marginBottom: '10px' }}>
                                 <TextField
                                     value={phoneNumber || ''}
@@ -201,6 +191,18 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                     label="מספר פלאפון" style={{ marginRight: '10px', marginTop: '10px', width: '95%' }}
                                     placeholder="הכנס מספר פלאפון" />
                             </div>
+                            <Divider variant="middle" style={{ marginTop: marginTop }} />
+                            {!user &&
+                                <div style={{ flexDirection: 'row', justifyContent: 'flex-start', display: 'flex', marginBottom: '10px' }}>
+                                    <TextField
+                                        value={password || ''}
+                                        size='small'
+                                        onChange={(event: any) => { setPassword(event.target.value) }}
+                                        variant="outlined"
+                                        label="סיסמא" style={{ marginRight: '10px', marginTop: '10px', width: '95%' }}
+                                        placeholder="הכנס סיסמא" />
+                                </div>
+                            }
                             <Divider variant="middle" style={{ marginTop: marginTop }} />
                             <div style={{ marginBottom: '10px' }}>
                                 <FormControl fullWidth variant="filled">
@@ -220,7 +222,7 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                         </MenuItem>
                                         {jobs.map((job: Job, index) => {
                                             return (
-                                                <MenuItem className={classes.option} key={index} value={job as any}>
+                                                <MenuItem className={classes.option} key={index} value={job.id}>
                                                     <div className={classes.optionDisplay}>{job.name}</div>
                                                 </MenuItem>
                                             )
@@ -234,9 +236,9 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                 <FormControl fullWidth variant="filled">
 
                                     <Select
-                                        value={role ? job : 'None'}
-                                        defaultValue={role ? job : 'None'}
-                                        
+                                        value={role ? role : 'None'}
+                                        defaultValue={role ? role : 'None'}
+
                                         className={classes.select}
                                         onChange={(event: any) => {
                                             setRole(event.target.value)
@@ -248,7 +250,7 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
                                         </MenuItem>
                                         {roles.map((role: RoleDTO, index: number) => {
                                             return (
-                                                <MenuItem className={classes.option} key={index} value={role as any}>
+                                                <MenuItem className={classes.option} key={index} value={role.id}>
                                                     <div className={classes.optionDisplay}>{role.name}</div>
                                                 </MenuItem>
                                             )

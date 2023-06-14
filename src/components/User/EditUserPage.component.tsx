@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { User, UserCreationParams } from '@checkout/types';
 
 import { useNavigate, useParams } from 'react-router-dom';
-import { createUser, getUser } from '../../services/user.service';
+import { createUser, editUser, getUser } from '../../services/user.service';
 import UserForm from './UserForm';
 import { LinearProgress } from '@material-ui/core';
 
@@ -29,7 +29,14 @@ const EditUserPage: React.FC<UserCardProps> = ({ }) => {
 
 
     const onSaveClick = async (user: UserCreationParams) => {
-        return createUser(user);
+        const userBody: any = {
+            fullname: user.fullname,
+            username: user.fullname,
+            phoneNumber: user.phoneNumber,
+            roleId: user.roleId,
+            jobId: user.jobId
+        }
+        return editUser(user.id, userBody);
     }
 
     return (
