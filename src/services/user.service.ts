@@ -21,7 +21,7 @@ export function createUser(user: UserCreationParams): Promise<User>{
     return instance.post(`${Config.serverUrl}/auth/register`,user,{headers:{'Content-Type':'application/json'}}).then(res => res.data)
 }
 
-export function editUser(user: UserCreationParams): Promise<User>{
-    return instance.patch(`${Config.serverUrl}/users`,user,{headers:{'Content-Type':'application/json'}}).then(res => res.data)
+export function editUser(userId: number , user: UserCreationParams): Promise<User>{
+    return instance.patch(`${Config.serverUrl}/users/${userId}`,user,{headers:{'Content-Type':'application/json'}}).then(res => res.data)
 }
 
