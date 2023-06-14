@@ -70,7 +70,7 @@ const Router = () => {
             }
           />
           <Route path="/managment/users" element={
-            <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
+           user  && <ProtectedRoute user={user} userPremmitedRoles={userAdminRole}>
               <UserManagmentPage />
             </ProtectedRoute>
           } />

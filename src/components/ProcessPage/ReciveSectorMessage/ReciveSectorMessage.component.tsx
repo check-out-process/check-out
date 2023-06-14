@@ -13,8 +13,8 @@ import { ProcessInstance, SectorInstance } from '@checkout/types';
 const useStyles = makeStyles(() =>
     createStyles({
         systemLogo: {
-            width: '200px',
-            height: '200px'
+            width: '180px',
+            height: '180px'
         }
     }),
 );
@@ -74,25 +74,16 @@ const ReciveSectorMessage: React.FC = () => {
         <>
             {isLoading ? <CircularProgress style={{ marginTop: '20%' }} disableShrink /> :
                 <>
-                    {sector && <Typography style={{ marginTop: '10px' }} align='center' variant="h5" component="h2">סקטור {sector!.name}</Typography>}
                     {!isLoading && !hasError ?
                         <>
                             {sector && process &&
-                                <div style={{ marginTop: '8%' }}>
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height:'100%', justifyContent: 'center'}}>
                                         <img className={classes.systemLogo} src={check} alt='' />
                                         <div style={{ width: '80%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '6px' }}>
-                                            <div>
-                                                <Typography align='right' variant="h5" component="h2">הודעה התקבלה בהצלחה</Typography>
-                                                <Typography align='right' variant="h5" component="h2">מבצע: {sector.commitingWorker?.fullname}</Typography>
-                                                <Typography align='right' variant="h5" component="h2">מחלקה: {process.department.name}</Typography>
-                                                <Typography align='right' variant="h5" component="h2">חדר: {process.room.name}</Typography>
-                                                <Typography align='right' variant="h5" component="h2">מיטה: {process.bed.name}</Typography>
-                                            </div>
+                                                <Typography align='right' variant="h5" component="h2" style={{fontWeight:'600'}}>ההודעה התקבלה בהצלחה</Typography>
+                                                <Typography align='right' variant="h5" component="h2" style={{fontSize: '20px'}}>נשלחה הודעה לסיום הסקטור</Typography>
                                         </div>
-                                    </div>
-
-                                </div>}
+                                    </div>}
                         </> :
                         <div style={{ marginTop: '8%' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
