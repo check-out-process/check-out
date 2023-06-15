@@ -20,6 +20,21 @@ const ProcessList = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const classes = useStyles()
     const navigate = useNavigate();
+    const MINUTE_MS = 60000;
+
+    useEffect(() => {
+        let interval = setInterval(() => {
+            getUserProcessInstances().then(((processes: ProcessInstance[]) => {
+                const sortedProcesses: ProcessInstance[] = sortProcesses(processes)
+                setProcesses(sortedProcesses)
+                setCurrentProcesses(sortedProcesses)
+            }))
+        }, MINUTE_MS * 3);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     useEffect(() => {
         const user = getUser();
@@ -47,11 +62,11 @@ const ProcessList = () => {
             const yDate = new Date(y.createdAt)
             if (xDate > yDate) {
                 return -1;
-              } else if (xDate < yDate) {
+            } else if (xDate < yDate) {
                 return 1;
-              } else {
+            } else {
                 return 0;
-              }
+            }
         }).sort((x: ProcessInstance, y: ProcessInstance) => {
             if ((x.status === Status.In_Progress) && (y.status === Status.Done)) {
                 return -1
@@ -92,11 +107,11 @@ const ProcessList = () => {
 
     return (
         <div>
-            {isLogIn ? <></>: <div>
+            {isLogIn ? <></> : <div>
                 <div className={classes.headers} >
                     <ProcessListHeader processes={processes} setProcesses={initFirstPage} />
                 </div >
-                {loading ? <CircularProgress style={{ marginTop:'50%'}} disableShrink /> : null}
+                {loading ? <CircularProgress style={{ marginTop: '50%' }} disableShrink /> : null}
                 <div className={classes.processesList}>
                     {currentProcesses?.length > 0 ?
                         <FixedSizeList direction='rtl' height={450} width='98%' itemSize={165} itemCount={currentProcesses.length}>
