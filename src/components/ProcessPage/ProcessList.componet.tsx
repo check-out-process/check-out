@@ -114,7 +114,7 @@ const ProcessList = () => {
                 {loading ? <CircularProgress style={{ marginTop: '50%' }} disableShrink /> : null}
                 <div className={classes.processesList}>
                     {currentProcesses?.length > 0 ?
-                        <FixedSizeList direction='rtl' height={450} width='98%' itemSize={165} itemCount={currentProcesses.length}>
+                        <FixedSizeList direction='rtl' height={window.innerHeight - 200} width='98%' itemSize={165} itemCount={currentProcesses.length}>
                             {memo((props: ListChildComponentProps) => {
                                 const { index, style } = props;
                                 return (

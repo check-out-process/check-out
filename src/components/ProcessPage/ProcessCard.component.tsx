@@ -21,21 +21,20 @@ export type ProcessCardProps = {
 const ProcessCard: React.FC<ProcessCardProps> = ({ process }) => {
     const classes = useStyles();
     const navigate = useNavigate();
-
     const navigateTo = () => navigate(`/processes/${process.instanceId}`);
 
     return (
         <div className={classes.root}>
-            <Card className={classes.card} style={{ backgroundColor: getColorByStatus(process.status) }} onClick={navigateTo} >
+            <Card className={classes.card} style={{ backgroundColor: getColorByStatus(process.status),  }} onClick={navigateTo} >
                 <CardContent className={classes.cardContent}>
                     <div className={classes.rightDescription}>
-                        <Typography align='right' variant="subtitle1" component="div">
+                        <Typography align='right' variant="subtitle1" component="div" style= {{fontSize: '17px'}}>
                             מחלקה: {process.department.name}
                         </Typography>
-                        <Typography align='right' variant="subtitle1" component="div">
+                        <Typography align='right' variant="subtitle1" component="div" style= {{fontSize: '17px'}}>
                             חדר: {process.room.name}
                         </Typography>
-                        <Typography align='right' variant="subtitle1" component="div">
+                        <Typography align='right' variant="subtitle1" component="div" style= {{fontSize: '17px'}}>
                             מיטה: {process.bed.name}
                         </Typography>
                     </div>

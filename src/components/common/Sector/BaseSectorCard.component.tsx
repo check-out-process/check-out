@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
             justifyContent: 'space-between',
             alignItems: 'center',
             width: '100%',
-            height: '48px'
+            height: '52px'
         },
         CardContent: {
             display: 'flex',
@@ -30,11 +30,11 @@ const useStyles = makeStyles<Theme, StyleProps>(() =>
             padding: '4px',
         },
         sectorName: {
-            fontSize: '16px',
+            fontSize: '19px',
             marginRight: '15px'
         },
         ownerTitle: {
-            fontSize: '12px',
+            fontSize: '15px',
             marginRight: '15px'
         },
         iconOfModal: {
