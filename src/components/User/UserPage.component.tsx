@@ -11,6 +11,8 @@ import { User } from '@checkout/types';
 import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { UserContext } from '../../context/UserContext';
 import { Colors } from '../../style/colors/color';
+import { useSnackbar } from 'notistack';
+
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,6 +54,8 @@ const UserPage: React.FC<UserPageProps> = ({ }) => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { enqueueSnackbar } = useSnackbar();
+
 
 
     const onBackClick = () => {
@@ -64,7 +68,13 @@ const UserPage: React.FC<UserPageProps> = ({ }) => {
 
     const onDeleteSave = (confirm: boolean) => {
         if (confirm) {
-            deleteUser(currentUser.id)
+            deleteUser(currentUser.id).then(res => {
+                enqueueSnackbar('יוזר נמחק בהצלחה', { variant: 'success' })
+                navigate(`/managment/users`);
+            }).catch(err => {
+                enqueueSnackbar('מחיקת יוזר נכשלה, אנא נסה שוב', { variant: 'error' })
+            })
+            
         } else {
             setOpenDeleteConfirmiation(false)
         }
