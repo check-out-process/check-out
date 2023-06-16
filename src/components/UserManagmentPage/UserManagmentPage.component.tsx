@@ -23,8 +23,8 @@ const UserManagmentPage: React.FC<{}> = ({ }) => {
 
     const fetchUsers = () => {
         setLoading(true)
-        getUsers().then((users: User[]) => {
-            setUsers(users)
+        getUsers().then((usersList: User[]) => {
+            setUsers(usersList)
             setLoading(false)
         }).catch(err => {
             setLoading(false)
