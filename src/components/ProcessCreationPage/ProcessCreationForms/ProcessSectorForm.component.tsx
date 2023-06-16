@@ -104,7 +104,7 @@ const ProcessSectorForm = () => {
             <div>
               <SectorsList />
               <IconButton onClick={handleDrawerOpen} className={classes.drawerIcon}>
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon style={{height: '27px',width: '27px' }}/>
               </IconButton>
             </div>
           </div >

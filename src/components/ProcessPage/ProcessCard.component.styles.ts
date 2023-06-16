@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: '95%', borderRadius: '8px'
         },
         cardContent: {
-            height: '56px', display: 'flex', justifyContent: 'space-between'
+             display: 'flex', justifyContent: 'space-between', padding: '16px 16px 4px 16px'
         },
         rightDescription: {
             width: '50%', marginTop: '-10px'
