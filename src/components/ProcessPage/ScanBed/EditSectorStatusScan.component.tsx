@@ -10,7 +10,7 @@ import BaseModal from '../../Common/Modal/BaseModal.component';
 import { createStyles, makeStyles } from "@material-ui/core";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Colors } from '../../../style/colors/color';
-
+import tapHereIcon from '../../../style/images/taphere.png'
 interface IEditSectorStatusProps {
     processInstanceStatusRes: ProcessInstanceStatusReturnedParamsUI,
     bedId: string
@@ -25,7 +25,8 @@ const useStyles = makeStyles(() =>
             height: '90%',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            flexDirection: 'column'
         },
         endSectorButton: {
             width: '42%',
@@ -118,6 +119,7 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
                         >
                             סיום סקטור
                         </Button>
+                        <img src={tapHereIcon} alt="Logo" style={{height: '55px',width: '55px',marginLeft: '148px',marginTop: '-23px',zIndex: 1}}/>
                     </div>
                     {isAnotherSectorEdit ? <BaseModal open={isAnotherSectorEdit} setOpen={onAnswerAnotherSectorEdit} title='יש עוד סקטור בתהליך באחריותך האם תרצה לסמן סיום גם עליו?' /> : null}
                 </div> :
