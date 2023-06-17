@@ -28,10 +28,11 @@ const useStyles = makeStyles(() =>
             alignItems: 'center'
         },
         endSectorButton: {
-            width: '40%',
-            height: '52px',
+            width: '42%',
+            height: '58px',
             backgroundColor: Colors.buttonPrimaryBackgroundColor,
-            fontSize: '16px'
+            fontSize: '16px',
+            borderRadius: '31px'
         },
         editSectorStatusContainer: {
             height: '100%'
@@ -135,7 +136,7 @@ const EditSectorStatusScan: React.FC<IEditSectorStatusProps> = ({ processInstanc
                         </p>
                     </div>
             }
-        </>
+        </> 
     )
 }
 
