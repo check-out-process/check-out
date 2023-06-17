@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getRooms } from '../../services/Room.service';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common1/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import { DepartmentDTO, RoomDTO } from '@checkout/types';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 
@@ -62,8 +62,7 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
                 
                 setRoomsDropdownData(data);
                 setIsLoading(false);
-            }).
-            catch(err => {
+            }).catch(err => {
                 setIsLoading(false);
                 setRoomsDropdownData([])
                 setRooms([])

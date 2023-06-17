@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './ProcessCard.component.styles';
@@ -11,7 +10,7 @@ import {
 import { Divider } from '@material-ui/core';
 import { formatDistance } from 'date-fns'
 import { he } from 'date-fns/locale';
-import { getColorByStatus } from '../Common1/helpers/helper';
+import { getColorByStatus } from '../Common/helpers/helper';
 import CircularProgressSectorsBar from './CircularProgressbar/CircularProgressbar.component';
 
 export type ProcessCardProps = {

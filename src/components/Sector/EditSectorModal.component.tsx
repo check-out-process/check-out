@@ -1,11 +1,7 @@
-import { Modal, IconButton } from "@material-ui/core";
-import React, { Dispatch, SetStateAction, useState, useEffect, useContext } from 'react';
-import CloseIcon from '@material-ui/icons/Close';
+import React, { Dispatch, SetStateAction } from 'react';
 import './SectorOptionsModal.component.css';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common1/Select/Dropdown.component";
-import { User, Sector } from '@checkout/types';
-import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
-import BaseSectorModal from "../Common1/Sector/Modal/BaseSectorModal.component";
+import { Sector } from '@checkout/types';
+import BaseSectorModal from "../Common/Sector/Modal/BaseSectorModal.component";
 
 interface IEditSectorModalProps {
     openEditModal: boolean,
@@ -17,7 +13,6 @@ const EditSectorModal: React.FC<IEditSectorModalProps> = ({ openEditModal, setOp
 
     return (
         <BaseSectorModal openModal={openEditModal} setOpenModal={setOpenEditModal} sector={sector}/>
-
     )
 }
 

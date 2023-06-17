@@ -1,16 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { User, UserCreationParams } from '@checkout/types';
-
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { UserCreationParams } from '@checkout/types';
 import { createUser } from '../../services/user.service';
 import UserForm from './UserForm';
 
 
-export type UserCardProps = {
-
-}
-
-const AddUserPage: React.FC<UserCardProps> = ({ }) => {
+const AddUserPage: React.FC = () => {
 
     const onSaveClick = async (user: UserCreationParams) => {
         return createUser(user)

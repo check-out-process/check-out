@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import ScanData from '../ScanBarcode/ScanData.component';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getProcessSectorInstances, getProcessStatusByBedId, getUserProcessInstance } from '../../../services/ProcessInstance.service';
+import { useParams } from 'react-router-dom';
+import { getProcessSectorInstances, getUserProcessInstance } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from "@material-ui/core";

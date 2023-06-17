@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Sector } from "@checkout/types";
 import SectorOptionsModal from "./SectorOptionsModal.component";
 import { Draggable } from "react-beautiful-dnd";
-import BaseSectorCard from "../Common1/Sector/BaseSectorCard.component";
+import BaseSectorCard from "../Common/Sector/BaseSectorCard.component";
 
 interface ISectorCardProps {
     sector: Sector,

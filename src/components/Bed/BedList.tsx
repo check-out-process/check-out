@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getBeds } from '../../services/Bed.service';
 import { BedDTO, RoomDTO } from '@checkout/types';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common1/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 
 export type RoomListProps = {
@@ -39,7 +39,7 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
             const data: DropdownKeyPair[] = beds.map((bed: BedDTO) => ({ value: bed, displayName: bed.name }))
             setBedsDropdownData(data);
         }
-        if (room == undefined && bed === undefined){
+        if (room === undefined && bed === undefined){
             setBedsDropdownData([]);
         }
     }, [room])

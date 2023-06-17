@@ -13,7 +13,7 @@ import {
     ThemeProvider,
     createTheme
 } from "@material-ui/core/styles";
-import BaseModal from '../Common1/Modal/BaseModal.component';
+import BaseModal from '../Common/Modal/BaseModal.component';
 import { enqueueSnackbar } from 'notistack';
 import { getJobs } from '../../services/Job.service';
 import { getRoles } from '../../services/Role.service';
@@ -86,7 +86,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
     const navigate = useNavigate();
     const classes = useStyles();
     const [openConfirmiation, setOpenConfirmiation] = useState<boolean>()
-    const [id, setId] = useState<number>()
     const [fullName, setFullName] = useState<string>()
     const [phoneNumber, setPhoneNumber] = useState<string>()
     const [password, setPassword] = useState<string>()
@@ -106,7 +105,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
 
     useEffect(() => {
         if (user) {
-            setId(user.id)
             setFullName(user.fullname)
             setPhoneNumber(user.phoneNumber)
             setJob(user.job.id)

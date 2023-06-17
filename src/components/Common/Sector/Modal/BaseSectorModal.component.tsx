@@ -1,5 +1,5 @@
 import { Modal, IconButton } from "@material-ui/core";
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import SectorModalBody from "./SectorModalBody.component";

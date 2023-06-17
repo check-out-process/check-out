@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Config } from "../config";
 import { RoleDTO } from '@checkout/types';
 import instance from "./Api.service";

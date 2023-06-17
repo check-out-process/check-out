@@ -14,9 +14,6 @@ const ProcessList = () => {
     const [isLogIn, setIsLogIn] = useState<boolean>(true);
     const [processes, setProcesses] = useState<ProcessInstance[]>([])
     const [currentProcesses, setCurrentProcesses] = useState<ProcessInstance[]>([])
-    const [pages, setPages] = useState<number>(0)
-    const [pageProcessMap, setPageProcessMap] = useState<ProcessInstance[][]>([])
-    const processPerPage: number = 3;
     const [loading, setLoading] = useState<boolean>(false);
     const classes = useStyles()
     const navigate = useNavigate();
@@ -82,26 +79,7 @@ const ProcessList = () => {
         })
     }
 
-    const splitProcessesIntoChunks = (processes: ProcessInstance[]) => {
-        const res = [];
-        for (let i = 0; i < processes.length; i += processPerPage) {
-            const chunk = processes.slice(i, i + processPerPage);
-            res.push(chunk);
-        }
-        return res;
-    }
-
-    const calculatePagesNumber = (processes: ProcessInstance[]) => {
-        const pagesNumber = (processes.length / processPerPage)
-        const isNaturalNumber: boolean = (pagesNumber % 1 === 0)
-        const totalPageNumber = (isNaturalNumber) ? pagesNumber : Math.floor(pagesNumber) + 1;
-        setPages(totalPageNumber)
-    }
-
     const initFirstPage = (processes: ProcessInstance[]) => {
-        calculatePagesNumber(processes)
-        const pages = splitProcessesIntoChunks(processes)
-        setPageProcessMap(pages)
         setCurrentProcesses(sortProcesses(processes))
     }
 
@@ -125,7 +103,7 @@ const ProcessList = () => {
                             })}
                         </FixedSizeList> : null}
 
-                    {currentProcesses?.length == 0 && !loading ?
+                    {currentProcesses?.length === 0 && !loading ?
                         <Typography className={classes.noResultTitle} align='center' variant="h5" component="h2">לא נמצאו תהליכים</Typography> : null}
                 </div>
             </div>}

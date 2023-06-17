@@ -1,8 +1,8 @@
-import { createStyles, LinearProgress, makeStyles, Snackbar, Theme } from '@material-ui/core';
+import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { getDepartments } from '../../services/Department.service';
 import { DepartmentDTO } from '@checkout/types';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common1/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import { useSnackbar } from 'notistack';
 
 
@@ -35,7 +35,7 @@ const DepartmentList: React.FC<DepartmentListProps> = ({ department, setDepartme
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
-        if (departments.length == 0) {
+        if (departments.length === 0) {
             fetchDepartments()
         } else {
             const data: DropdownKeyPair[] = departments.map((department: DepartmentDTO) =>

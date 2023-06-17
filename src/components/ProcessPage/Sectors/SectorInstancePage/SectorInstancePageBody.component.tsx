@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { DropdownKeyPair } from '../../../Common1/Select/Dropdown.component';
+import { DropdownKeyPair } from '../../../Common/Select/Dropdown.component';
 import { getSectorById } from '../../../../services/Sector.service';
 import EditResponsibleTeamUser from './DropDownOptions/EditResponsibleTeamUser.component';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"

@@ -3,7 +3,7 @@ import { Card, CardContent, IconButton, Typography, createStyles, makeStyles, Th
 import { SectorInstance, Sector } from '@checkout/types';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import './BaseSectorCard.component.css';
-import { getColorByStatus } from '../../Common1/helpers/helper';
+import { getColorByStatus } from '../../Common/helpers/helper';
 interface IBaseSectorCardProps {
     sector: SectorInstance | Sector,
     withModal: Boolean,
