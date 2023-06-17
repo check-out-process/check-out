@@ -30,7 +30,6 @@ const ProcessSectorForm = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    const a = ProcessTemplateFactory();
     const {processTemplateIsolationId, processTemplateBedNonIsolationId, processTypeId } = (ProcessTemplateFactory() as any )[department.name];;
     fetchDefaultSectors(processTemplateIsolationId, processTemplateBedNonIsolationId);
     fetchNotDefaultSectors(processTypeId);
@@ -71,14 +70,7 @@ const ProcessSectorForm = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const handleCancel = () => {
-  };
-
-  const buttonsStyle = () => ({
-    marginRight: '10px', height: '32px', width: '85px', marginBottom: '6px', marginTop: '8px'
-  });
-
+  
   const onDragEnd = (result: DropResult) => {
     const { destination, source } = result;
 

@@ -1,9 +1,8 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { Button, CircularProgress, Fab, OutlinedInput, Typography } from "@material-ui/core"
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import React, { memo, useEffect, useState } from 'react';
+import { CircularProgress, Fab, Typography } from "@material-ui/core"
 import { User } from '@checkout/types';
 import { getUsers } from '../../services/user.service';
-import { enqueueSnackbar, useSnackbar } from 'notistack';
+import { enqueueSnackbar } from 'notistack';
 import UserCard from './UserCard.component';
 import { FixedSizeList, ListChildComponentProps } from 'react-window';
 import AddIcon from '@material-ui/icons/Add';
@@ -11,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const UserManagmentPage: React.FC<{}> = ({ }) => {
+const UserManagmentPage: React.FC = () => {
     const [users, setUsers] = useState<User[]>([])
     const [loading, setLoading] = useState<boolean>(false);
     const navigate = useNavigate();

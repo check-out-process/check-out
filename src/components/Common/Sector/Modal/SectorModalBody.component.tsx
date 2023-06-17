@@ -3,7 +3,7 @@ import { ProcessSectorsContext } from "../../../../context/ProcessSectorsContext
 import { User, Sector } from '@checkout/types';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from "../../Select/Dropdown.component";
 import { Button, CircularProgress } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core';
 
 interface ISectorModalBodyProps {
     sector: Sector,

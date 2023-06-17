@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  RouterProvider, Route, Navigate
+  RouterProvider, Route
 } from "react-router-dom";
 import NavBarLayout from '../Layout/NavBar/NavBar.component';
 import LogInPage from '../LogInPage/logInPage.component';

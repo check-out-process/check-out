@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, OutlinedInput, Typography } from "@material-ui/core";
 import { addDepartment } from '../../services/Department.service';
 import { enqueueSnackbar } from 'notistack';
@@ -22,15 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const DepartmentCreationPage: React.FC<{}> = ({ }) => {
+const DepartmentCreationPage: React.FC = () => {
     const [department, setDepartment] = useState<string>('');
     const classes = useStyles()
 
     const onSave = () => {
         addDepartment(department).then(() => {
             enqueueSnackbar('המחלקה נוצר בהצלחה', { variant: 'success' })
-        }).
-            catch(err => {
+        }).catch(err => {
                 enqueueSnackbar('שגיאה בעת הכנסת מחלקה', { variant: 'error' })
             })
     }

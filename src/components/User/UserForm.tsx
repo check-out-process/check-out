@@ -86,7 +86,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
     const navigate = useNavigate();
     const classes = useStyles();
     const [openConfirmiation, setOpenConfirmiation] = useState<boolean>()
-    const [id, setId] = useState<number>()
     const [fullName, setFullName] = useState<string>()
     const [phoneNumber, setPhoneNumber] = useState<string>()
     const [password, setPassword] = useState<string>()
@@ -106,7 +105,6 @@ const UserForm: React.FC<UserCardProps> = ({ onSave, user }) => {
 
     useEffect(() => {
         if (user) {
-            setId(user.id)
             setFullName(user.fullname)
             setPhoneNumber(user.phoneNumber)
             setJob(user.job.id)

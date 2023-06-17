@@ -39,7 +39,7 @@ const ProcessSectorsList: React.FC = () => {
                         <ProcessSectorCard key={sector.instanceId} sector={sector} processId={processId} />
                     ))}
                 </List>}
-            {processSectors?.length == 0 && !loading ?
+            {processSectors?.length === 0 && !loading ?
                 <Typography align='center' variant="h5" component="h2">לא נמצאו סקטורים</Typography> : null}
 
         </div>

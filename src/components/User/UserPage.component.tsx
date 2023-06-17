@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Button, CircularProgress, Divider, IconButton, LinearProgress, OutlinedInput, Typography } from "@material-ui/core"
+import React, { useContext, useEffect , useState } from 'react';
+import { Button, CircularProgress, Divider, IconButton, Typography } from "@material-ui/core"
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { deleteUser, getUser } from '../../services/user.service';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -43,10 +43,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const marginTop: string = '10px'
 
-export type UserPageProps = {
-}
 
-const UserPage: React.FC<UserPageProps> = ({ }) => {
+const UserPage: React.FC = () => {
     const [currentUser, setCurrentUser] = useState<User>()
     const [openDeleteConfirmiation, setOpenDeleteConfirmiation] = useState<boolean>()
     const { userId } = useParams();

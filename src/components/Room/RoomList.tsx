@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getRooms } from '../../services/Room.service';
 import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
 import { DepartmentDTO, RoomDTO } from '@checkout/types';
@@ -62,8 +62,7 @@ const RoomList: React.FC<RoomListType> = ({ department, room, setRoom, rooms, se
                 
                 setRoomsDropdownData(data);
                 setIsLoading(false);
-            }).
-            catch(err => {
+            }).catch(err => {
                 setIsLoading(false);
                 setRoomsDropdownData([])
                 setRooms([])

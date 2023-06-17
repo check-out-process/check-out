@@ -1,20 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { User, UserCreationParams } from '@checkout/types';
-
-import { useNavigate, useParams } from 'react-router-dom';
-import { createUser, editUser, getUser } from '../../services/user.service';
+import { useParams } from 'react-router-dom';
+import { editUser, getUser } from '../../services/user.service';
 import UserForm from './UserForm';
 import { LinearProgress } from '@material-ui/core';
 
 
-export type UserCardProps = {
-
-}
-
-const EditUserPage: React.FC<UserCardProps> = ({ }) => {
-
+const EditUserPage: React.FC = () => {
     const [user, setUser] = useState<User>()
-
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const { userId } = useParams();
 

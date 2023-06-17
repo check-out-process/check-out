@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const RoomCreationPage: React.FC<{}> = ({ }) => {
+const RoomCreationPage: React.FC = () => {
     const [department, setDepartment] = useState<DepartmentDTO>();
     const [room, setRoom] = useState<string>('');
     const [departments, setDepartments] = useState<DepartmentDTO[]>([]);
@@ -35,8 +35,7 @@ const RoomCreationPage: React.FC<{}> = ({ }) => {
     const onSave = () => {
         addRoom(department.id, room).then(() => {
             enqueueSnackbar('המחלקה נוצר בהצלחה', { variant: 'success' })
-        }).
-            catch(err => {
+        }).catch(err => {
                 enqueueSnackbar('שגיאה בעת הכנסת מחלקה', { variant: 'error' })
             })
     }

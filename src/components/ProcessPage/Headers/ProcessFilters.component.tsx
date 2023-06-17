@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
 import { ProcessInstance } from "@checkout/types";
-import { Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, OutlinedInput, TextField, Theme, Typography, createStyles, makeStyles } from "@material-ui/core";
+import { Button, Divider, Drawer, IconButton, OutlinedInput, Typography } from "@material-ui/core";
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {useStyles} from "./ProcessFilters.component.styles";
 import { Status } from "@checkout/types/dist/lib/enums/status.enum";
@@ -17,8 +17,7 @@ export type ProcessFiltersProps = {
 
 const ProcessFilters: React.FC<ProcessFiltersProps> = ({ processes, setProcesses, open, setOpen }) => {
     const classes = useStyles();
-    const [statues, setStatues] = useState<string[]>([Status.Done, Status.In_Progress]);
-
+    const statues: string[] = [Status.Done, Status.In_Progress];
     const [department, setDepartment] = useState<string>('');
     const [room, setRoom] = useState<string>('');
     const [bed, setBed] = useState<string>('');

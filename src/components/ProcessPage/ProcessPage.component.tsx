@@ -5,8 +5,6 @@ import { ProcessInstance } from '@checkout/types';
 import { useNavigate, useParams } from 'react-router-dom';
 import UserLogo from '../../style/images/hospital-bed.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { he } from 'date-fns/locale';
-import { formatDistance } from 'date-fns'
 import { Colors } from '../../style/colors/color';
 
 

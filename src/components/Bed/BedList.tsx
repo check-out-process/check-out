@@ -39,7 +39,7 @@ const BedList: React.FC<RoomListProps> = ({ room, bed, setBed, beds, setBeds }) 
             const data: DropdownKeyPair[] = beds.map((bed: BedDTO) => ({ value: bed, displayName: bed.name }))
             setBedsDropdownData(data);
         }
-        if (room == undefined && bed === undefined){
+        if (room === undefined && bed === undefined){
             setBedsDropdownData([]);
         }
     }, [room])
