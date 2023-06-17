@@ -2,10 +2,10 @@ import { Modal, IconButton } from "@material-ui/core";
 import React, { Dispatch, SetStateAction, useState, useEffect, useContext } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
 import './SectorOptionsModal.component.css';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common/Select/Dropdown.component";
+import Dropdown, { DropdownKeyPair, onChangeEvent } from "../Common1/Select/Dropdown.component";
 import { User, Sector } from '@checkout/types';
 import { ProcessSectorsContext } from "../../context/ProcessSectorsContext";
-import BaseSectorModal from "../Common/Sector/Modal/BaseSectorModal.component";
+import BaseSectorModal from "../Common1/Sector/Modal/BaseSectorModal.component";
 
 interface IEditSectorModalProps {
     openEditModal: boolean,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { getRooms } from '../../services/Room.service';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common1/Select/Dropdown.component';
 import { DepartmentDTO, RoomDTO } from '@checkout/types';
 import { createStyles, LinearProgress, makeStyles, Theme } from '@material-ui/core';
 

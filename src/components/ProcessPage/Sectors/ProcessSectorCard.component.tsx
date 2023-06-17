@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseSectorCard from "../../Common/Sector/BaseSectorCard.component";
+import BaseSectorCard from "../../Common1/Sector/BaseSectorCard.component";
 import { SectorInstance } from '@checkout/types';
 import {
     useNavigate

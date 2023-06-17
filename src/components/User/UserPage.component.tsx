@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import UserLogo from '../../style/images/userLogo.png';
 import Paper from '@material-ui/core/Paper';
-import BaseModal from '../Common/Modal/BaseModal.component';
+import BaseModal from '../Common1/Modal/BaseModal.component';
 import { User } from '@checkout/types';
 import { Role } from '@checkout/types/dist/lib/enums/role.enum';
 import { UserContext } from '../../context/UserContext';

@@ -11,7 +11,7 @@ import {
 import { Divider } from '@material-ui/core';
 import { formatDistance } from 'date-fns'
 import { he } from 'date-fns/locale';
-import { getColorByStatus } from '../Common/helpers/helper';
+import { getColorByStatus } from '../Common1/helpers/helper';
 import CircularProgressSectorsBar from './CircularProgressbar/CircularProgressbar.component';
 
 export type ProcessCardProps = {

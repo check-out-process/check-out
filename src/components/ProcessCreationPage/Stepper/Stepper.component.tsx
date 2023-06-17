@@ -10,11 +10,11 @@ import { useSnackbar } from 'notistack';
 import { useStyles, ColorlibConnector } from './Stepper.component.styles';
 import './Stepper.component.css';
 import { ProcessCreationDetailsContext } from '../../../context/ProcessCreationContext';
-import BaseModal from '../../Common/Modal/BaseModal.component';
+import BaseModal from '../../Common1/Modal/BaseModal.component';
 import ProcessCreationBasicDetailsForm from '../ProcessCreationForms/ProcessCreationBasicDetailsForm.component';
 import { createProcessInstance } from '../../../services/ProcessInstance.service';
 import { ProcessSectorsContext } from '../../../context/ProcessSectorsContext';
-import { buildProcessInstanceBody } from '../../Common/helpers/processInstance.helper';
+import { buildProcessInstanceBody } from '../../Common1/helpers/processInstance.helper';
 import { HttpStatusCode } from 'axios';
 
 export type StepperType = {

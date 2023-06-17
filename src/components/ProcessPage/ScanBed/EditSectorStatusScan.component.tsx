@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateProcessStatus } from '../../../services/ProcessInstance.service';
 import { enqueueSnackbar } from 'notistack';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
-import BaseModal from '../../Common/Modal/BaseModal.component';
+import BaseModal from '../../Common1/Modal/BaseModal.component';
 import { createStyles, makeStyles } from "@material-ui/core";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import { Colors } from '../../../style/colors/color';

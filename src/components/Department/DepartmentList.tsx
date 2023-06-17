@@ -2,7 +2,7 @@ import { createStyles, LinearProgress, makeStyles, Snackbar, Theme } from '@mate
 import React, { useEffect, useState } from 'react';
 import { getDepartments } from '../../services/Department.service';
 import { DepartmentDTO } from '@checkout/types';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../Common1/Select/Dropdown.component';
 import { useSnackbar } from 'notistack';
 
 

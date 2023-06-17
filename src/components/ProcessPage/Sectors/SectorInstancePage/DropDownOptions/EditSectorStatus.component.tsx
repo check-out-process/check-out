@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown, { DropdownKeyPair, onChangeEvent } from '../../../../Common/Select/Dropdown.component';
+import Dropdown, { DropdownKeyPair, onChangeEvent } from '../../../../Common1/Select/Dropdown.component';
 import { Status } from "@checkout/types/dist/lib/enums/status.enum"
 
 interface IEditSectorStatusProps {

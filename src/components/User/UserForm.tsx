@@ -13,7 +13,7 @@ import {
     ThemeProvider,
     createTheme
 } from "@material-ui/core/styles";
-import BaseModal from '../Common/Modal/BaseModal.component';
+import BaseModal from '../Common1/Modal/BaseModal.component';
 import { enqueueSnackbar } from 'notistack';
 import { getJobs } from '../../services/Job.service';
 import { getRoles } from '../../services/Role.service';
